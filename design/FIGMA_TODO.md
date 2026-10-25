@@ -10,4 +10,7 @@ Status: Figma pass pending (design/figma-tokens.json not yet supplied)
    - `colors.glass.*` -> Frosted glass surface properties (blur, opacity, rim borders)
    - `radii.*` -> Card, pill, and dock corner radii
    - `physics.springCurves.*` -> Easing curves for split expansion and dock magnification
-4. Once saved, diffs will be automatically merged into `design/tokens.json` on a branch.
+4. **Brand Concept Refinement (`site/projects/brand-concept/`):**
+   - Fine-tune vector node constraints for the Aether Focal Mark in Figma.
+   - Vector export of die-cut packaging creases to SVG for production print proofs.
+5. Once saved, diffs will be automatically merged into `design/tokens.json` on a branch.
