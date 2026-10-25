@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digit Atlas // 2D t-SNE Embedding &amp; Real-time Inference</title>
+  <style>
+    :root {
+      --bg: #090a0f;
+      --surface: #12151f;
+      --border: rgba(255, 255, 255, 0.12);
+      --text: #f1f3f5;
+      --muted: #8e95a0;
+      --accent: #5ce1e6;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: "SF Mono", Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    h1 { font-size: 1.35rem; font-weight: 700; }
+    .badge {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      background: rgba(92, 225, 230, 0.1);
+      color: var(--accent);
+      border: 1px solid rgba(92, 225, 230, 0.3);
+      padding: 4px 10px;
+      border-radius: 9999px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 24px;
+      flex: 1;
+    }
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    h2 { font-size: 0.95rem; color: var(--accent); font-family: var(--font-mono); text-transform: uppercase; }
+    
+    /* Map Canvas */
+    .map-container {
+      position: relative;
+      flex: 1;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+    }
+    #atlas-canvas {
+      width: 100%;
+      height: 100%;
+      background: #080a0e;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      cursor: crosshair;
+    }
+    .legend-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+    }
+    .legend-item { display: flex; align-items: center; gap: 4px; }
+    .color-swatch { width: 10px; height: 10px; border-radius: 50%; }
+
+    /* Interactive Side Panel */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .pad-card {
+      background: #0d1017;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    #draw-pad {
+      background: #000;
+      border: 2px solid var(--accent);
+      border-radius: 8px;
+      cursor: crosshair;
+      touch-action: none;
+    }
+    .btn-row { display: flex; gap: 8px; width: 100%; }
+    button {
+      flex: 1;
+      background: #202636;
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 8px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      cursor: pointer;
+    }
+    button:hover { background: #2c344a; }
+    .pred-result {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      color: #bdff52;
+      text-align: center;
+    }
+
+    /* Magnified Inspect Sample */
+    .inspect-box {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      background: #0d1017;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+    }
+    #sample-canvas {
+      width: 64px;
+      height: 64px;
+      border: 1px solid var(--border);
+      image-rendering: pixelated;
+      background: #000;
+    }
+    .sample-meta {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* Under The Hood Details */
+    .hood-toggle-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      cursor: pointer;
+      align-self: flex-start;
+    }
+    .conf-matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 2px;
+      background: #080a0e;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+    .matrix-cell {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-family: var(--font-mono);
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Digit Atlas // 2D t-SNE &amp; Browser Inference</h1>
+      <span style="font-size: 0.8rem; color: var(--muted);">1,797 Handwritten Digits Projected from 64-Dimensional Space</span>
+    </div>
+    <span class="badge">Self-initiated project</span>
+  </header>
+
+  <div class="layout">
+    <!-- Map Stage -->
+    <div class="panel map-container">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h2>2D t-SNE Embedding Manifold</h2>
+        <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent);">
+          Accuracy: <strong id="acc-text">96.94%</strong>
+        </span>
+      </div>
+      <canvas id="atlas-canvas"></canvas>
+      <div class="legend-row" id="legend-row"></div>
+    </div>
+
+    <!-- Sidebar: Draw & Inspect -->
+    <div class="sidebar">
+      <!-- Draw-a-digit Pad -->
+      <div class="panel">
+        <h2>Draw a Digit (Live Inference)</h2>
+        <div class="pad-card">
+          <canvas id="draw-pad" width="160" height="160"></canvas>
+          <div class="btn-row">
+            <button id="clear-btn">Clear Canvas</button>
+            <button id="classify-btn" style="background: var(--accent); color: #090a0f; font-weight: bold;">Predict</button>
+          </div>
+          <div class="pred-result" id="pred-result">Prediction: &mdash;</div>
+        </div>
+      </div>
+
+      <!-- Selected Sample Inspector -->
+      <div class="panel">
+        <h2>Hover / Click Point Inspector</h2>
+        <div class="inspect-box">
+          <canvas id="sample-canvas" width="8" height="8"></canvas>
+          <div class="sample-meta" id="sample-meta">
+            Hover over any cluster point to inspect its raw 8&times;8 pixel bitmap.
+          </div>
+        </div>
+      </div>
+
+      <!-- Under The Hood Panel -->
+      <div class="panel">
+        <button class="hood-toggle-btn" id="hood-toggle">Under The Hood &darr;</button>
+        <div id="hood-content" hidden>
+          <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); margin-bottom: 8px;">
+            Confusion Matrix (10 &times; 10 Holdout Test Evaluation):
+          </div>
+          <div class="conf-matrix-grid" id="conf-matrix"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
