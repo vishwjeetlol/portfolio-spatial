@@ -4,87 +4,62 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Glass UI Lab // 6 Spatial Components &amp; Spring Physics</title>
+  <link rel="stylesheet" href="../../shared/styles.css">
   <style>
     :root {
-      --bg: #07080c;
-      --surface: rgba(255, 255, 255, 0.04);
-      --border: rgba(255, 255, 255, 0.12);
-      --blur: 24px;
-      --text: #f8f9fa;
-      --muted: #8e95a0;
-      --accent: #5ce1e6;
-      --accent-magenta: #cf005e;
-      --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
-      --font-mono: "SF Mono", Menlo, Consolas, monospace;
-      --spring: cubic-bezier(0.16, 1, 0.3, 1);
+      --accent: #94a3b8;
+      --accent-glow: rgba(148, 163, 184, 0.15);
+      --glass-blur: 24px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-sans);
-      min-height: 100vh;
-      padding: 28px;
-      overflow-x: hidden;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 28px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
-    }
-    h1 { font-size: 1.4rem; font-weight: 700; }
-    .badge {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      background: rgba(92, 225, 230, 0.1);
-      color: var(--accent);
-      border: 1px solid rgba(92, 225, 230, 0.3);
-      padding: 4px 10px;
-      border-radius: 9999px;
-    }
-
-    /* 6 Component Grid */
     .components-grid {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: var(--space-3);
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-bottom: 40px;
+      gap: var(--space-3);
     }
+
+    @media (max-width: 960px) {
+      .components-grid {
+        grid-template-columns: 1fr;
+        padding: var(--space-2);
+      }
+    }
+
     .comp-pod {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      -webkit-backdrop-filter: blur(var(--blur));
-      backdrop-filter: blur(var(--blur));
-      border-radius: 20px;
-      padding: 24px;
+      background: var(--bg-graphite);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-surface);
+      padding: var(--space-3);
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: var(--space-2);
+      min-height: 290px;
       position: relative;
-      min-height: 320px;
     }
+
     .pod-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 8px;
     }
+
     .pod-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
     }
+
     .pod-tag {
       font-family: var(--font-mono);
-      font-size: 0.7rem;
+      font-size: 11px;
       color: var(--accent);
     }
+
     .stage {
       flex: 1;
       display: flex;
@@ -97,237 +72,251 @@
     .card-stack {
       position: relative;
       width: 180px;
-      height: 140px;
+      height: 130px;
       perspective: 800px;
       transform-style: preserve-3d;
+      cursor: pointer;
     }
+
     .stack-layer {
       position: absolute;
       inset: 0;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-surface);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-medium);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--text);
-      transition: transform 300ms var(--spring);
+      font-size: 11px;
+      color: var(--text-secondary);
+      transition: transform var(--duration-std) var(--ease-spring), border-color var(--duration-fast) var(--ease-spring);
     }
-    .stack-layer:nth-child(1) { transform: translateZ(-30px) translateY(-12px) scale(0.92); opacity: 0.5; }
-    .stack-layer:nth-child(2) { transform: translateZ(-15px) translateY(-6px) scale(0.96); opacity: 0.75; }
+
+    .stack-layer:nth-child(1) { transform: translateZ(-24px) translateY(-10px) scale(0.92); opacity: 0.5; }
+    .stack-layer:nth-child(2) { transform: translateZ(-12px) translateY(-5px) scale(0.96); opacity: 0.75; }
     .stack-layer:nth-child(3) { transform: translateZ(0); opacity: 1; }
-    .card-stack:hover .stack-layer:nth-child(1) { transform: translateZ(-60px) translateY(-24px) scale(0.88); }
-    .card-stack:hover .stack-layer:nth-child(2) { transform: translateZ(-30px) translateY(-12px) scale(0.94); }
-    .card-stack:hover .stack-layer:nth-child(3) { transform: translateZ(20px) translateY(4px); border-color: var(--accent); }
+
+    .card-stack:hover .stack-layer:nth-child(1) { transform: translateZ(-48px) translateY(-20px) scale(0.88); }
+    .card-stack:hover .stack-layer:nth-child(2) { transform: translateZ(-24px) translateY(-10px) scale(0.94); }
+    .card-stack:hover .stack-layer:nth-child(3) { transform: translateZ(16px) translateY(4px); border-color: var(--text-primary); }
 
     /* 2. Magnetic Dock */
     .mag-dock {
-      background: rgba(18, 20, 28, 0.7);
-      border: 1px solid var(--border);
-      border-radius: 9999px;
-      padding: 8px 12px;
+      background: rgba(24, 27, 34, 0.85);
+      border: 1px solid var(--border-subtle);
+      -webkit-backdrop-filter: blur(24px);
+      backdrop-filter: blur(24px);
+      border-radius: var(--radius-surface);
+      padding: 6px 10px;
       display: flex;
-      gap: 10px;
+      gap: 8px;
       align-items: center;
     }
+
     .dock-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid var(--border);
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-control);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: var(--font-mono);
-      font-size: 0.9rem;
+      font-size: 13px;
+      color: var(--text-secondary);
       cursor: pointer;
-      transition: transform 180ms var(--spring), background 180ms ease;
-    }
-    .dock-icon:hover {
-      transform: scale(1.35) translateY(-6px);
-      background: var(--accent);
-      color: #000;
-      border-color: #fff;
+      transition: transform var(--duration-fast) var(--ease-spring), background var(--duration-fast) var(--ease-spring), color var(--duration-fast) var(--ease-spring);
     }
 
-    /* 3. Draggable Sheet with Inertia */
+    .dock-icon:hover {
+      transform: scale(1.2) translateY(-4px);
+      background: var(--bg-void);
+      color: var(--text-primary);
+      border-color: var(--accent);
+    }
+
+    /* 3. Draggable Sheet */
     .sheet-wrapper {
       width: 100%;
-      height: 180px;
-      background: #0a0c12;
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      height: 160px;
+      background: var(--bg-void);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-control);
       position: relative;
       overflow: hidden;
     }
+
     .sheet-handle {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      height: 100px;
-      background: rgba(25, 30, 44, 0.9);
-      border-top: 2px solid var(--accent);
-      border-radius: 14px 14px 0 0;
-      padding: 10px;
+      height: 90px;
+      background: rgba(24, 27, 34, 0.92);
+      border-top: 1px solid var(--border-active);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      border-radius: var(--radius-surface) var(--radius-surface) 0 0;
+      padding: 8px;
       cursor: ns-resize;
       touch-action: none;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 6px;
-      transition: transform 100ms ease-out;
+      transition: transform 80ms ease-out;
     }
-    .grab-bar { width: 36px; height: 4px; border-radius: 2px; background: var(--muted); }
+
+    .grab-bar {
+      width: 32px;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--text-muted);
+    }
 
     /* 4. 3D Tilt Card */
     .tilt-card {
       width: 220px;
-      height: 140px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 16px;
+      height: 130px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-medium);
+      -webkit-backdrop-filter: blur(24px);
+      backdrop-filter: blur(24px);
+      border-radius: var(--radius-surface);
+      padding: var(--space-2);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       transform-style: preserve-3d;
-      transition: transform 120ms ease-out, border-color 200ms ease;
+      transition: transform 100ms ease-out, border-color var(--duration-fast) var(--ease-spring);
       cursor: pointer;
     }
-    .tilt-card:hover { border-color: var(--accent); }
 
-    /* 5. Spatial Controls & Volumetric Sliders */
-    .toggle-row {
+    .tilt-card:hover {
+      border-color: var(--text-primary);
+    }
+
+    /* 5. Spatial Switches */
+    .toggle-stack {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
       width: 100%;
       max-width: 240px;
     }
-    .switch-wrap {
+
+    .switch-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-family: var(--font-mono);
-      font-size: 0.82rem;
+      font-size: 12px;
+      color: var(--text-secondary);
     }
+
     .spatial-switch {
-      width: 48px;
-      height: 26px;
-      background: #181d2a;
-      border: 1px solid var(--border);
-      border-radius: 9999px;
+      width: 40px;
+      height: 22px;
+      background: var(--bg-graphite-raised);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-control);
       position: relative;
       cursor: pointer;
-      transition: background 200ms ease;
+      transition: background var(--duration-fast) var(--ease-spring);
     }
-    .spatial-switch.on { background: var(--accent); border-color: var(--accent); }
+
+    .spatial-switch.on {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: var(--accent);
+    }
+
     .switch-knob {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: #fff;
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      background: var(--text-primary);
       position: absolute;
-      top: 2px;
-      left: 2px;
-      transition: transform 200ms var(--spring);
+      top: 3px;
+      left: 3px;
+      transition: transform var(--duration-fast) var(--ease-spring);
     }
-    .spatial-switch.on .switch-knob { transform: translateX(22px); }
+
+    .spatial-switch.on .switch-knob {
+      transform: translateX(18px);
+      background: var(--text-primary);
+    }
 
     /* 6. Command Palette */
-    .cmd-trigger-btn {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      cursor: pointer;
-    }
     .cmd-overlay {
       position: absolute;
-      inset: 10px;
-      background: rgba(14, 17, 26, 0.95);
-      border: 1px solid var(--accent);
-      border-radius: 12px;
-      padding: 14px;
+      inset: 8px;
+      background: rgba(8, 9, 12, 0.95);
+      border: 1px solid var(--border-active);
+      -webkit-backdrop-filter: blur(24px);
+      backdrop-filter: blur(24px);
+      border-radius: var(--radius-surface);
+      padding: 12px;
       display: flex;
       flex-direction: column;
       gap: 8px;
       z-index: 20;
     }
+
     .cmd-input {
       width: 100%;
       background: transparent;
       border: none;
-      border-bottom: 1px solid var(--border);
-      color: #fff;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-primary);
       font-family: var(--font-sans);
-      font-size: 0.88rem;
+      font-size: 13px;
       padding: 6px 0;
       outline: none;
     }
+
     .cmd-list {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 3px;
       font-family: var(--font-mono);
-      font-size: 0.78rem;
+      font-size: 11px;
     }
+
     .cmd-item {
       padding: 6px 8px;
-      border-radius: 6px;
+      border-radius: var(--radius-control);
       cursor: pointer;
+      color: var(--text-secondary);
     }
+
     .cmd-item.active {
-      background: var(--accent);
-      color: #000;
-      font-weight: bold;
-    }
-
-    /* Under The Hood Details */
-    .hood-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 24px;
-    }
-    .code-preview {
-      background: #090b10;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      line-height: 1.5;
-      color: #ced4da;
-    }
-
-    /* Reduced Motion */
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
-        transform: none !important;
-      }
+      background: var(--bg-graphite-raised);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+      font-weight: 600;
     }
   </style>
 </head>
 <body>
-  <header>
-    <div>
-      <h1>Glass UI Lab // 6 Spatial Components</h1>
-      <span style="font-size: 0.8rem; color: var(--muted);">Frosted-Glass Depth Parallax &amp; Spring Dynamics</span>
+  <header class="studio-header">
+    <a href="/portfolio-night/" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M10 12L6 8l4-4"/>
+      </svg>
+      Studio
+    </a>
+    <div class="header-title-group">
+      <span class="header-title">Glass UI Lab</span>
+      <span class="badge">Craft</span>
     </div>
-    <span class="badge">Self-initiated project</span>
+    <span class="tag-self">Self-initiated project</span>
   </header>
 
-  <div class="components-grid">
+  <main class="components-grid">
     <!-- Component 1 -->
     <div class="comp-pod">
       <div class="pod-header">
@@ -347,7 +336,7 @@
     <div class="comp-pod">
       <div class="pod-header">
         <h2 class="pod-title">2. Magnetic Dock</h2>
-        <span class="pod-tag">Proximity Magnify</span>
+        <span class="pod-tag">Proximity Scale</span>
       </div>
       <div class="stage">
         <div class="mag-dock">
@@ -363,13 +352,13 @@
     <div class="comp-pod">
       <div class="pod-header">
         <h2 class="pod-title">3. Draggable Sheet</h2>
-        <span class="pod-tag">Inertia &amp; Snap</span>
+        <span class="pod-tag">Momentum Inertia</span>
       </div>
-      <div class="stage" style="width:100%;">
+      <div class="stage" style="width: 100%;">
         <div class="sheet-wrapper">
           <div class="sheet-handle" id="sheet-handle">
             <div class="grab-bar"></div>
-            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent);">Drag with Inertia</span>
+            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary);">Drag with Inertia</span>
           </div>
         </div>
       </div>
@@ -379,13 +368,13 @@
     <div class="comp-pod">
       <div class="pod-header">
         <h2 class="pod-title">4. 3D Tilt Card</h2>
-        <span class="pod-tag">Pointer Perspective</span>
+        <span class="pod-tag">Perspective</span>
       </div>
       <div class="stage">
         <div class="tilt-card" id="tilt-card">
-          <span style="font-family:var(--font-mono); font-size:0.7rem; color:var(--accent);">SPATIAL SLAB</span>
-          <div style="font-size:1.1rem; font-weight:700;">Refractive Glass</div>
-          <span style="font-family:var(--font-mono); font-size:0.65rem; color:var(--muted);">Mousemove to Tilt</span>
+          <span style="font-family: var(--font-mono); font-size: 10px; color: var(--text-muted);">SPATIAL SLAB</span>
+          <div style="font-size: 14px; font-weight: 600;">Refractive Glass</div>
+          <span style="font-family: var(--font-mono); font-size: 10px; color: var(--text-muted);">Move Pointer to Tilt</span>
         </div>
       </div>
     </div>
@@ -393,16 +382,16 @@
     <!-- Component 5 -->
     <div class="comp-pod">
       <div class="pod-header">
-        <h2 class="pod-title">5. Spatial Toggles &amp; Sliders</h2>
-        <span class="pod-tag">Tactile State</span>
+        <h2 class="pod-title">5. Spatial Switches</h2>
+        <span class="pod-tag">Spring Easing</span>
       </div>
       <div class="stage">
-        <div class="toggle-row">
-          <div class="switch-wrap">
+        <div class="toggle-stack">
+          <div class="switch-row">
             <span>Caustics Dispersion</span>
             <div class="spatial-switch on" id="switch-1"><div class="switch-knob"></div></div>
           </div>
-          <div class="switch-wrap">
+          <div class="switch-row">
             <span>Sub-surface Scatter</span>
             <div class="spatial-switch" id="switch-2"><div class="switch-knob"></div></div>
           </div>
@@ -411,13 +400,13 @@
     </div>
 
     <!-- Component 6 -->
-    <div class="comp-pod" style="position:relative;">
+    <div class="comp-pod">
       <div class="pod-header">
         <h2 class="pod-title">6. Command Palette</h2>
-        <span class="pod-tag">Keyboard Nav [Cmd+K]</span>
+        <span class="pod-tag">Keyboard Nav</span>
       </div>
       <div class="stage">
-        <button class="cmd-trigger-btn" id="open-cmd">Open Palette (Cmd+K)</button>
+        <button class="studio-btn" id="open-cmd">Open Palette (Cmd+K)</button>
         <div class="cmd-overlay" id="cmd-overlay" hidden>
           <input type="text" class="cmd-input" id="cmd-input" placeholder="Search spatial actions...">
           <div class="cmd-list">
@@ -428,25 +417,37 @@
         </div>
       </div>
     </div>
-  </div>
+  </main>
 
-  <!-- Under The Hood Panel -->
-  <section class="hood-card">
-    <h2 style="font-size: 1rem; color: var(--accent); font-family: var(--font-mono); margin-bottom: 12px;">
-      Under The Hood // Spring Physics &amp; Damping Equations
-    </h2>
-    <div class="code-preview">
-// Damped Harmonic Oscillator (Spring Dynamics)
-function calculateSpringStep(current, target, velocity, stiffness = 180, damping = 12, dt = 0.016) {
+  <!-- Collapsible Under The Hood Drawer -->
+  <section class="under-the-hood">
+    <details class="hood-details" open>
+      <summary class="hood-summary">
+        <span>Under The Hood: Spring Physics Function &amp; Glass Optical Tokens</span>
+        <span style="font-family: var(--font-mono); font-size: 11px;">[Expand / Collapse]</span>
+      </summary>
+      <div class="hood-content">
+        <div class="hood-col">
+          <h4>Damped Harmonic Spring Function</h4>
+          <pre class="hood-code"><code>function calculateSpringStep(current, target, velocity, stiffness = 180, damping = 12, dt = 0.016) {
   const force = -stiffness * (current - target);
   const dampingForce = -damping * velocity;
   const acceleration = force + dampingForce;
   velocity += acceleration * dt;
   current += velocity * dt;
   return { current, velocity };
-}
-// Token Matrix: backdrop-filter: blur(24px) saturate(180%); border: 1px solid rgba(255,255,255,0.12);
-    </div>
+}</code></pre>
+        </div>
+        <div class="hood-col">
+          <h4>Calibrated Optical Tokens</h4>
+          <pre class="hood-code"><code>-backdrop-filter: blur(24px) saturate(180%);
+-webkit-backdrop-filter: blur(24px) saturate(180%);
+border: 1px solid rgba(255, 255, 255, 0.08);
+background: rgba(17, 19, 24, 0.75);
+transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1);</code></pre>
+        </div>
+      </div>
+    </details>
   </section>
 
   <script src="app.js"></script>
