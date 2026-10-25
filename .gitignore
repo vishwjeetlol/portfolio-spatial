@@ -1,0 +1,24 @@
+# Node
+node_modules/
+dist/
+.vite/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment & Secrets
+.env
+.env.*
+*.local
+
+# Operating System
+.DS_Store
+Thumbs.db
+
+# Renders & Temporary Assets
+renders/raw/
+*.tmp
+*.log
+
+# Vercel
+.vercel/
