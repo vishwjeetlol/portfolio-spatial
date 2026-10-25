@@ -45,20 +45,20 @@ function init() {
   currentMeshGroup = new THREE.Group();
   scene.add(currentMeshGroup);
 
-  // Studio Lighting
-  const keyLight = new THREE.DirectionalLight(0xffffff, 2.6);
+  // Studio Lighting (Neutral Daylight & Subtle Silver Rim)
+  const keyLight = new THREE.DirectionalLight(0xffffff, 2.4);
   keyLight.position.set(5, 8, 5);
   scene.add(keyLight);
 
-  const cyanRim = new THREE.DirectionalLight(0x5ce1e6, 2.0);
-  cyanRim.position.set(-6, -4, -3);
-  scene.add(cyanRim);
+  const silverRim = new THREE.DirectionalLight(0xdce2ec, 1.6);
+  silverRim.position.set(-6, -4, -3);
+  scene.add(silverRim);
 
-  const magentaFill = new THREE.DirectionalLight(0xcf005e, 1.4);
-  magentaFill.position.set(0, -6, 4);
-  scene.add(magentaFill);
+  const softFill = new THREE.DirectionalLight(0x94a3b8, 0.8);
+  softFill.position.set(0, -6, 4);
+  scene.add(softFill);
 
-  const amb = new THREE.AmbientLight(0x1a202c, 1.2);
+  const amb = new THREE.AmbientLight(0x181b22, 1.0);
   scene.add(amb);
 
   loadActiveModel();
