@@ -1,32 +1,63 @@
-# Spatial Studio Design Specification
+# Spatial Studio Design Specification (Arbiter Consolidated)
 
-## 1. Aesthetic Vision: Spatial Studio
-The interface embodies a high-precision spatial design studio: dark cosmic graphite, brushed titanium edges, and frosted optical glass. The atmosphere is clinical yet tactile, driven by realistic spring physics, refraction optics, and kinetic responsiveness.
+Synthesized from multimodal inputs (`agents/gemini/direction.md`, `agents/claude/direction.md`, `agents/gpt/anti-patterns.md`) and refined for the 7 showcase projects.
 
-## 2. Core Components
+## 1. Aesthetic Vision: Precision Spatial Studio
+The interface embodies a high-precision spatial design and creative engineering studio: deep non-black graphite, brushed titanium rim lighting, and optical glass used strictly where depth occlusion occurs. The environment is clinical, tactile, and restrained. Zero decorative fluff.
 
-### 2.1 The Gyroscope Hero
-- 3 nested concentric brushed-titanium rings centered around an optical refractive icosphere.
-- Smooth spring physics tilts the gimbal towards the cursor coordinate.
-- Double-clicking the core triggers a dispersion pulse.
-- Graceful poster fallback on mobile or no-WebGL devices.
+## 2. The Spatial Titanium Matrix (Color Palette)
+- **`Void` (`#08090c`)**: Background substrate. Non-black, prevents ocular contrast vibration.
+- **`Graphite` (`#111318`)**: Primary panel and container surface. Solid matte; zero unnecessary glass blur.
+- **`Graphite Raised` (`#181b22`)**: Secondary elevated control surface and active tabs.
+- **`Rim Border Subdued` (`rgba(255, 255, 255, 0.08)`)**: Structural division lines.
+- **`Titanium Silver` (`#ced4da`)**: Primary interactive borders, icons, and secondary telemetry text.
+- **`Pure Alabaster` (`#f8f9fa`)**: Primary text and active values (Contrast ratio ≥ 14:1 against Void).
+- **`Subject Accents` (Strictly one per project, never blended into decorative gradients):**
+  - `neural-playground`: Electric Cyan (`#5ce1e6`)
+  - `seismic-globe`: Subduction Amber (`#f4a228`)
+  - `digit-atlas`: Phosphor Chartreuse (`#a3e635`)
+  - `material-lab`: Specular Titanium (`#e2e8f0`)
+  - `brand-concept`: Spatial Monolith (`#ffffff` / switchable brand shifts)
+  - `glass-ui-lab`: Optical Quartz (`#94a3b8`)
+  - `motion-studies`: Kinetic Ochre (`#eab308`)
 
-### 2.2 The Dual-Split Shell
-- **Desktop (>= 1024px):** A balanced 50/50 vertical division between `Code` (Left) and `Craft` (Right). Hovering expands the active column with smooth spring physics (`cubic-bezier(0.16, 1, 0.3, 1)`).
-- **Mobile (< 1024px):** Segmented frosted pill control (`[ Code | Craft ]`) that switches active viewport and synchronizes the 3D gyroscope tilt.
+## 3. Typographic System & Scale
+Only system font stacks. Zero external Google Font or CDN network requests.
+- **Display / Heading**: `-apple-system, BlinkMacSystemFont, "SF Pro Display", -ui-sans-serif, system-ui, sans-serif`. Weight `600` / `700`, letter-spacing `-0.02em`. Sentence case strictly required.
+- **Body / Prose**: `-apple-system, BlinkMacSystemFont, "SF Pro Text", -ui-sans-serif, system-ui, sans-serif`. Weight `400`, letter-spacing `-0.005em`, line-height `1.6`, max line length `68ch`.
+- **Telemetry / Mono**: `"SF Mono", Menlo, Monaco, Consolas, monospace`. Weight `500`, letter-spacing `0.02em`, font-size `12px` / `13px`. Used for coordinates, parameters, FPS, weights, and code.
 
-### 2.3 CSS 3D Project Cards
-- Elevated frosted glass slabs (`backdrop-filter: blur(24px)`).
-- Sub-millimeter brushed rim lighting (`border: 1px solid rgba(255, 255, 255, 0.12)`).
-- Mouse position translates into 3D card perspective tilt.
-- "See Under the Hood" toggle displays architectural schematics and wireframe breakdowns.
+### Type Scale (Strict 8px Multiples)
+- Title: `24px` / `32px` line-height
+- Section Heading: `16px` / `24px` line-height
+- Body: `14px` / `22px` line-height
+- Meta / Telemetry: `12px` / `16px` line-height
 
-### 2.4 Magnetic Floating Dock (3 Doors)
-- **Door 1: Hire / Project Builder:** Launches interactive modal with project scope, timeline, and budget builder; pre-fills `mailto:` link.
-- **Door 2: CV & GitHub:** Direct access to PDF curriculum vitae and GitHub repository.
-- **Door 3: Instagram & Writing:** Direct access to the 30-day Instagram campaign and published technical notes.
+## 4. Layout Architecture & Spatial Grid
+- Strict 8px spatial rhythm: `8px`, `16px`, `24px`, `32px`, `48px`, `64px`.
+- Max 2 corner radii rule:
+  - **`Radius Control` = `6px`**: Buttons, segmented controls, inputs, badges, sliders.
+  - **`Radius Surface` = `14px`**: Structural canvas viewports, panels, drawers.
+- **Immediate Verifiability**: Every project opens immediately into its primary interactive canvas/viewport. Never show a passive splash card, skeleton loader, or banner that pushes the artifact below the fold.
+- **Header**: Fixed, compact height (`52px`), frosted backdrop (`backdrop-filter: blur(20px)`), containing:
+  - Left: Back link `← Studio`
+  - Center: Project Title and Category badge (`Code` or `Craft`)
+  - Right: `Self-initiated project` metadata tag
+- **Main Workspace**: Split layout on desktop (Viewport left/center + Precision Control Panel right); stacked layout on mobile (< 900px).
+- **Under The Hood Drawer**: Collapsible panel at the base containing architecture schematics, math/code excerpts, and measured benchmarks.
 
-## 3. Contrast & Accessibility
-- Primary text on frosted glass has contrast ratio >= 7:1 (WCAG AAA compliant).
-- Full keyboard focus trap in all modal dialogs with `Esc` key dismiss.
-- Automatic reduced motion detection disables gyro loop and replaces dynamic transitions with instantaneous fades.
+## 5. Prohibited Anti-Patterns (Banned AI & Junior Tells)
+1. **No AI Gradient Washes**: No purple-cyan or multi-color gradients across headers, borders, or text.
+2. **No One-Word Headline Highlights**: Never style a single word with an accent color.
+3. **No All-Caps Eyebrow Spam**: Never put `UPPERCASE LETTER-SPACING` tags above every single heading.
+4. **No Faux-Editorial Numbering**: No `01`, `02`, `03` unless items represent an ordered sequential step.
+5. **No Center-Aligned Paragraphs**: All descriptive body prose must be left-aligned.
+6. **No Uniform Hover-Lifts**: No `translateY(-8px)` or box-shadow explosions on hover. Hover states change subtle border luminescence or background alpha.
+7. **No Browser Default Controls**: Native unstyled range sliders, scrollbars, and select boxes are strictly forbidden.
+8. **No Emoji As Interface Icons**: Bespoke SVG geometry or plain typographic labels only.
+9. **No Fluff Adjectives**: No "Revolutionary", "Next-gen", "Seamless", "Supercharged". Write plain authorial verbs describing what the system does.
+
+## 6. Motion & Spring Restraint
+- Spring physics must use critical damping (damping ratio $\zeta \approx 1.0$). Zero perpetual oscillation.
+- Fast interactive response: micro-interactions $\le 150\text{ms}$.
+- Full support for `prefers-reduced-motion: reduce`: instantly collapse transitions to immediate state updates.
