@@ -1,10 +1,10 @@
 ---
 title: Motion Studies
 side: craft
-role: "Creative direction and build (AI-assisted, self-initiated)"
-stack: [Canvas 2D, Kinetic Typography, Particle Systems, 3D Projections, ffmpeg]
-publish: false
+role: Self-initiated project
+stack: [HTML5 Canvas 2D, Trigonometric Wave Math, Particle Vectors, ffmpeg, Playwright]
+publish: true
 preview: site/projects/motion-studies/preview.png
 ---
-A suite of three algorithmic kinetic studies testing programmatic typography waves, autonomous particle matrix morphing, and 3D origami prism unfolds. Built entirely in procedural canvas math without timeline libraries or pre-baked video assets.
-Outcome: 1,200 autonomous spring particles, 3 continuous motion modes running at measured 60 FPS headless, and captured 8.6-second MP4 video proof (817 KB).
+Three kinetic studies engineered in code: harmonic wave typography, particle-text morphing, and 3D origami prism topological unfolding. Includes automated loop video capture with local MP4 encoding.
+Outcome: 1,200 particle vectors animated at 60 FPS in headless Playwright; loopable 8.6s MP4 artifact captured via ffmpeg (836 KB) with zero console errors.

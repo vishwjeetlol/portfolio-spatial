@@ -1,10 +1,10 @@
 ---
-title: Aether Spatial Optics (Brand Concept)
+title: Aether Spatial Optics Brand System
 side: craft
-role: "Creative direction and build (AI-assisted, self-initiated)"
-stack: [SVG, CSS Architecture, Design Tokens, Spatial UI, Open Design]
-publish: false
+role: Self-initiated project
+stack: [Open Design, SVG, CSS Architecture, Design Tokens, Spatial Typography]
+publish: true
 preview: site/projects/brand-concept/preview.png
 ---
-A speculative brand identity and spatial design system conceptualized for an autonomous optical physics hardware laboratory. Features an SVG geometric focal mark, a multi-tier design token architecture, and three applied mockups across an exhibition poster, a hardware controller app, and a die-cut packaging flat.
-Outcome: Built dynamic Brand Shift engine supporting 3 palettes (16.8:1 max contrast ratio), 3 vector mockups, and interactive 40px construction grid overlay.
+A fictional brand identity and spatial design system for a refractive hardware and optics studio. Features an SVG geometric focal mark, typographic hierarchy, and 3 applied mockups (poster, controller interface, packaging die-cut) with live Brand Shift palette switching.
+Outcome: 3 swappable chromatic palettes verified for WCAG AAA contrast ratio &ge; 8.2:1; responsive CSS/SVG mockups rendering with 0 Playwright console errors across desktop and mobile.

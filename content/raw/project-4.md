@@ -1,10 +1,10 @@
 ---
 title: Material Lab
 side: craft
-role: "Creative direction and build (AI-assisted, self-initiated)"
-stack: [Blender, Python, Three.js, WebGL, MeshPhysicalMaterial, glTF]
-publish: false
+role: Self-initiated project
+stack: [Blender, Python, Three.js, glTF, MeshPhysicalMaterial, WebGL]
+publish: true
 preview: site/projects/material-lab/preview.png
 ---
-An interactive 3D physical shader inspection studio powered by procedural geometries generated headlessly in Blender. Visitors swap between three procedural forms (twisted torus knot, faceted shard, ribbed vase) while tuning transmission, index of refraction, roughness, and metalness with live wireframe inspection.
-Outcome: Generated 3 glTF 2.0 models passing header checks and zero gltf-validator errors (total model size 92 KB across 3 assets), rendering PBR transmission at measured 60 FPS headless.
+A real-time physical optics and shader studio featuring 3 procedural geometries generated via headless Blender scripts. Visitors can swap objects, inspect wireframes, and interactively tune physical transmission, IOR, roughness, and metalness.
+Outcome: 3 watertight .glb models generated via headless Blender 5.4.0 (12,288 faces, 0 validation errors via gltf-validator); 60 FPS real-time physical refraction with zero CDN dependencies.

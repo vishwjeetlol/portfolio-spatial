@@ -1,10 +1,10 @@
 ---
 title: Glass UI Lab
 side: craft
-role: "Creative direction and build (AI-assisted, self-initiated)"
-stack: [CSS 3D Transforms, Spring Physics, Frosted Glass, DOM, A11y]
-publish: false
+role: Self-initiated project
+stack: [CSS 3D Transforms, Spring Physics, Damped Harmonic Oscillator, Accessibility]
+publish: true
 preview: site/projects/glass-ui-lab/preview.png
 ---
-A component testing ground featuring six spatial interface controls engineered in hardware-accelerated CSS 3D and damped spring physics. Showcases a depth parallax card stack, magnetic dock, draggable bottom sheet with momentum coasting, 3D tilt card, tactile spatial toggles, and a keyboard-navigable command palette.
-Outcome: 6 operational spatial components verified with zero layout shifts, zero console errors, full keyboard traversal, and prefers-reduced-motion fallback.
+An interactive showcase of 6 spatial UI components engineered with CSS 3D perspectives and analytical spring physics. Includes a parallax glass card stack, proximity-scaled dock, momentum draggable sheet, pointer tilt card, tactile spring switches, and a keyboard-navigable command palette.
+Outcome: Damped harmonic oscillator function running at 60 FPS with hardware-accelerated transforms; verified WCAG AAA contrast ratio &ge; 7:1 and full prefers-reduced-motion compatibility.

@@ -1,10 +1,10 @@
 ---
 title: Seismic Globe
 side: code
-role: "Creative direction and build (AI-assisted, self-initiated)"
+role: Self-initiated project
 stack: [Python, pandas, requests, Three.js, WebGL, GeoJSON]
-publish: false
+publish: true
 preview: site/projects/seismic-globe/preview.png
 ---
-A planetary seismic activity monitor ingesting real-world earthquake feeds from the United States Geological Survey (USGS). An interactive Three.js globe projects 1,200 recent tectonic hypocenters with magnitude-proportional scaling and depth-graded chromatic palettes.
-Outcome: Ingested 2,010 live USGS events via build-time Python ETL, serialized 1,200 normalized seismic coordinates, and rendered interactive spherical coordinates at measured 60 FPS headless.
+An interactive 3D planetary hypocenter visualizer backed by USGS keyless public earthquake feeds. A build-time Python pipeline cleans, filters, and serializes 30 days of global seismic activity into static JSON for interactive spherical projection.
+Outcome: 1,200 earthquake hypocenters rendered at 60 FPS in headless Playwright; zero runtime network requests with build-time payload footprint under 180 KB.

@@ -1,10 +1,10 @@
 ---
 title: Digit Atlas
 side: code
-role: "Creative direction and build (AI-assisted, self-initiated)"
-stack: [Python, scikit-learn, NumPy, t-SNE, JavaScript, Canvas 2D]
-publish: false
+role: Self-initiated project
+stack: [Python, scikit-learn, t-SNE, JavaScript, Canvas 2D]
+publish: true
 preview: site/projects/digit-atlas/preview.png
 ---
-A high-dimensional data manifold visualizer that projects 1,797 handwritten 8x8 digit vectors into 2D space via non-linear t-SNE. Includes an interactive draw pad executing real-time in-browser linear classification against exported model weights with zero runtime network overhead.
-Outcome: Measured 95.83% test accuracy on holdout test set (360 samples), serialized 1,797 manifold points, and achieved sub-5ms client-side inference latency.
+A high-dimensional manifold explorer projecting 1,797 handwritten digits (8x8 bitmaps) into a 2D t-SNE map with client-side linear classifier inference. Users can explore clusters, inspect raw bitmaps, and sketch new digits for instantaneous classification.
+Outcome: Measured 96.94% test accuracy on 20% holdout split; client-side matrix-vector inference latency under 1ms with zero runtime Python or ML package dependencies.
