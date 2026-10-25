@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProjectsCollection",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "id",
+      "title",
+      "side",
+      "summary",
+      "role",
+      "stack",
+      "outcomes",
+      "links",
+      "media",
+      "underTheHood",
+      "publish"
+    ],
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "title": {
+        "type": "string"
+      },
+      "side": {
+        "type": "string",
+        "enum": ["code", "craft"]
+      },
+      "summary": {
+        "type": "string"
+      },
+      "role": {
+        "type": "string"
+      },
+      "stack": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "outcomes": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "links": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["label", "url"],
+          "properties": {
+            "label": { "type": "string" },
+            "url": { "type": "string" }
+          }
+        }
+      },
+      "media": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["type", "url"],
+          "properties": {
+            "type": { "type": "string" },
+            "url": { "type": "string" },
+            "alt": { "type": "string" }
+          }
+        }
+      },
+      "underTheHood": {
+        "type": "object",
+        "required": ["type", "assetPath"],
+        "properties": {
+          "type": { "type": "string", "enum": ["diagram", "wireframe", "breakdown", "none"] },
+          "assetPath": { "type": "string" }
+        }
+      },
+      "publish": {
+        "type": "boolean"
+      }
+    },
+    "additionalProperties": false
+  }
+}

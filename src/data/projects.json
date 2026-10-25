@@ -1,0 +1,168 @@
+[
+  {
+    "id": "threejs-museum",
+    "title": "The Museum of Three.js",
+    "side": "craft",
+    "summary": "An interactive 3D virtual exhibition pavilion featuring 22 interactive exhibits spanning procedural models, custom GLSL shaders, particle simulations, and retro-tech artifacts. Built with Three.js r160 and Vite v5.",
+    "role": "[ADD ROLE]",
+    "stack": ["JavaScript", "Three.js", "Vite", "WebGL", "GLSL Shaders", "HTML", "CSS"],
+    "outcomes": [
+      "Production build executes in 384ms across 24 code-split chunks with zero errors",
+      "Sustained 60 FPS performance via dynamic spotlight pooling and distance culling",
+      "Passed multi-agent quality gate reviews with composite average 9.2/10 and 100% brand compliance"
+    ],
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/vishwjeetlol/3js-museum"
+      }
+    ],
+    "media": [
+      {
+        "type": "image",
+        "url": "/img/projects/threejs-museum.png",
+        "alt": "The Museum of Three.js 3D Virtual Pavilion"
+      }
+    ],
+    "underTheHood": {
+      "type": "breakdown",
+      "assetPath": "/diagrams/threejs-museum-breakdown.svg"
+    },
+    "publish": true
+  },
+  {
+    "id": "nepo-baby-web-toy",
+    "title": "Nepo Baby Magazine — Desi Kitsch Web Toy",
+    "side": "craft",
+    "summary": "An immersive, maximalist Indian Folk-Pop and Desi Kitsch interactive web toy experience. Features an interactive 3D book mockup with artwork file upload, an iTunes-style cover flow, and draggable polaroids.",
+    "role": "[ADD ROLE]",
+    "stack": ["HTML", "CSS", "JavaScript"],
+    "outcomes": [
+      "[ADD RESULT]"
+    ],
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/vishwjeetlol/Nepo_Baby_Website"
+      }
+    ],
+    "media": [
+      {
+        "type": "image",
+        "url": "/img/projects/nepo-baby-web-toy.png",
+        "alt": "Nepo Baby Magazine Web Toy Mockup"
+      }
+    ],
+    "underTheHood": {
+      "type": "wireframe",
+      "assetPath": "/diagrams/nepo-baby-toy-wireframe.svg"
+    },
+    "publish": true
+  },
+  {
+    "id": "nepo-magazine-blender",
+    "title": "Nepo Baby Magazine with Blender",
+    "side": "craft",
+    "summary": "A maximalist digital editorial web experience integrating layered responsive layouts with 3D canvas rendering and embedded 3D assets including a coupe model turntable and animated marquees.",
+    "role": "[ADD ROLE]",
+    "stack": ["HTML", "CSS", "JavaScript", "3D Canvas"],
+    "outcomes": [
+      "[ADD RESULT]"
+    ],
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/vishwjeetlol/Nepowebsitewithblender"
+      }
+    ],
+    "media": [
+      {
+        "type": "image",
+        "url": "/img/projects/nepo-magazine-blender.png",
+        "alt": "Nepo Baby Magazine 3D Coupe Experience"
+      }
+    ],
+    "underTheHood": {
+      "type": "breakdown",
+      "assetPath": "/diagrams/nepo-blender-breakdown.svg"
+    },
+    "publish": true
+  },
+  {
+    "id": "tata-truck-simulator",
+    "title": "Classic Tata Truck Cabin Simulator & The Bazaar",
+    "side": "craft",
+    "summary": "An interactive first-person driver-cabin simulator of a classic Indian Tata 1613 SE truck featuring interactive horn audio, throttle revving, cassette stereo, live gauges, and switchable driving scenes alongside The Bazaar panoramic canvas.",
+    "role": "[ADD ROLE]",
+    "stack": ["HTML", "Tailwind CSS", "Web Audio API", "JavaScript"],
+    "outcomes": [
+      "[ADD RESULT]"
+    ],
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/vishwjeetlol/VishwjeetPortfolio"
+      }
+    ],
+    "media": [
+      {
+        "type": "image",
+        "url": "/img/projects/tata-truck-simulator.png",
+        "alt": "Classic Tata Truck Cabin Simulator Interface"
+      }
+    ],
+    "underTheHood": {
+      "type": "wireframe",
+      "assetPath": "/diagrams/tata-truck-wireframe.svg"
+    },
+    "publish": true
+  },
+  {
+    "id": "spatial-data-pipeline",
+    "title": "[PLACEHOLDER] Distributed Data & Systems Pipeline",
+    "side": "code",
+    "summary": "[PLACEHOLDER] High-throughput data streaming and systems processing pipeline. No public systems repositories were found on github.com/vishwjeetlol.",
+    "role": "[ADD ROLE]",
+    "stack": ["TypeScript", "Node.js", "Systems"],
+    "outcomes": [
+      "[ADD RESULT]"
+    ],
+    "links": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/img/projects/code-placeholder-1.png",
+        "alt": "Data Pipeline Architecture Placeholder"
+      }
+    ],
+    "underTheHood": {
+      "type": "diagram",
+      "assetPath": "/diagrams/systems-pipeline-diagram.svg"
+    },
+    "publish": false
+  },
+  {
+    "id": "generative-vision-ml",
+    "title": "[PLACEHOLDER] Computer Vision & ML Inference Engine",
+    "side": "code",
+    "summary": "[PLACEHOLDER] Real-time computer vision inference engine and neural model pipeline. No public ML repositories were found on github.com/vishwjeetlol.",
+    "role": "[ADD ROLE]",
+    "stack": ["Python", "Machine Learning", "PyTorch"],
+    "outcomes": [
+      "[ADD RESULT]"
+    ],
+    "links": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/img/projects/code-placeholder-2.png",
+        "alt": "Machine Learning Architecture Placeholder"
+      }
+    ],
+    "underTheHood": {
+      "type": "diagram",
+      "assetPath": "/diagrams/ml-inference-diagram.svg"
+    },
+    "publish": false
+  }
+]

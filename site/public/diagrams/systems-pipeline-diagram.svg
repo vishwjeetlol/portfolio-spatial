@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <rect width="800" height="500" fill="#0c0e14" rx="16"/>
+  <text x="40" y="50" fill="#fff" font-family="sans-serif" font-size="20" font-weight="bold">[PLACEHOLDER] Distributed Systems &amp; Data Streaming Architecture</text>
+  <text x="40" y="75" fill="#8e95a0" font-family="monospace" font-size="12">Event Bus Topology, Zero-Copy Partitioning, Real-time Metrics</text>
+  
+  <g transform="translate(60, 140)">
+    <rect width="180" height="240" fill="#141720" stroke="#5ce1e6" rx="8"/>
+    <text x="20" y="40" fill="#5ce1e6" font-family="sans-serif" font-size="14" font-weight="bold">Ingestion Gateway</text>
+    <text x="20" y="80" fill="#ced4da" font-family="monospace" font-size="11">gRPC / WebSocket</text>
+    <text x="20" y="110" fill="#ced4da" font-family="monospace" font-size="11">TLS Termination</text>
+    <text x="20" y="140" fill="#ced4da" font-family="monospace" font-size="11">Rate Limiter</text>
+  </g>
+  
+  <path d="M 255 260 L 315 260" stroke="#5ce1e6" stroke-width="2"/>
+  
+  <g transform="translate(330, 140)">
+    <rect width="200" height="240" fill="#141720" stroke="#bdff52" rx="8"/>
+    <text x="20" y="40" fill="#bdff52" font-family="sans-serif" font-size="14" font-weight="bold">Streaming Bus</text>
+    <text x="20" y="80" fill="#ced4da" font-family="monospace" font-size="11">Partition Ring [0..63]</text>
+    <text x="20" y="110" fill="#ced4da" font-family="monospace" font-size="11">Zero-Copy Buffer</text>
+    <text x="20" y="140" fill="#ced4da" font-family="monospace" font-size="11">Backpressure Guard</text>
+  </g>
+  
+  <path d="M 545 260 L 605 260" stroke="#bdff52" stroke-width="2"/>
+  
+  <g transform="translate(620, 140)">
+    <rect width="140" height="240" fill="#141720" stroke="#cf005e" rx="8"/>
+    <text x="15" y="40" fill="#cf005e" font-family="sans-serif" font-size="14" font-weight="bold">Storage Sink</text>
+    <text x="15" y="80" fill="#ced4da" font-family="monospace" font-size="11">Parquet Lake</text>
+    <text x="15" y="110" fill="#ced4da" font-family="monospace" font-size="11">Timeseries DB</text>
+    <text x="15" y="140" fill="#ced4da" font-family="monospace" font-size="11">Index Bloom</text>
+  </g>
+</svg>

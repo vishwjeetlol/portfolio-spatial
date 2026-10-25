@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <rect width="800" height="500" fill="#0c0e14" rx="16"/>
+  <text x="40" y="50" fill="#fff" font-family="sans-serif" font-size="20" font-weight="bold">Nepo Baby Magazine: CSS 3D Toy &amp; Coverflow Wireframe</text>
+  <text x="40" y="75" fill="#8e95a0" font-family="monospace" font-size="12">Hardware-accelerated CSS transforms and live canvas texture projection</text>
+  
+  <g transform="translate(60, 120)">
+    <rect width="180" height="260" fill="#1b1816" stroke="#f4a228" stroke-width="2" rx="8" transform="rotate(-6 90 130)"/>
+    <text x="30" y="80" fill="#f4a228" font-family="sans-serif" font-size="14" font-weight="bold">3D Book Mockup</text>
+    <rect x="25" y="100" width="130" height="90" fill="#2a1f18" stroke="#ff3377" rx="4" stroke-dasharray="3"/>
+    <text x="35" y="145" fill="#fff" font-family="monospace" font-size="10">Drag &amp; Drop Image</text>
+    <text x="35" y="165" fill="#85c77d" font-family="monospace" font-size="9">Live Texture Injection</text>
+  </g>
+  
+  <g transform="translate(300, 140)">
+    <rect width="220" height="220" fill="#141720" stroke="#5ce1e6" rx="8"/>
+    <text x="20" y="40" fill="#5ce1e6" font-family="sans-serif" font-size="14" font-weight="bold">iTunes Cover Flow</text>
+    <text x="20" y="70" fill="#adb5bd" font-family="monospace" font-size="11">transform-style: preserve-3d</text>
+    <text x="20" y="100" fill="#adb5bd" font-family="monospace" font-size="11">perspective: 1200px</text>
+    <text x="20" y="130" fill="#bdff52" font-family="monospace" font-size="11">Reflection: Webkit Mask</text>
+    <text x="20" y="160" fill="#ced4da" font-family="monospace" font-size="11">Center Focus: Scale 1.25</text>
+  </g>
+
+  <g transform="translate(560, 160)">
+    <rect width="180" height="180" fill="#faf5eb" stroke="#1b1816" stroke-width="3" rx="4" transform="rotate(8 90 90)"/>
+    <rect x="15" y="15" width="150" height="120" fill="#1b1816" rx="2"/>
+    <text x="30" y="80" fill="#fff" font-family="sans-serif" font-size="11">Polaroid Toy</text>
+    <text x="35" y="160" fill="#1b1816" font-family="sans-serif" font-size="11" font-weight="bold">#NepoBaby</text>
+  </g>
+</svg>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <rect width="800" height="500" fill="#0c0e14" rx="16"/>
+  <text x="40" y="50" fill="#fff" font-family="sans-serif" font-size="20" font-weight="bold">The Museum of Three.js: Spotlight Pooling &amp; Culling Architecture</text>
+  <text x="40" y="75" fill="#8e95a0" font-family="monospace" font-size="12">Dynamic rendering budget optimization // 22 exhibits to 2 active lights</text>
+  
+  <!-- Exhibits Grid -->
+  <g transform="translate(40, 110)">
+    <rect width="220" height="340" fill="#141720" stroke="#2a3040" rx="8"/>
+    <text x="20" y="35" fill="#5ce1e6" font-family="sans-serif" font-size="14" font-weight="bold">22 Spatial Exhibits</text>
+    <text x="20" y="60" fill="#adb5bd" font-family="monospace" font-size="11">Exhibit 01..10 (Wing A)</text>
+    <text x="20" y="80" fill="#adb5bd" font-family="monospace" font-size="11">Exhibit 11..14 (Wing B)</text>
+    <text x="20" y="100" fill="#adb5bd" font-family="monospace" font-size="11">Exhibit 15..22 (Wing C)</text>
+    
+    <rect x="20" y="130" width="180" height="70" fill="#1b202e" stroke="#5ce1e6" rx="6" stroke-dasharray="4"/>
+    <text x="30" y="155" fill="#fff" font-family="sans-serif" font-size="12">GPU Vertex Curl</text>
+    <text x="30" y="175" fill="#8e95a0" font-family="monospace" font-size="10">Exhibit 03 Page Turner</text>
+    
+    <rect x="20" y="220" width="180" height="70" fill="#1b202e" stroke="#cf005e" rx="6" stroke-dasharray="4"/>
+    <text x="30" y="245" fill="#fff" font-family="sans-serif" font-size="12">Particle Compute</text>
+    <text x="30" y="265" fill="#8e95a0" font-family="monospace" font-size="10">Exhibit 12 Singularity</text>
+  </g>
+  
+  <!-- Arrow -->
+  <path d="M 280 280 L 340 280" stroke="#5ce1e6" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Dynamic Spotlight Pooler -->
+  <g transform="translate(360, 110)">
+    <rect width="200" height="340" fill="#141720" stroke="#5ce1e6" rx="8"/>
+    <text x="20" y="35" fill="#5ce1e6" font-family="sans-serif" font-size="14" font-weight="bold">Distance Culling Engine</text>
+    <text x="20" y="65" fill="#adb5bd" font-family="sans-serif" font-size="12">Threshold: 28 Units</text>
+    <rect x="20" y="90" width="160" height="90" fill="#1f2838" rx="6"/>
+    <text x="30" y="120" fill="#fff" font-family="monospace" font-size="11">Spotlight Pool [2]</text>
+    <text x="30" y="145" fill="#bdff52" font-family="monospace" font-size="11">&gt; Key Light Focus</text>
+    <text x="30" y="165" fill="#bdff52" font-family="monospace" font-size="11">&gt; Fill Follow Target</text>
+    
+    <circle cx="100" cy="250" r="45" fill="none" stroke="#5ce1e6" stroke-width="2" stroke-dasharray="3"/>
+    <text x="65" y="255" fill="#ced4da" font-family="monospace" font-size="10">Frustum Clip</text>
+  </g>
+  
+  <!-- Arrow -->
+  <path d="M 580 280 L 640 280" stroke="#bdff52" stroke-width="2"/>
+  
+  <!-- Output -->
+  <g transform="translate(660, 110)">
+    <rect width="100" height="340" fill="#141720" stroke="#bdff52" rx="8"/>
+    <text x="15" y="50" fill="#bdff52" font-family="sans-serif" font-size="16" font-weight="bold">60 FPS</text>
+    <text x="15" y="80" fill="#adb5bd" font-family="monospace" font-size="10">Zero drops</text>
+    <text x="15" y="140" fill="#fff" font-family="sans-serif" font-size="14" font-weight="bold">384ms</text>
+    <text x="15" y="165" fill="#adb5bd" font-family="monospace" font-size="10">Vite Build</text>
+    <text x="15" y="230" fill="#5ce1e6" font-family="sans-serif" font-size="14" font-weight="bold">24 Chunks</text>
+    <text x="15" y="255" fill="#adb5bd" font-family="monospace" font-size="10">Code split</text>
+  </g>
+</svg>

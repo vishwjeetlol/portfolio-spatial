@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spatial Dual-Split Portfolio & 3D Gyroscope Sandbox</title>
+  <style>
+    :root {
+      --bg-base: #090a0d;
+      --bg-surface: #111318;
+      --silver-100: #f1f3f5;
+      --silver-400: #ced4da;
+      --silver-600: #868e96;
+      --glass-bg: rgba(255, 255, 255, 0.04);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      --glass-blur: 24px;
+      --spring-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+      --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+      --font-mono: "SF Mono", Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg-base);
+      color: var(--silver-100);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Ambient Spatial Lighting */
+    .ambient-glow {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 50% 20%, rgba(92, 225, 230, 0.06), transparent 60%),
+                  radial-gradient(circle at 80% 80%, rgba(207, 0, 94, 0.04), transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Spatial Hero Canvas */
+    .hero-container {
+      position: relative;
+      width: 100%;
+      height: 48vh;
+      min-height: 340px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    #gyro-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: grab;
+    }
+
+    #gyro-canvas:active {
+      cursor: grabbing;
+    }
+
+    .hero-hud {
+      position: absolute;
+      top: 16px;
+      left: 24px;
+      right: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .hud-badge {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      backdrop-filter: blur(var(--glass-blur));
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.8125rem;
+      font-family: var(--font-mono);
+      color: var(--silver-400);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #bdff52;
+      box-shadow: 0 0 10px #bdff52;
+    }
+
+    /* Dual-Split Container */
+    .split-layout {
+      position: relative;
+      z-index: 2;
+      max-width: 1380px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 24px 100px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .split-col {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      backdrop-filter: blur(var(--glass-blur));
+      border-radius: 20px;
+      padding: 28px;
+      transition: transform 300ms var(--spring-smooth), border-color 300ms ease;
+    }
+
+    .split-col:hover {
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .col-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 12px;
+    }
+
+    .col-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .col-badge {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--silver-600);
+      text-transform: uppercase;
+    }
+
+    /* CSS 3D Project Cards */
+    .card-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      perspective: 1000px;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 20px;
+      transform-style: preserve-3d;
+      transition: transform 200ms ease-out, border-color 200ms ease;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      border-color: rgba(255, 255, 255, 0.24);
+      transform: translateZ(12px) rotateX(2deg) rotateY(-2deg);
+    }
+
+    .project-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .project-desc {
+      font-size: 0.9rem;
+      color: var(--silver-400);
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .stack-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .tag {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      color: var(--silver-400);
+    }
+
+    .hood-btn {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: var(--silver-100);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+
+    .hood-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Floating Magnetic Dock */
+    .dock-wrapper {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+    }
+
+    .dock {
+      background: rgba(18, 20, 26, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      -webkit-backdrop-filter: blur(28px);
+      backdrop-filter: blur(28px);
+      border-radius: 9999px;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .dock-door {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--silver-400);
+      padding: 8px 14px;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 200ms var(--spring-smooth);
+    }
+
+    .dock-door:hover, .dock-door.primary {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .dock-door.primary {
+      background: #f8f9fa;
+      color: #090a0d;
+      font-weight: 600;
+    }
+
+    .dock-door.primary:hover {
+      background: #e9ecef;
+      color: #000;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .split-layout {
+        grid-template-columns: 1fr;
+        padding-bottom: 120px;
+      }
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+</head>
+<body>
+  <div class="ambient-glow"></div>
+
+  <header class="hero-container">
+    <div class="hero-hud">
+      <div class="hud-badge">
+        <span class="status-dot"></span>
+        <span>VISHWJEET // SPATIAL STUDIO</span>
+      </div>
+      <div class="hud-badge">
+        <span>FPS: <strong id="fps-counter">60</strong></span>
+      </div>
+    </div>
+    <canvas id="gyro-canvas"></canvas>
+  </header>
+
+  <main class="split-layout">
+    <!-- LEFT: CODE -->
+    <section class="split-col" id="col-code">
+      <div class="col-header">
+        <h2 class="col-title">Code // Systems</h2>
+        <span class="col-badge">ML &bull; Data &bull; Infra</span>
+      </div>
+      <div class="card-list">
+        <article class="project-card">
+          <h3 class="project-title">[PLACEHOLDER] Distributed Data & Systems Pipeline</h3>
+          <p class="project-desc">High-throughput data streaming and systems processing pipeline with deterministic low-latency dispatch.</p>
+          <div class="stack-tags">
+            <span class="tag">TypeScript</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">Systems</span>
+          </div>
+          <button class="hood-btn" onclick="alert('Architecture Diagram: High-throughput async event bus with zero backpressure.')">See Under the Hood</button>
+        </article>
+        <article class="project-card">
+          <h3 class="project-title">[PLACEHOLDER] Computer Vision & ML Inference Engine</h3>
+          <p class="project-desc">Real-time computer vision inference engine and neural model execution pipeline running edge acceleration.</p>
+          <div class="stack-tags">
+            <span class="tag">Python</span>
+            <span class="tag">PyTorch</span>
+            <span class="tag">ML</span>
+          </div>
+          <button class="hood-btn" onclick="alert('Architecture Diagram: Real-time tensor graph optimizer.')">See Under the Hood</button>
+        </article>
+      </div>
+    </section>
+
+    <!-- RIGHT: CRAFT -->
+    <section class="split-col" id="col-craft">
+      <div class="col-header">
+        <h2 class="col-title">Craft // Realtime</h2>
+        <span class="col-badge">3D &bull; Shaders &bull; Motion</span>
+      </div>
+      <div class="card-list">
+        <article class="project-card">
+          <h3 class="project-title">The Museum of Three.js</h3>
+          <p class="project-desc">An interactive 3D virtual exhibition pavilion featuring 22 interactive exhibits, custom GPU vertex curl shaders, and dynamic spotlight pooling.</p>
+          <div class="stack-tags">
+            <span class="tag">Three.js</span>
+            <span class="tag">GLSL Shaders</span>
+            <span class="tag">Vite</span>
+            <span class="tag">WebGL</span>
+          </div>
+          <button class="hood-btn" onclick="alert('Technical Breakdown: Spotlight pooling reducing 22 lights to 2 dynamic sources.')">See Under the Hood</button>
+        </article>
+        <article class="project-card">
+          <h3 class="project-title">Classic Tata Truck Cabin Simulator</h3>
+          <p class="project-desc">First-person Tata 1613 SE cabin web simulator with procedural Web Audio synthesis for horn, throttle revving, and cassette stereo.</p>
+          <div class="stack-tags">
+            <span class="tag">Web Audio API</span>
+            <span class="tag">Tailwind</span>
+            <span class="tag">JavaScript</span>
+          </div>
+          <button class="hood-btn" onclick="alert('Technical Breakdown: FM frequency curves synthesize engine harmonics in real time.')">See Under the Hood</button>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <nav class="dock-wrapper">
+    <div class="dock">
+      <button class="dock-door primary" onclick="alert('Start a Project: Type, Scope, Timeline, Budget')">1. Hire / Builder</button>
+      <a class="dock-door" href="/cv.pdf" target="_blank">2. CV & GitHub</a>
+      <a class="dock-door" href="/social" target="_blank">3. Social / Writing</a>
+    </div>
+  </nav>
+
+  <script>
+    // Three.js Gyroscope Scene Implementation
+    let scene, camera, renderer;
+    let ringOuter, ringMid, ringInner, core;
+    let targetTiltX = 0, targetTiltY = 0;
+    let currentTiltX = 0, currentTiltY = 0;
+    let isDragging = false;
+    let previousMouseX = 0, previousMouseY = 0;
+    let dragVelocityX = 0, dragVelocityY = 0;
+    let animId = null;
+    let frameTimes = [];
+    let lastTime = performance.now();
+
+    function initGyro() {
+      const container = document.querySelector('.hero-container');
+      const canvas = document.getElementById('gyro-canvas');
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+      camera.position.set(0, 0, 7.5);
+
+      renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Titanium Material for Rings
+      const titaniumMat = new THREE.MeshStandardMaterial({
+        color: 0xd8dde4,
+        metalness: 0.95,
+        roughness: 0.22
+      });
+
+      // Refractive Optical Glass Core Material
+      const glassMat = new THREE.MeshPhysicalMaterial({
+        color: 0xffffff,
+        transmission: 0.98,
+        opacity: 1,
+        transparent: true,
+        roughness: 0.04,
+        ior: 1.52,
+        reflectivity: 0.9
+      });
+
+      // Rings Geometry
+      ringOuter = new THREE.Mesh(new THREE.TorusGeometry(2.4, 0.08, 20, 64), titaniumMat);
+      ringMid = new THREE.Mesh(new THREE.TorusGeometry(1.8, 0.07, 16, 48), titaniumMat);
+      ringInner = new THREE.Mesh(new THREE.TorusGeometry(1.2, 0.06, 16, 48), titaniumMat);
+      core = new THREE.Mesh(new THREE.IcosahedronGeometry(0.65, 3), glassMat);
+
+      scene.add(ringOuter);
+      scene.add(ringMid);
+      scene.add(ringInner);
+      scene.add(core);
+
+      // Procedural Studio Lighting
+      const dirLight1 = new THREE.DirectionalLight(0xffffff, 2.4);
+      dirLight1.position.set(5, 8, 5);
+      scene.add(dirLight1);
+
+      const dirLight2 = new THREE.DirectionalLight(0x5ce1e6, 1.8);
+      dirLight2.position.set(-6, -4, -3);
+      scene.add(dirLight2);
+
+      const dirLight3 = new THREE.DirectionalLight(0xcf005e, 1.2);
+      dirLight3.position.set(0, -6, 4);
+      scene.add(dirLight3);
+
+      const ambient = new THREE.AmbientLight(0x181a20, 1.5);
+      scene.add(ambient);
+
+      // Event Listeners for Interaction & Drag Inertia
+      window.addEventListener('mousemove', onMouseMove);
+      canvas.addEventListener('mousedown', onMouseDown);
+      window.addEventListener('mouseup', onMouseUp);
+      canvas.addEventListener('dblclick', onCoreDoubleClick);
+      window.addEventListener('resize', onResize);
+
+      animate();
+    }
+
+    function onMouseMove(e) {
+      if (isDragging) {
+        const deltaX = e.clientX - previousMouseX;
+        const deltaY = e.clientY - previousMouseY;
+        dragVelocityX = deltaX * 0.005;
+        dragVelocityY = deltaY * 0.005;
+        ringOuter.rotation.y += dragVelocityX;
+        ringMid.rotation.x += dragVelocityY;
+        previousMouseX = e.clientX;
+        previousMouseY = e.clientY;
+      }
+
+      // Pointer-X tilt towards Code (left) or Craft (right)
+      const normX = (e.clientX / window.innerWidth) * 2 - 1;
+      const normY = -(e.clientY / window.innerHeight) * 2 + 1;
+      targetTiltY = normX * 0.45;
+      targetTiltX = -normY * 0.25;
+    }
+
+    function onMouseDown(e) {
+      isDragging = true;
+      previousMouseX = e.clientX;
+      previousMouseY = e.clientY;
+      dragVelocityX = 0;
+      dragVelocityY = 0;
+    }
+
+    function onMouseUp() {
+      isDragging = false;
+    }
+
+    function onCoreDoubleClick() {
+      // Easter egg pulse on core
+      let scale = 1.0;
+      const pulseInterval = setInterval(() => {
+        scale += 0.06;
+        core.scale.set(scale, scale, scale);
+        if (scale >= 1.4) {
+          clearInterval(pulseInterval);
+          const shrinkInterval = setInterval(() => {
+            scale -= 0.05;
+            core.scale.set(scale, scale, scale);
+            if (scale <= 1.0) {
+              core.scale.set(1, 1, 1);
+              clearInterval(shrinkInterval);
+            }
+          }, 16);
+        }
+      }, 16);
+    }
+
+    function onResize() {
+      const container = document.querySelector('.hero-container');
+      if (!container || !renderer) return;
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
+    }
+
+    function animate() {
+      animId = requestAnimationFrame(animate);
+
+      // FPS Calculation
+      const now = performance.now();
+      const delta = now - lastTime;
+      lastTime = now;
+      frameTimes.push(1000 / delta);
+      if (frameTimes.length > 30) frameTimes.shift();
+      const avgFps = Math.round(frameTimes.reduce((a, b) => a + b, 0) / frameTimes.length);
+      const fpsEl = document.getElementById('fps-counter');
+      if (fpsEl && avgFps) fpsEl.textContent = avgFps;
+
+      // Spring interpolation towards mouse tilt
+      currentTiltX += (targetTiltX - currentTiltX) * 0.06;
+      currentTiltY += (targetTiltY - currentTiltY) * 0.06;
+
+      // Inertia decay
+      if (!isDragging) {
+        dragVelocityX *= 0.94;
+        dragVelocityY *= 0.94;
+        ringOuter.rotation.y += dragVelocityX;
+        ringMid.rotation.x += dragVelocityY;
+      }
+
+      // Continuous differential ring rotation rates
+      ringOuter.rotation.z += 0.003;
+      ringMid.rotation.y += 0.007;
+      ringInner.rotation.x += 0.012;
+      core.rotation.y += 0.015;
+
+      // Gimbal tilt
+      scene.rotation.x = currentTiltX;
+      scene.rotation.y = currentTiltY;
+
+      renderer.render(scene, camera);
+    }
+
+    // Teardown / memory management test function
+    window.__gyroTeardown = function() {
+      if (animId) cancelAnimationFrame(animId);
+      scene.traverse(child => {
+        if (child.isMesh) {
+          child.geometry.dispose();
+          if (Array.isArray(child.material)) child.material.forEach(m => m.dispose());
+          else child.material.dispose();
+        }
+      });
+      renderer.dispose();
+    };
+
+    window.__gyroInit = initGyro;
+
+    window.addEventListener('DOMContentLoaded', initGyro);
+  </script>
+</body>
+</html>

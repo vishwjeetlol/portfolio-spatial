@@ -1,0 +1,37 @@
+{
+  "title": "Vishwjeet — Spatial Studio & Creative Engineering",
+  "description": "Portfolio of Vishwjeet: spatial developer and creative technologist specializing in real-time WebGL, 3D graphics, motion physics, and systems interfaces.",
+  "canonicalUrl": "https://portfolio-spatial.vercel.app",
+  "openGraph": {
+    "type": "website",
+    "locale": "en_US",
+    "url": "https://portfolio-spatial.vercel.app",
+    "title": "Vishwjeet — Spatial Studio & Creative Engineering",
+    "description": "High-fidelity real-time 3D, physics-driven interfaces, and creative engineering systems.",
+    "siteName": "Vishwjeet Spatial Studio",
+    "images": [
+      {
+        "url": "/img/gyro-poster.png",
+        "width": 1200,
+        "height": 630,
+        "alt": "Refractive Gyroscope 3D Hero and Spatial Studio Interface"
+      }
+    ]
+  },
+  "twitter": {
+    "card": "summary_large_image",
+    "title": "Vishwjeet — Spatial Studio & Creative Engineering",
+    "description": "Real-time WebGL, 3D interactive graphics, and systems interfaces.",
+    "image": "/img/gyro-poster.png"
+  },
+  "structuredData": {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Vishwjeet",
+    "jobTitle": "Creative Technologist / Spatial Developer",
+    "url": "https://portfolio-spatial.vercel.app",
+    "sameAs": [
+      "https://github.com/vishwjeetlol"
+    ]
+  }
+}

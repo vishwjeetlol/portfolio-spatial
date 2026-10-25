@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vishwjeet — Spatial Studio &amp; Creative Engineering</title>
+  <meta name="description" content="Portfolio of Vishwjeet: spatial developer and creative technologist specializing in real-time WebGL, 3D graphics, motion physics, and systems interfaces.">
+  <link rel="canonical" href="https://portfolio-spatial.vercel.app">
+
+  <!-- OpenGraph Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://portfolio-spatial.vercel.app">
+  <meta property="og:title" content="Vishwjeet — Spatial Studio &amp; Creative Engineering">
+  <meta property="og:description" content="High-fidelity real-time 3D, physics-driven interfaces, and creative engineering systems.">
+  <meta property="og:site_name" content="Vishwjeet Spatial Studio">
+  <meta property="og:image" content="/img/gyro-poster.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Vishwjeet — Spatial Studio &amp; Creative Engineering">
+  <meta name="twitter:description" content="Real-time WebGL, 3D interactive graphics, and systems interfaces.">
+  <meta name="twitter:image" content="/img/gyro-poster.png">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Vishwjeet",
+    "jobTitle": "Creative Technologist / Spatial Developer",
+    "url": "https://portfolio-spatial.vercel.app",
+    "sameAs": ["https://github.com/vishwjeetlol"]
+  }
+  </script>
+
+  <link rel="stylesheet" href="/src/styles.css">
+</head>
+<body>
+  <div class="ambient-glow" aria-hidden="true"></div>
+
+  <!-- HUD Header -->
+  <header class="hud-header">
+    <div class="hud-badge">
+      <span class="status-dot"></span>
+      <span class="hud-brand">VISHWJEET // SPATIAL STUDIO</span>
+    </div>
+    <div class="hud-actions">
+      <div class="hud-badge desktop-only">
+        <span>FPS: <strong id="hud-fps">60</strong></span>
+      </div>
+      <a href="https://github.com/vishwjeetlol" target="_blank" rel="noopener noreferrer" class="hud-badge hover-pill" aria-label="GitHub Profile">
+        <span>GitHub</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- 3D Gyroscope Hero -->
+  <section class="hero-stage" aria-label="3D Interactive Gyroscope">
+    <div class="hero-canvas-wrap">
+      <canvas id="gyro-canvas" role="img" aria-label="Interactive 3D brushed-titanium gyroscope with optical refractive glass core"></canvas>
+      <noscript>
+        <img src="/img/gyro-poster.png" alt="3D Gyroscope Visual" class="hero-poster-fallback">
+      </noscript>
+    </div>
+    <div class="hero-instruction desktop-only" aria-hidden="true">
+      &larr; Tilt Left for Code &bull; Drag to Spin with Inertia &bull; Tilt Right for Craft &rarr;
+    </div>
+  </section>
+
+  <!-- Bio & Core Statement (<= 40 words) -->
+  <section class="bio-section" aria-label="Bio and Overview">
+    <p class="bio-text">
+      Spatial frontend engineer and creative technologist building real-time WebGL, procedural shaders, and interactive systems. Translating tactile craft into sub-second browser architecture.
+    </p>
+  </section>
+
+  <!-- Search & Segmented Switch -->
+  <section class="controls-section" aria-label="Project Controls and Filter">
+    <div class="search-bar-wrap">
+      <input type="search" id="project-search" placeholder="Filter by stack, keyword, or architecture..." aria-label="Search projects">
+    </div>
+    <div class="mobile-switcher mobile-only" role="tablist" aria-label="Discipline Switcher">
+      <button class="switch-btn active" role="tab" aria-selected="true" id="tab-code" data-target="code">Code</button>
+      <button class="switch-btn" role="tab" aria-selected="false" id="tab-craft" data-target="craft">Craft</button>
+    </div>
+  </section>
+
+  <!-- Spatial Dual-Split Layout -->
+  <main class="dual-split-container" id="projects-container">
+    <!-- Left Column: CODE -->
+    <div class="split-column col-code" id="view-code" role="tabpanel" aria-labelledby="tab-code">
+      <div class="col-sticky-header">
+        <h2 class="col-heading">Code // Systems</h2>
+        <span class="col-sub">ML &bull; Pipelines &bull; Infra</span>
+      </div>
+      <div class="cards-stack" id="cards-code">
+        <!-- Rendered dynamically from projects.json -->
+      </div>
+    </div>
+
+    <!-- Right Column: CRAFT -->
+    <div class="split-column col-craft" id="view-craft" role="tabpanel" aria-labelledby="tab-craft">
+      <div class="col-sticky-header">
+        <h2 class="col-heading">Craft // Realtime</h2>
+        <span class="col-sub">3D &bull; Shaders &bull; Motion</span>
+      </div>
+      <div class="cards-stack" id="cards-craft">
+        <!-- Rendered dynamically from projects.json -->
+      </div>
+    </div>
+  </main>
+
+  <!-- 4-Step "How I Work" Process -->
+  <section class="process-section" aria-label="Engineering and Craft Process">
+    <h2 class="section-title">How I Work</h2>
+    <div class="process-grid">
+      <div class="process-card">
+        <span class="step-num">01</span>
+        <h3 class="step-title">Model &amp; Prototype</h3>
+        <p class="step-desc">Rapid geometric and physics verification directly in headless scripts and sandbox environments.</p>
+      </div>
+      <div class="process-card">
+        <span class="step-num">02</span>
+        <h3 class="step-title">Materiality &amp; Shaders</h3>
+        <p class="step-desc">Dialing in optical refraction, frosted diffusion, and specular edge lighting with custom GLSL shaders.</p>
+      </div>
+      <div class="process-card">
+        <span class="step-num">03</span>
+        <h3 class="step-title">Systems &amp; Performance</h3>
+        <p class="step-desc">Distance culling, dynamic light pooling, zero layout shift, and sub-second static build bundles.</p>
+      </div>
+      <div class="process-card">
+        <span class="step-num">04</span>
+        <h3 class="step-title">Polish &amp; Verification</h3>
+        <p class="step-desc">Multi-agent quality gates, automated memory leak tests, and strict WCAG AAA contrast compliance.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating Magnetic Dock (3 Doors) -->
+  <nav class="magnetic-dock-wrap" aria-label="Action Dock">
+    <div class="magnetic-dock" id="magnetic-dock">
+      <button class="dock-btn primary-btn" id="open-hire-modal" aria-haspopup="dialog">
+        <span class="dock-icon">&Delta;</span>
+        <span>1. Hire / Builder</span>
+      </button>
+      <a href="/cv.pdf" target="_blank" rel="noopener" class="dock-btn">
+        <span class="dock-icon">&Xi;</span>
+        <span>2. CV + GitHub</span>
+      </a>
+      <a href="/writing" class="dock-btn">
+        <span class="dock-icon">&Phi;</span>
+        <span>3. Social + Writing</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Modal 1: Hire / Start a Project Builder -->
+  <div class="modal-backdrop" id="hire-modal" role="dialog" aria-modal="true" aria-labelledby="hire-title" hidden>
+    <div class="modal-surface">
+      <div class="modal-header">
+        <h2 id="hire-title">Start a Project // Scope Builder</h2>
+        <button class="modal-close-btn" id="close-hire-modal" aria-label="Close dialog">&times;</button>
+      </div>
+      <form id="project-builder-form" class="modal-body" onsubmit="event.preventDefault();">
+        <div class="form-group">
+          <label for="project-type">Project Type</label>
+          <select id="project-type" class="form-select">
+            <option value="3D Interactive / WebGL">3D Interactive / WebGL Experience</option>
+            <option value="Design System & Spatial UI">Design System &amp; Spatial UI</option>
+            <option value="Creative Engineering / Prototype">Creative Engineering / Prototype</option>
+            <option value="Performance & Shader Optimization">Performance &amp; Shader Optimization</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="project-scope">Scope &amp; Deliverables</label>
+          <select id="project-scope" class="form-select">
+            <option value="Full Build (Architecture to Release)">Full Build (Architecture to Release)</option>
+            <option value="Interactive Prototype / Proof of Concept">Interactive Prototype / Proof of Concept</option>
+            <option value="Spatial Shader / 3D Asset Integration">Spatial Shader / 3D Asset Integration</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="project-timeline">Target Timeline</label>
+            <select id="project-timeline" class="form-select">
+              <option value="2-4 Weeks">2 &ndash; 4 Weeks</option>
+              <option value="1-2 Months">1 &ndash; 2 Months</option>
+              <option value="Quarterly Studio Retainer">Quarterly Studio Retainer</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="project-budget">Estimated Budget</label>
+            <select id="project-budget" class="form-select">
+              <option value="$5k - $10k">$5k &ndash; $10k</option>
+              <option value="$10k - $25k">$10k &ndash; $25k</option>
+              <option value="$25k+">$25k+</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="project-notes">Project Context / Links</label>
+          <textarea id="project-notes" class="form-textarea" rows="3" placeholder="Briefly describe your goals, references, or timeline constraints..."></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" id="copy-brief-btn">Copy Brief</button>
+          <a href="#" id="send-mail-link" class="btn-primary">Launch Mail Client</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 2: See Under the Hood -->
+  <div class="modal-backdrop" id="hood-modal" role="dialog" aria-modal="true" aria-labelledby="hood-title" hidden>
+    <div class="modal-surface hood-surface">
+      <div class="modal-header">
+        <h2 id="hood-title">Under the Hood Architecture</h2>
+        <button class="modal-close-btn" id="close-hood-modal" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body hood-body">
+        <div id="hood-diagram-container" class="hood-diagram-container"></div>
+        <div id="hood-details" class="hood-details"></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
