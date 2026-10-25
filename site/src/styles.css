@@ -730,3 +730,391 @@ label {
     transform: none !important;
   }
 }
+
+
+/* ===================================================
+   PANORAMA STAGE & MODE SWITCHER ENHANCEMENTS
+   =================================================== */
+
+.mode-switcher {
+  display: flex;
+  background: rgba(18, 21, 28, 0.85);
+  border: 1px solid var(--glass-border);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-radius: 9999px;
+  padding: 3px;
+  gap: 3px;
+  pointer-events: auto;
+}
+
+.mode-toggle-btn {
+  background: transparent;
+  border: none;
+  color: var(--silver-400);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 180ms var(--spring-smooth);
+}
+
+.mode-toggle-btn:hover {
+  color: #fff;
+}
+
+.mode-toggle-btn.active {
+  background: var(--bg-surface);
+  color: #fff;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Sound Synthesizer Button */
+.sound-toggle-btn {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+  border-radius: 9999px;
+  padding: 6px 14px;
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  color: var(--silver-300);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 180ms ease;
+}
+
+.sound-toggle-btn:hover {
+  border-color: var(--accent-cyan);
+  color: #fff;
+}
+
+.sound-toggle-btn.active {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  box-shadow: 0 0 12px rgba(92, 225, 230, 0.2);
+}
+
+.sound-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+
+.sound-bar {
+  width: 2px;
+  height: 6px;
+  background: currentColor;
+  border-radius: 1px;
+}
+
+.sound-toggle-btn.active .sound-bar:nth-child(1) { animation: soundEq 0.6s infinite alternate ease-in-out; }
+.sound-toggle-btn.active .sound-bar:nth-child(2) { animation: soundEq 0.4s infinite alternate ease-in-out; }
+.sound-toggle-btn.active .sound-bar:nth-child(3) { animation: soundEq 0.8s infinite alternate ease-in-out; }
+
+@keyframes soundEq {
+  0% { height: 3px; }
+  100% { height: 12px; }
+}
+
+/* Panorama Stage Viewport */
+.panorama-stage {
+  position: relative;
+  width: 100%;
+  height: 52vh;
+  min-height: 380px;
+  background: #07080c;
+  overflow: hidden;
+  border-bottom: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+}
+
+#panorama-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: grab;
+}
+
+.panorama-controls-bar {
+  position: absolute;
+  bottom: 14px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.station-jump-group {
+  display: flex;
+  gap: 6px;
+  pointer-events: auto;
+  overflow-x: auto;
+  max-width: 80%;
+  scrollbar-width: none;
+}
+
+.station-jump-btn {
+  background: rgba(18, 21, 28, 0.85);
+  border: 1px solid var(--glass-border);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  color: var(--silver-300);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 150ms ease;
+}
+
+.station-jump-btn:hover {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+/* ===================================================
+   PLAYROOM: TATA TRUCK DASHBOARD & AUDIO SYNTHESIZER
+   =================================================== */
+
+.playroom-section {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+
+.playroom-card {
+  background: linear-gradient(135deg, rgba(24, 28, 38, 0.9), rgba(14, 16, 22, 0.95));
+  border: 1px solid rgba(244, 162, 40, 0.25);
+  border-radius: 20px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 32px;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .playroom-card {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+}
+
+.playroom-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #f4a228;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.playroom-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+
+.playroom-desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--silver-400);
+  margin-bottom: 24px;
+  max-width: 60ch;
+}
+
+.playroom-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.playroom-btn {
+  background: #f4a228;
+  color: #08090c;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 120ms ease, opacity 120ms ease;
+  box-shadow: 0 4px 16px rgba(244, 162, 40, 0.3);
+}
+
+.playroom-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+.playroom-btn:active {
+  transform: translateY(1px);
+}
+
+.playroom-btn.secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: 1px solid var(--glass-border);
+  box-shadow: none;
+}
+
+.playroom-btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #fff;
+}
+
+/* Speedometer Gauge Visualizer */
+.gauge-cluster {
+  background: #090b10;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.gauge-svg {
+  width: 180px;
+  height: 100px;
+  overflow: visible;
+}
+
+.needle {
+  transform-origin: 90px 90px;
+  transform: rotate(-45deg);
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gauge-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--silver-500);
+  text-transform: uppercase;
+}
+
+/* ===================================================
+   MANIFESTO / EDITORIAL STORY SECTION
+   =================================================== */
+
+.manifesto-section {
+  max-width: 980px;
+  margin: 60px auto 100px;
+  padding: 0 24px;
+}
+
+.manifesto-header {
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 24px;
+  margin-bottom: 48px;
+}
+
+.manifesto-lead {
+  font-size: 1.8rem;
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin-top: 12px;
+}
+
+.manifesto-lead em {
+  font-style: normal;
+  color: var(--accent-cyan);
+}
+
+.manifesto-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  margin-bottom: 48px;
+}
+
+@media (max-width: 800px) {
+  .manifesto-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.manifesto-block {
+  background: var(--bg-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.manifesto-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-cyan);
+  letter-spacing: 0.05em;
+}
+
+.manifesto-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.manifesto-body {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--silver-400);
+}
+
+.manifesto-quote-banner {
+  background: linear-gradient(135deg, rgba(92, 225, 230, 0.08), rgba(207, 0, 94, 0.06));
+  border: 1px solid rgba(92, 225, 230, 0.25);
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+  margin: 48px 0;
+}
+
+.manifesto-quote-banner blockquote {
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.manifesto-quote-banner cite {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-style: normal;
+  color: var(--accent-cyan);
+  margin-top: 14px;
+}

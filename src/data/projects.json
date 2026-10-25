@@ -1,5 +1,129 @@
 [
   {
+    "id": "tata-truck-simulator",
+    "title": "Classic Tata Truck Cabin Simulator & The Bazaar",
+    "side": "craft",
+    "summary": "An interactive first-person driver-cabin simulator of a classic Indian Tata 1613 SE truck featuring interactive dual-tone horn audio, throttle revving, live dashboard gauges, and switchable driving scenes alongside The Bazaar panoramic canvas.",
+    "role": "Self-initiated project",
+    "stack": ["HTML5 Canvas", "Web Audio API", "CSS 3D", "JavaScript", "Tailwind CSS"],
+    "outcomes": [
+      "Pure browser-synthesized audio via Web Audio API oscillators (dual air-horn, diesel combustion harmonics) with zero external audio assets",
+      "Horizontally explorable panoramic canvas running at locked 60 FPS",
+      "Interactive cabin controls with live dashboard gauges and throttle responsiveness"
+    ],
+    "links": [
+      {
+        "label": "View Repository & Code",
+        "url": "https://github.com/vishwjeetlol/VishwjeetPortfolio"
+      }
+    ],
+    "media": [
+      {
+        "type": "image",
+        "url": "/img/projects/tata-truck-simulator.png",
+        "alt": "Classic Tata Truck Cabin Simulator & The Bazaar"
+      }
+    ],
+    "underTheHood": {
+      "type": "wireframe",
+      "assetPath": "/diagrams/tata-truck-wireframe.svg"
+    },
+    "publish": true
+  },
+  {
+    "id": "nepo-baby-web-toy",
+    "title": "Nepo Baby Magazine — Desi Kitsch Web Toy",
+    "side": "craft",
+    "summary": "An immersive, maximalist Indian Folk-Pop and Desi Kitsch interactive web toy experience. Features an interactive 3D book mockup with artwork file upload, an iTunes-style cover flow, and draggable polaroids.",
+    "role": "Self-initiated project",
+    "stack": ["HTML", "CSS 3D", "JavaScript", "Figma", "Web Toy Mechanics"],
+    "outcomes": [
+      "Tactile 3D book cover open/close physics with custom artwork file upload injection",
+      "Draggable polaroids with spring momentum and z-index elevation stacking",
+      "Purposeful maximalist typography and playful interaction mechanics"
+    ],
+    "links": [
+      {
+        "label": "View Repository & Code",
+        "url": "https://github.com/vishwjeetlol/Nepo_Baby_Website"
+      }
+    ],
+    "media": [
+      {
+        "type": "image",
+        "url": "/img/projects/nepo-baby-web-toy.png",
+        "alt": "Nepo Baby Magazine Desi Kitsch Web Toy"
+      }
+    ],
+    "underTheHood": {
+      "type": "wireframe",
+      "assetPath": "/diagrams/nepo-baby-toy-wireframe.svg"
+    },
+    "publish": true
+  },
+  {
+    "id": "threejs-museum",
+    "title": "The Museum of Three.js",
+    "side": "craft",
+    "summary": "An interactive 3D virtual exhibition pavilion featuring 22 interactive exhibits spanning procedural models, custom GLSL curl shaders, particle simulations, and retro-tech artifacts inside a single WebGL context.",
+    "role": "Self-initiated project",
+    "stack": ["JavaScript", "Three.js", "Vite", "WebGL", "GLSL Shaders", "Procedural Geometry"],
+    "outcomes": [
+      "Dynamic spotlight pooling and distance culling at 28 units maintaining 60 FPS across 22 exhibits",
+      "Production build executes in 384ms across 24 code-split chunks with zero errors",
+      "Custom vertex curl noise and volumetric light shaft shaders"
+    ],
+    "links": [
+      {
+        "label": "View Repository & Code",
+        "url": "https://github.com/vishwjeetlol/3js-museum"
+      }
+    ],
+    "media": [
+      {
+        "type": "image",
+        "url": "/img/projects/threejs-museum.png",
+        "alt": "The Museum of Three.js 3D Virtual Pavilion"
+      }
+    ],
+    "underTheHood": {
+      "type": "breakdown",
+      "assetPath": "/diagrams/threejs-museum-breakdown.svg"
+    },
+    "publish": true
+  },
+  {
+    "id": "nepo-magazine-blender",
+    "title": "Nepo Baby Magazine with Blender",
+    "side": "craft",
+    "summary": "A maximalist digital editorial web experience integrating layered responsive layouts with 3D canvas rendering and embedded 3D assets including a coupe model turntable and animated marquees.",
+    "role": "Self-initiated project",
+    "stack": ["Blender 3D", "HTML5", "CSS", "JavaScript", "3D Canvas"],
+    "outcomes": [
+      "Embedded 3D vehicle turntable rendering in real-time with orbit controls",
+      "Layered editorial layouts translating cultural print storytelling into browser-native media",
+      "Zero external runtime framework dependencies"
+    ],
+    "links": [
+      {
+        "label": "View Repository & Code",
+        "url": "https://github.com/vishwjeetlol/Nepowebsitewithblender"
+      }
+    ],
+    "media": [
+      {
+        "type": "image",
+        "url": "/img/projects/nepo-magazine-blender.png",
+        "alt": "Nepo Baby Magazine 3D Coupe Experience"
+      }
+    ],
+    "underTheHood": {
+      "type": "breakdown",
+      "assetPath": "/diagrams/nepo-blender-breakdown.svg"
+    },
+    "publish": true
+  },
+  {
     "id": "neural-playground",
     "title": "Neural Playground",
     "side": "code",

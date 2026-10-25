@@ -3,25 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vishwjeet — Spatial Studio &amp; Creative Engineering</title>
-  <meta name="description" content="Portfolio of Vishwjeet: spatial developer and creative technologist specializing in real-time WebGL, 3D graphics, motion physics, and systems interfaces.">
+  <title>Vishwjeet Chavan — Creative Developer · Interactive Designer · Experience Builder</title>
+  <meta name="description" content="Portfolio of Vishwjeet Chavan: independent creative developer working at the intersection of technology, design, and interactive storytelling. Real-time WebGL, 3D graphics, procedural Web Audio, and digital experiences.">
   <link rel="canonical" href="https://portfolio-spatial-eight.vercel.app">
 
   <!-- OpenGraph Meta -->
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_US">
   <meta property="og:url" content="https://portfolio-spatial-eight.vercel.app">
-  <meta property="og:title" content="Vishwjeet — Spatial Studio &amp; Creative Engineering">
-  <meta property="og:description" content="High-fidelity real-time 3D, physics-driven interfaces, and creative engineering systems.">
-  <meta property="og:site_name" content="Vishwjeet Spatial Studio">
+  <meta property="og:title" content="Vishwjeet Chavan — Creative Developer · Interactive Designer">
+  <meta property="og:description" content="Turning ideas into distinctive digital experiences: custom web development, interactive design, creative coding, and visual storytelling.">
+  <meta property="og:site_name" content="Vishwjeet Chavan Studio">
   <meta property="og:image" content="/img/gyro-poster.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Vishwjeet — Spatial Studio &amp; Creative Engineering">
-  <meta name="twitter:description" content="Real-time WebGL, 3D interactive graphics, and systems interfaces.">
+  <meta name="twitter:title" content="Vishwjeet Chavan — Creative Developer · Interactive Designer">
+  <meta name="twitter:description" content="High-fidelity 3D, physics-driven interfaces, and creative digital experiences.">
   <meta name="twitter:image" content="/img/gyro-poster.png">
 
   <!-- Structured Data -->
@@ -29,8 +29,8 @@
   {
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": "Vishwjeet",
-    "jobTitle": "Creative Technologist / Spatial Developer",
+    "name": "Vishwjeet Chavan",
+    "jobTitle": "Creative Developer & Interactive Designer",
     "url": "https://portfolio-spatial-eight.vercel.app",
     "sameAs": ["https://github.com/vishwjeetlol"]
   }
@@ -45,20 +45,64 @@
   <header class="hud-header">
     <div class="hud-badge">
       <span class="status-dot"></span>
-      <span class="hud-brand">VISHWJEET // SPATIAL STUDIO</span>
+      <span class="hud-brand">VISHWJEET CHAVAN // CREATIVE DEVELOPER</span>
     </div>
+
+    <!-- Mode Selector -->
+    <div class="mode-switcher desktop-only" role="tablist" aria-label="Experience Mode Switcher">
+      <button class="mode-toggle-btn active" data-mode="panorama" role="tab" aria-selected="true">
+        🌐 Panorama World
+      </button>
+      <button class="mode-toggle-btn" data-mode="gyro" role="tab" aria-selected="false">
+        🧭 3D Gyroscope
+      </button>
+      <button class="mode-toggle-btn" data-mode="manifesto" role="tab" aria-selected="false">
+        📖 Manifesto
+      </button>
+    </div>
+
     <div class="hud-actions">
+      <!-- Procedural Sound Toggle -->
+      <button class="sound-toggle-btn active" id="sound-toggle-btn" title="Toggle Procedural Web Audio">
+        <div class="sound-bars">
+          <span class="sound-bar"></span>
+          <span class="sound-bar"></span>
+          <span class="sound-bar"></span>
+        </div>
+        <span id="sound-label">AUDIO ON</span>
+      </button>
+
       <div class="hud-badge desktop-only">
         <span>FPS: <strong id="hud-fps">60</strong></span>
       </div>
+
       <a href="https://github.com/vishwjeetlol" target="_blank" rel="noopener noreferrer" class="hud-badge hover-pill" aria-label="GitHub Profile">
         <span>GitHub</span>
       </a>
     </div>
   </header>
 
-  <!-- 3D Gyroscope Hero -->
-  <section class="hero-stage" aria-label="3D Interactive Gyroscope">
+  <!-- STAGE 1: Interactive Panorama Stage (Default) -->
+  <section class="panorama-stage" id="panorama-stage" aria-label="Interactive Panorama Exploration">
+    <canvas id="panorama-canvas" role="img" aria-label="Horizontally explorable interactive world canvas with parallax depth and stations"></canvas>
+    
+    <div class="panorama-controls-bar">
+      <div class="station-jump-group">
+        <button class="station-jump-btn" data-offset="0">🚚 Tata Truck Cabin</button>
+        <button class="station-jump-btn" data-offset="550">📖 Nepo Baby Magazine</button>
+        <button class="station-jump-btn" data-offset="1100">🏛️ Three.js Museum</button>
+        <button class="station-jump-btn" data-offset="1650">🧠 Neural Playground</button>
+        <button class="station-jump-btn" data-offset="2200">🌍 Seismic Globe</button>
+        <button class="station-jump-btn" data-offset="2750">💎 Material Lab</button>
+      </div>
+      <div class="hud-badge desktop-only" style="font-size: 0.72rem;">
+        <span>Drag to Explore &bull; Wheel to Pan</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAGE 2: 3D Gyroscope Stage (Toggleable) -->
+  <section class="hero-stage" id="gyro-stage" aria-label="3D Interactive Gyroscope" hidden>
     <div class="hero-canvas-wrap">
       <canvas id="gyro-canvas" role="img" aria-label="Interactive 3D brushed-titanium gyroscope with optical refractive glass core"></canvas>
       <noscript>
@@ -70,17 +114,52 @@
     </div>
   </section>
 
-  <!-- Bio & Core Statement (<= 40 words) -->
-  <section class="bio-section" aria-label="Bio and Overview">
+  <!-- Bio & Core Statement (Directly from Vishwjeet's Philosophy) -->
+  <section class="bio-section" aria-label="Bio and Core Philosophy">
     <p class="bio-text">
-      Spatial frontend engineer and creative technologist building real-time WebGL, procedural shaders, and interactive systems. Translating tactile craft into sub-second browser architecture.
+      Independent creative developer working at the intersection of technology, design, and interactive storytelling. A website doesn't have to be a static place where information lives—it can be an experience in itself. Functionality and personality must coexist.
     </p>
+  </section>
+
+  <!-- INTERACTIVE PLAYROOM: Tata Truck 1613 SE Audio Dashboard -->
+  <section class="playroom-section" aria-label="Interactive Audio Synthesizer Dashboard">
+    <div class="playroom-card">
+      <div>
+        <span class="playroom-badge">Browser Web Audio API &bull; Zero External Audio Files</span>
+        <h2 class="playroom-title">Classic Tata Truck Cabin &amp; Audio Synthesizer</h2>
+        <p class="playroom-desc">
+          Demonstrating Vishwjeet's audio-tactile philosophy: rather than downloading static MP3 sound files, real-time audio is generated directly via mathematical oscillator waveforms and biquad frequency filters in the browser. Test the live cabin controls below.
+        </p>
+        <div class="playroom-actions">
+          <button class="playroom-btn" id="play-horn-btn">
+            <span>📢 Sound Dual Air-Horn</span>
+          </button>
+          <button class="playroom-btn secondary" id="play-rev-btn">
+            <span>⚡ Rev Diesel Throttle</span>
+          </button>
+          <a href="https://github.com/vishwjeetlol/VishwjeetPortfolio" target="_blank" rel="noopener noreferrer" class="playroom-btn secondary">
+            <span>View Full Simulator Code &rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Live Speedometer / Tachometer Needle Gauge -->
+      <div class="gauge-cluster">
+        <svg class="gauge-svg" viewBox="0 0 180 100">
+          <path d="M 20 90 A 70 70 0 0 1 160 90" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="8" stroke-linecap="round"/>
+          <path d="M 20 90 A 70 70 0 0 1 100 20" fill="none" stroke="#f4a228" stroke-width="8" stroke-linecap="round"/>
+          <line id="speedo-needle" class="needle" x1="90" y1="90" x2="90" y2="30" stroke="#f4a228" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="90" cy="90" r="7" fill="#ffffff"/>
+        </svg>
+        <span class="gauge-label">Live Tachometer Telemetry</span>
+      </div>
+    </div>
   </section>
 
   <!-- Search & Segmented Switch -->
   <section class="controls-section" aria-label="Project Controls and Filter">
     <div class="search-bar-wrap">
-      <input type="search" id="project-search" placeholder="Filter by stack, keyword, or architecture..." aria-label="Search projects">
+      <input type="search" id="project-search" placeholder="Filter 11 projects by stack, keyword, or architecture..." aria-label="Search projects">
     </div>
     <div class="mobile-switcher mobile-only" role="tablist" aria-label="Discipline Switcher">
       <button class="switch-btn active" role="tab" aria-selected="true" id="tab-code" data-target="code">Code</button>
@@ -88,13 +167,13 @@
     </div>
   </section>
 
-  <!-- Spatial Dual-Split Layout -->
+  <!-- Spatial Dual-Split Project Showcase -->
   <main class="dual-split-container" id="projects-container">
     <!-- Left Column: CODE -->
     <div class="split-column col-code" id="view-code" role="tabpanel" aria-labelledby="tab-code">
       <div class="col-sticky-header">
         <h2 class="col-heading">Code // Systems</h2>
-        <span class="col-sub">ML &bull; Pipelines &bull; Infra</span>
+        <span class="col-sub">ML &bull; Neural Networks &bull; GeoJSON Pipelines</span>
       </div>
       <div class="cards-stack" id="cards-code">
         <!-- Rendered dynamically from projects.json -->
@@ -104,8 +183,8 @@
     <!-- Right Column: CRAFT -->
     <div class="split-column col-craft" id="view-craft" role="tabpanel" aria-labelledby="tab-craft">
       <div class="col-sticky-header">
-        <h2 class="col-heading">Craft // Realtime</h2>
-        <span class="col-sub">3D &bull; Shaders &bull; Motion</span>
+        <h2 class="col-heading">Craft // Realtime &amp; Toys</h2>
+        <span class="col-sub">3D Shaders &bull; Web Audio &bull; Desi Kitsch Editorial</span>
       </div>
       <div class="cards-stack" id="cards-craft">
         <!-- Rendered dynamically from projects.json -->
@@ -113,29 +192,82 @@
     </div>
   </main>
 
-  <!-- 4-Step "How I Work" Process -->
+  <!-- STAGE 3: The Editorial Manifesto Section -->
+  <section class="manifesto-section" id="manifesto-section" aria-label="Design and Creative Philosophy Manifesto">
+    <div class="manifesto-header">
+      <span class="tag">01 &ndash; 10 // PHILOSOPHICAL MANIFESTO</span>
+      <h2 class="manifesto-lead">
+        The browser is a creative medium, not a filing cabinet.<br>
+        <em>Functionality and personality should coexist.</em>
+      </h2>
+    </div>
+
+    <div class="manifesto-grid">
+      <div class="manifesto-block">
+        <span class="manifesto-num">01. WHO I AM</span>
+        <h3 class="manifesto-title">Thinking Beyond the Page</h3>
+        <p class="manifesto-body">
+          Rather than approaching digital projects as a collection of pages, sections, and buttons, Vish thinks about how the entire experience comes together. What makes someone curious enough to keep exploring? How can an interaction communicate a brand's personality better than another paragraph of text? How can sound, motion, and unexpected details turn an ordinary website into something people actually remember?
+        </p>
+      </div>
+
+      <div class="manifesto-block">
+        <span class="manifesto-num">02. THE WAY I THINK</span>
+        <h3 class="manifesto-title">Connecting Design and Implementation</h3>
+        <p class="manifesto-body">
+          Vish approaches projects from the perspective of both a designer and a builder. The technical possibilities of a browser can influence a visual concept, while the visual concept determines how the underlying experience needs to be engineered. Not every project needs to be experimental, but every project should have a point of view.
+        </p>
+      </div>
+
+      <div class="manifesto-block">
+        <span class="manifesto-num">04. WHAT I BRING</span>
+        <h3 class="manifesto-title">Unifying Isolated Disciplines</h3>
+        <p class="manifesto-body">
+          From creative coding and custom navigation to real-time WebGL, 3D asset pipeline engineering, and pure browser Web Audio synthesis. The value lies in taking a concept beyond static mockups and translating it into a working, responsive, and robust digital environment.
+        </p>
+      </div>
+
+      <div class="manifesto-block">
+        <span class="manifesto-num">07. KINDS OF PROJECTS</span>
+        <h3 class="manifesto-title">Where Personality Matters</h3>
+        <p class="manifesto-body">
+          Independent magazines and editorial publications, creative studios, cultural projects, fashion and emerging consumer brands, founders looking to give a product a distinctive digital identity, and clients who want interactive portfolios or unconventional personal websites.
+        </p>
+      </div>
+    </div>
+
+    <!-- Pull Quote Banner -->
+    <div class="manifesto-quote-banner">
+      <blockquote>
+        &ldquo;Vishwjeet Chavan is a creative developer who turns ideas into distinctive digital experiences, combining custom web development, interactive design, creative coding, and visual storytelling to build work that functions as well as it feels.&rdquo;
+      </blockquote>
+      <cite>&mdash; In One Sentence // Section 10</cite>
+    </div>
+  </section>
+
+  <!-- 4-Step Process -->
   <section class="process-section" aria-label="Engineering and Craft Process">
     <h2 class="section-title">How I Work</h2>
     <div class="process-grid">
       <div class="process-card">
         <span class="step-num">01</span>
-        <h3 class="step-title">Model &amp; Prototype</h3>
-        <p class="step-desc">Rapid geometric and physics verification directly in headless scripts and sandbox environments.</p>
+        <h3 class="step-title">Understand the Brief</h3>
+        <p class="step-desc">Identifying the details that make a project engaging, expressive, or memorable before defaulting to familiar patterns.</p>
       </div>
       <div class="process-card">
         <span class="step-num">02</span>
-        <h3 class="step-title">Materiality &amp; Shaders</h3>
-        <p class="step-desc">Dialing in optical refraction, frosted diffusion, and specular edge lighting with custom GLSL shaders.</p>
+        <h3 class="step-title">Explore Interactive Direction</h3>
+        <p class="step-desc">Rapid visual experiments, prototypes of key interaction mechanics, and establishing a tailored sensory language.</p>
       </div>
       <div class="process-card">
         <span class="step-num">03</span>
-        <h3 class="step-title">Systems &amp; Performance</h3>
-        <p class="step-desc">Distance culling, dynamic light pooling, zero layout shift, and sub-second static build bundles.</p>
+        <h3 class="step-title">Build &amp; Implement</h3>
+        <p class="step-desc">Bridging concept and code: high-performance WebGL, procedural Web Audio, and sub-second static build bundles.</p>
       </div>
       <div class="process-card">
         <span class="step-num">04</span>
-        <h3 class="step-title">Polish &amp; Verification</h3>
-        <p class="step-desc">Multi-agent quality gates, automated memory leak tests, and strict WCAG AAA contrast compliance.</p>
+        <h3 class="step-title">Refine &amp; Deliver</h3>
+        <p class="step-desc">Meticulous attention to how animations start and stop, typography across viewports, and verified accessibility standards.</p>
       </div>
     </div>
   </section>
@@ -145,7 +277,7 @@
     <div class="magnetic-dock" id="magnetic-dock">
       <button class="dock-btn primary-btn" id="open-hire-modal" aria-haspopup="dialog">
         <span class="dock-icon">&Delta;</span>
-        <span>1. Hire / Builder</span>
+        <span>1. Start a Project / Scope</span>
       </button>
       <a href="/cv.pdf" target="_blank" rel="noopener" class="dock-btn">
         <span class="dock-icon">&Xi;</span>
@@ -153,7 +285,7 @@
       </a>
       <a href="/writing" class="dock-btn">
         <span class="dock-icon">&Phi;</span>
-        <span>3. Social + Writing</span>
+        <span>3. Technical Notes</span>
       </a>
     </div>
   </nav>
@@ -169,18 +301,18 @@
         <div class="form-group">
           <label for="project-type">Project Type</label>
           <select id="project-type" class="form-select">
-            <option value="3D Interactive / WebGL">3D Interactive / WebGL Experience</option>
-            <option value="Design System & Spatial UI">Design System &amp; Spatial UI</option>
-            <option value="Creative Engineering / Prototype">Creative Engineering / Prototype</option>
-            <option value="Performance & Shader Optimization">Performance &amp; Shader Optimization</option>
+            <option value="Interactive Web Experience">Interactive Web Experience</option>
+            <option value="Digital Publication / Editorial Brand">Digital Publication / Editorial Brand</option>
+            <option value="3D WebGL / Canvas Application">3D WebGL / Canvas Application</option>
+            <option value="Creative Coding / Experimental Interface">Creative Coding / Experimental Interface</option>
           </select>
         </div>
         <div class="form-group">
           <label for="project-scope">Scope &amp; Deliverables</label>
           <select id="project-scope" class="form-select">
-            <option value="Full Build (Architecture to Release)">Full Build (Architecture to Release)</option>
+            <option value="Full Build (Design to Production Launch)">Full Build (Design to Production Launch)</option>
             <option value="Interactive Prototype / Proof of Concept">Interactive Prototype / Proof of Concept</option>
-            <option value="Spatial Shader / 3D Asset Integration">Spatial Shader / 3D Asset Integration</option>
+            <option value="Custom 3D / Shaders / Sound Design">Custom 3D / Shaders / Sound Design</option>
           </select>
         </div>
         <div class="form-row">
@@ -189,7 +321,7 @@
             <select id="project-timeline" class="form-select">
               <option value="2-4 Weeks">2 &ndash; 4 Weeks</option>
               <option value="1-2 Months">1 &ndash; 2 Months</option>
-              <option value="Quarterly Studio Retainer">Quarterly Studio Retainer</option>
+              <option value="Retainer / Ongoing Collaboration">Retainer / Ongoing Collaboration</option>
             </select>
           </div>
           <div class="form-group">
@@ -202,8 +334,8 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="project-notes">Project Context / Links</label>
-          <textarea id="project-notes" class="form-textarea" rows="3" placeholder="Briefly describe your goals, references, or timeline constraints..."></textarea>
+          <label for="project-notes">Project Context / Vision</label>
+          <textarea id="project-notes" class="form-textarea" rows="3" placeholder="Tell me about what you're making, who it's for, and what should make it distinctive..."></textarea>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn-secondary" id="copy-brief-btn">Copy Brief</button>
