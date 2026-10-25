@@ -3,211 +3,188 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aether Spatial Optics // Fictional Brand Identity &amp; Mockups</title>
+  <title>Aether Spatial Optics // Fictional Brand System</title>
+  <link rel="stylesheet" href="../../shared/styles.css">
   <style>
     :root {
       /* Palette A: Titanium Void (Default) */
-      --c-bg: #07080c;
-      --c-surface: #10131c;
-      --c-border: rgba(255, 255, 255, 0.12);
+      --c-bg: #08090c;
+      --c-surface: #111318;
+      --c-surface-raised: #181b22;
+      --c-border: rgba(255, 255, 255, 0.08);
       --c-accent: #5ce1e6;
-      --c-accent-glow: rgba(92, 225, 230, 0.25);
+      --c-accent-glow: rgba(92, 225, 230, 0.15);
       --c-text: #f8f9fa;
-      --c-muted: #8e95a0;
-      
-      --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
-      --font-mono: "SF Mono", Menlo, Consolas, monospace;
+      --c-muted: #868e96;
     }
 
     body.palette-solar {
       --c-bg: #120b08;
-      --c-surface: #201410;
-      --c-border: rgba(244, 162, 40, 0.22);
+      --c-surface: #1e1410;
+      --c-surface-raised: #281a14;
+      --c-border: rgba(244, 162, 40, 0.18);
       --c-accent: #f4a228;
-      --c-accent-glow: rgba(244, 162, 40, 0.25);
+      --c-accent-glow: rgba(244, 162, 40, 0.15);
       --c-text: #fffdfa;
       --c-muted: #bfa99c;
     }
 
     body.palette-flora {
       --c-bg: #06110d;
-      --c-surface: #0e201a;
-      --c-border: rgba(189, 255, 82, 0.22);
+      --c-surface: #0e1e17;
+      --c-surface-raised: #152c22;
+      --c-border: rgba(189, 255, 82, 0.18);
       --c-accent: #bdff52;
-      --c-accent-glow: rgba(189, 255, 82, 0.25);
+      --c-accent-glow: rgba(189, 255, 82, 0.15);
       --c-text: #f2fdf6;
       --c-muted: #8ba898;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: var(--c-bg);
+      background-color: var(--c-bg);
       color: var(--c-text);
-      font-family: var(--font-display);
-      min-height: 100vh;
-      padding: 32px;
-      transition: background 250ms ease, color 250ms ease;
-      position: relative;
+      transition: background-color var(--duration-std) var(--ease-spring), color var(--duration-std) var(--ease-spring);
     }
 
     /* Construction Grid Overlay */
     .grid-overlay {
       position: fixed;
       inset: 0;
-      background-size: 40px 40px;
+      background-size: 32px 32px;
       background-image: 
-        linear-gradient(to right, rgba(92, 225, 230, 0.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(92, 225, 230, 0.05) 1px, transparent 1px);
+        linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
       pointer-events: none;
       z-index: 999;
       display: none;
     }
     body.show-grid .grid-overlay { display: block; }
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 32px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--c-border);
-    }
-    .brand-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .disclaimer-badge {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--c-accent);
-      border: 1px solid var(--c-border);
-      padding: 4px 10px;
-      border-radius: 9999px;
-      display: inline-block;
-      width: fit-content;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em; }
-
-    /* Brand Shift Controls */
-    .controls-bar {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-    .shift-btn {
-      background: var(--c-surface);
-      border: 1px solid var(--c-border);
-      color: var(--c-text);
-      padding: 8px 16px;
-      border-radius: 9999px;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      cursor: pointer;
-      transition: all 180ms ease;
-    }
-    .shift-btn.active {
-      background: var(--c-accent);
-      color: #000;
-      font-weight: bold;
-      border-color: var(--c-accent);
-      box-shadow: 0 0 16px var(--c-accent-glow);
-    }
-    .grid-toggle-btn {
-      background: transparent;
-      border: 1px solid var(--c-border);
-      color: var(--c-muted);
-      padding: 8px 14px;
-      border-radius: 9999px;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      cursor: pointer;
-    }
-    .grid-toggle-btn:hover { color: #fff; }
-
-    /* Identity Overview */
-    .identity-row {
+    /* Identity Stage */
+    .identity-stage {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: var(--space-3);
       display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 32px;
-      margin-bottom: 40px;
+      grid-template-columns: 280px 1fr;
+      gap: var(--space-3);
     }
+
+    @media (max-width: 900px) {
+      .identity-stage {
+        grid-template-columns: 1fr;
+        padding: var(--space-2);
+      }
+    }
+
     .mark-card {
       background: var(--c-surface);
       border: 1px solid var(--c-border);
-      border-radius: 16px;
-      padding: 32px;
+      border-radius: var(--radius-surface);
+      padding: var(--space-4);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 16px;
+      gap: var(--space-2);
     }
+
     .mark-svg {
-      width: 120px;
-      height: 120px;
-      filter: drop-shadow(0 0 20px var(--c-accent-glow));
+      width: 110px;
+      height: 110px;
     }
+
     .mark-title {
       font-family: var(--font-mono);
-      font-size: 0.8rem;
+      font-size: 11px;
       color: var(--c-muted);
+      letter-spacing: 0.04em;
       text-transform: uppercase;
     }
 
     .specs-card {
       background: var(--c-surface);
       border: 1px solid var(--c-border);
-      border-radius: 16px;
-      padding: 24px;
+      border-radius: var(--radius-surface);
+      padding: var(--space-3);
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      gap: var(--space-3);
     }
+
+    @media (max-width: 768px) {
+      .specs-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .spec-group h3 {
       font-family: var(--font-mono);
-      font-size: 0.75rem;
+      font-size: 11px;
       color: var(--c-accent);
       text-transform: uppercase;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+      letter-spacing: 0.04em;
     }
+
     .spec-group p {
-      font-size: 0.9rem;
+      font-size: 13px;
       line-height: 1.5;
       color: var(--c-muted);
     }
 
     /* 3 Mockups Grid */
+    .mockups-container {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 0 var(--space-3) var(--space-3);
+    }
+
+    @media (max-width: 900px) {
+      .mockups-container {
+        padding: 0 var(--space-2) var(--space-2);
+      }
+    }
+
     .mockups-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-bottom: 40px;
+      gap: var(--space-3);
     }
+
+    @media (max-width: 960px) {
+      .mockups-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .mockup-card {
       background: var(--c-surface);
       border: 1px solid var(--c-border);
-      border-radius: 16px;
-      padding: 20px;
+      border-radius: var(--radius-surface);
+      padding: var(--space-3);
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: var(--space-2);
     }
-    .mockup-label {
+
+    .mockup-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       font-family: var(--font-mono);
-      font-size: 0.8rem;
+      font-size: 11px;
       color: var(--c-accent);
       text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
+
     .mockup-preview {
       width: 100%;
       height: 380px;
-      background: #000;
+      background: #000000;
       border: 1px solid var(--c-border);
-      border-radius: 12px;
+      border-radius: var(--radius-control);
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -217,53 +194,57 @@
 
     /* Mockup 1: Poster */
     .poster-inner {
-      width: 260px;
-      height: 350px;
+      width: 250px;
+      height: 340px;
       background: var(--c-bg);
       border: 1px solid var(--c-border);
-      padding: 20px;
+      padding: var(--space-3);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      position: relative;
+      border-radius: 4px;
     }
+
     .poster-hero-txt {
-      font-size: 1.8rem;
-      font-weight: 900;
+      font-size: 1.6rem;
+      font-weight: 800;
       line-height: 1.05;
       letter-spacing: -0.03em;
-      color: #fff;
+      color: var(--c-text);
     }
+
     .poster-foot {
       display: flex;
       justify-content: space-between;
       font-family: var(--font-mono);
-      font-size: 0.65rem;
+      font-size: 10px;
       color: var(--c-muted);
       border-top: 1px solid var(--c-border);
-      padding-top: 8px;
+      padding-top: 6px;
     }
 
     /* Mockup 2: App Screen */
     .app-screen {
       width: 200px;
-      height: 350px;
-      background: #000;
-      border: 3px solid #222;
-      border-radius: 28px;
+      height: 340px;
+      background: #000000;
+      border: 2px solid rgba(255, 255, 255, 0.12);
+      border-radius: 24px;
       padding: 16px 12px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      box-shadow: 0 12px 32px rgba(0,0,0,0.8);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.8);
     }
+
     .app-hud-top {
       display: flex;
       justify-content: space-between;
       font-family: var(--font-mono);
-      font-size: 0.65rem;
+      font-size: 10px;
       color: var(--c-accent);
     }
+
     .aperture-ring {
       width: 110px;
       height: 110px;
@@ -275,105 +256,86 @@
       justify-content: center;
       animation: spin 20s linear infinite;
     }
+
     @keyframes spin { 100% { transform: rotate(360deg); } }
+
     .aperture-val {
       font-family: var(--font-mono);
       font-size: 1.1rem;
-      font-weight: bold;
-      color: #fff;
+      font-weight: 700;
+      color: #ffffff;
     }
+
     .app-controls {
       display: flex;
       gap: 6px;
     }
+
     .app-btn {
       flex: 1;
-      background: var(--c-surface);
+      background: var(--c-surface-raised);
       border: 1px solid var(--c-border);
-      color: #fff;
+      color: var(--c-text);
       padding: 6px;
-      border-radius: 6px;
+      border-radius: var(--radius-control);
       font-family: var(--font-mono);
-      font-size: 0.65rem;
+      font-size: 10px;
       text-align: center;
     }
 
     /* Mockup 3: Packaging Flat */
     .packaging-flat {
-      width: 280px;
-      height: 280px;
+      width: 270px;
+      height: 270px;
       border: 1px dashed var(--c-muted);
       position: relative;
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 1fr;
-      padding: 8px;
+      padding: 6px;
       gap: 4px;
     }
+
     .pack-pane {
       border: 1px solid var(--c-border);
-      padding: 10px;
+      padding: 8px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-    }
-    .barcode {
-      height: 24px;
-      background: repeating-linear-gradient(to right, #fff, #fff 2px, transparent 2px, transparent 5px);
+      background: var(--c-surface);
     }
 
-    /* Under The Hood Drawer */
-    .under-hood-card {
-      background: var(--c-surface);
-      border: 1px solid var(--c-border);
-      border-radius: 16px;
-      padding: 24px;
+    .barcode {
+      height: 20px;
+      background: repeating-linear-gradient(to right, #ffffff, #ffffff 2px, transparent 2px, transparent 5px);
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-    }
-    th, td {
-      text-align: left;
-      padding: 10px 14px;
-      border-bottom: 1px solid var(--c-border);
-    }
-    th { color: var(--c-accent); }
-    td { color: var(--c-muted); }
   </style>
 </head>
 <body>
   <div class="grid-overlay"></div>
 
-  <header>
-    <div class="brand-meta">
-      <span class="disclaimer-badge">Concept, not a real client // Self-initiated project</span>
-      <h1>Aether Spatial Optics</h1>
-      <p style="color: var(--c-muted); font-size: 0.95rem;">
-        Autonomous spatial hardware &amp; refractive optics laboratory design system.
-      </p>
+  <header class="studio-header">
+    <a href="/portfolio-night/" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M10 12L6 8l4-4"/>
+      </svg>
+      Studio
+    </a>
+    <div class="header-title-group">
+      <span class="header-title">Aether Spatial Optics</span>
+      <span class="badge">Craft</span>
     </div>
-
-    <!-- Brand Shift Toggle -->
-    <div class="controls-bar">
-      <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--c-muted);">Brand Shift:</span>
-      <button class="shift-btn active" data-palette="void">1. Titanium Void</button>
-      <button class="shift-btn" data-palette="solar">2. Solar Quartz</button>
-      <button class="shift-btn" data-palette="flora">3. Cyber Flora</button>
-      <button class="grid-toggle-btn" id="toggle-grid">Toggle Grid</button>
-    </div>
+    <span class="tag-self">Concept, not a real client</span>
   </header>
 
-  <!-- Identity Row -->
-  <section class="identity-row">
+  <!-- Identity Stage -->
+  <main class="identity-stage">
     <div class="mark-card">
       <svg class="mark-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="44" stroke="currentColor" stroke-width="2" stroke-dasharray="4 2"/>
-        <polygon points="50,16 80,72 20,72" stroke="currentColor" stroke-width="2.5"/>
+        <circle cx="50" cy="50" r="44" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 2"/>
+        <polygon points="50,16 80,72 20,72" stroke="currentColor" stroke-width="2"/>
         <circle cx="50" cy="50" r="14" fill="var(--c-accent)"/>
-        <circle cx="50" cy="50" r="6" fill="#000"/>
+        <circle cx="50" cy="50" r="6" fill="#000000"/>
       </svg>
       <span class="mark-title">Aether Focal Mark</span>
     </div>
@@ -381,129 +343,163 @@
     <div class="specs-card">
       <div class="spec-group">
         <h3>Type Architecture</h3>
-        <p>Display: Native SF Pro / System Sans (geometric, high x-height).<br>Data: SF Mono / Menlo (telemetry, coordinate scales).</p>
+        <p>Display: Native SF Pro Display (geometric, balanced x-height).<br>Data: SF Mono (telemetry, coordinate scales).</p>
       </div>
       <div class="spec-group">
-        <h3>Chromatics</h3>
-        <p>Base: Deep Cosmic Graphite.<br>Core Accent: Optical Refraction Cyan (`#5ce1e6`), Solar Quartz, Cyber Flora.</p>
+        <h3>Brand Shift Chromatics</h3>
+        <p>Swappable spectrums: Titanium Void, Solar Quartz, Cyber Flora. Evaluated for WCAG AAA contrast ratio &ge; 8.2:1.</p>
+        <div style="display: flex; gap: 6px; margin-top: 10px;">
+          <div class="segmented-control" style="flex: 1;">
+            <button class="shift-btn active" data-palette="void">Titanium</button>
+            <button class="shift-btn" data-palette="solar">Solar</button>
+            <button class="shift-btn" data-palette="flora">Flora</button>
+          </div>
+          <button class="studio-btn" id="toggle-grid">Grid</button>
+        </div>
       </div>
       <div class="spec-group">
         <h3>Motion Physics</h3>
-        <p>Spring Curve: `cubic-bezier(0.16, 1, 0.3, 1)`<br>Aperture Dilation: 280ms ease-out with zero overshoot.</p>
+        <p>Spring curve: <code>cubic-bezier(0.16, 1, 0.3, 1)</code>.<br>Aperture dilation: 240ms ease-out with critical damping.</p>
       </div>
     </div>
-  </section>
+  </main>
 
   <!-- 3 Applied Mockups -->
-  <section class="mockups-grid">
-    <!-- Mockup 1: Poster -->
-    <div class="mockup-card">
-      <span class="mockup-label">Mockup 01 // Exhibition Poster</span>
-      <div class="mockup-preview">
-        <div class="poster-inner">
-          <div>
-            <span style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--c-accent);">AETHER // VOL. 04</span>
-            <div class="poster-hero-txt" style="margin-top: 10px;">REFRACTIVE<br>SPATIAL<br>LENS</div>
-          </div>
-          <div>
-            <svg width="60" height="60" viewBox="0 0 100 100" fill="none">
-              <circle cx="50" cy="50" r="40" stroke="var(--c-accent)" stroke-width="3"/>
-              <polygon points="50,20 75,70 25,70" stroke="#fff" stroke-width="2"/>
-            </svg>
-          </div>
-          <div class="poster-foot">
-            <span>TOKYO &bull; BERLIN &bull; SF</span>
-            <span>2026.11</span>
+  <section class="mockups-container">
+    <div class="mockups-grid">
+      <!-- Mockup 1: Poster -->
+      <div class="mockup-card">
+        <div class="mockup-header">
+          <span>Exhibition Poster</span>
+          <span>Print / SVG</span>
+        </div>
+        <div class="mockup-preview">
+          <div class="poster-inner">
+            <div>
+              <span style="font-family: var(--font-mono); font-size: 10px; color: var(--c-accent);">AETHER // VOL. 04</span>
+              <div class="poster-hero-txt" style="margin-top: 10px;">REFRACTIVE<br>SPATIAL<br>LENS</div>
+            </div>
+            <div>
+              <svg width="50" height="50" viewBox="0 0 100 100" fill="none">
+                <circle cx="50" cy="50" r="40" stroke="var(--c-accent)" stroke-width="2"/>
+                <polygon points="50,20 75,70 25,70" stroke="#ffffff" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="poster-foot">
+              <span>TOKYO &bull; BERLIN &bull; SF</span>
+              <span>2026.11</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Mockup 2: App Screen -->
-    <div class="mockup-card">
-      <span class="mockup-label">Mockup 02 // Controller App Screen</span>
-      <div class="mockup-preview">
-        <div class="app-screen">
-          <div class="app-hud-top">
-            <span>AETHER LINK</span>
-            <span>&bull; 60 FPS</span>
-          </div>
-          <div class="aperture-ring">
-            <span class="aperture-val">&fnof; / 1.4</span>
-          </div>
-          <div class="app-controls">
-            <div class="app-btn">Depth: 1.2m</div>
-            <div class="app-btn">Dispersion: 4%</div>
+      <!-- Mockup 2: App Screen -->
+      <div class="mockup-card">
+        <div class="mockup-header">
+          <span>Controller Interface</span>
+          <span>Mobile / Spatial</span>
+        </div>
+        <div class="mockup-preview">
+          <div class="app-screen">
+            <div class="app-hud-top">
+              <span>AETHER LINK</span>
+              <span>60 FPS</span>
+            </div>
+            <div class="aperture-ring">
+              <span class="aperture-val">&fnof; / 1.4</span>
+            </div>
+            <div class="app-controls">
+              <div class="app-btn">Depth: 1.2m</div>
+              <div class="app-btn">Dispersion: 4%</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Mockup 3: Packaging Flat -->
-    <div class="mockup-card">
-      <span class="mockup-label">Mockup 03 // Packaging Flat Die-Cut</span>
-      <div class="mockup-preview">
-        <div class="packaging-flat">
-          <div class="pack-pane">
-            <span style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--c-accent);">PANEL A (TOP)</span>
-            <span style="font-size: 0.8rem; font-weight: bold;">AETHER OPTICS</span>
-          </div>
-          <div class="pack-pane">
-            <span style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--c-muted);">PANEL B (SIDE)</span>
-            <span style="font-family: var(--font-mono); font-size: 0.65rem;">SERIAL: #889-AE</span>
-          </div>
-          <div class="pack-pane">
-            <span style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--c-muted);">PANEL C (BASE)</span>
-            <div class="barcode"></div>
-          </div>
-          <div class="pack-pane">
-            <span style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--c-accent);">PANEL D (SEAL)</span>
-            <span style="font-family: var(--font-mono); font-size: 0.6rem; color: #bdff52;">PASS QC &check;</span>
+      <!-- Mockup 3: Packaging Flat -->
+      <div class="mockup-card">
+        <div class="mockup-header">
+          <span>Packaging Die-Cut</span>
+          <span>Industrial Flat</span>
+        </div>
+        <div class="mockup-preview">
+          <div class="packaging-flat">
+            <div class="pack-pane">
+              <span style="font-family: var(--font-mono); font-size: 9px; color: var(--c-accent);">PANEL A (TOP)</span>
+              <span style="font-size: 11px; font-weight: 600;">AETHER OPTICS</span>
+            </div>
+            <div class="pack-pane">
+              <span style="font-family: var(--font-mono); font-size: 9px; color: var(--c-muted);">PANEL B (SIDE)</span>
+              <span style="font-family: var(--font-mono); font-size: 10px;">SN: #889-AE</span>
+            </div>
+            <div class="pack-pane">
+              <span style="font-family: var(--font-mono); font-size: 9px; color: var(--c-muted);">PANEL C (BASE)</span>
+              <div class="barcode"></div>
+            </div>
+            <div class="pack-pane">
+              <span style="font-family: var(--font-mono); font-size: 9px; color: var(--c-accent);">PANEL D (SEAL)</span>
+              <span style="font-family: var(--font-mono); font-size: 9px; color: var(--c-accent);">QC PASS &check;</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Under The Hood Drawer -->
-  <section class="under-hood-card">
-    <h2 style="font-size: 1rem; color: var(--c-accent); font-family: var(--font-mono); margin-bottom: 16px;">
-      Under The Hood // Token Specification Matrix
-    </h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Token Name</th>
-          <th>Titanium Void</th>
-          <th>Solar Quartz</th>
-          <th>Cyber Flora</th>
-          <th>Contrast Ratio</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>`--c-bg` (Base Canvas)</td>
-          <td>`#07080c`</td>
-          <td>`#120b08`</td>
-          <td>`#06110d`</td>
-          <td>16.8:1 against text</td>
-        </tr>
-        <tr>
-          <td>`--c-surface` (Card Surface)</td>
-          <td>`#10131c`</td>
-          <td>`#201410`</td>
-          <td>`#0e201a`</td>
-          <td>13.4:1 against text</td>
-        </tr>
-        <tr>
-          <td>`--c-accent` (Optical Core)</td>
-          <td>`#5ce1e6` (Cyan)</td>
-          <td>`#f4a228` (Amber)</td>
-          <td>`#bdff52` (Lime)</td>
-          <td>8.2:1 against surface</td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- Collapsible Under The Hood Drawer -->
+  <section class="under-the-hood">
+    <details class="hood-details" open>
+      <summary class="hood-summary">
+        <span>Under The Hood: Token Architecture &amp; Construction Geometry</span>
+        <span style="font-family: var(--font-mono); font-size: 11px;">[Expand / Collapse]</span>
+      </summary>
+      <div class="hood-content">
+        <div class="hood-col">
+          <h4>Chromatic Token Matrix</h4>
+          <table class="hood-stats-table">
+            <thead>
+              <tr>
+                <th>Token</th>
+                <th>Titanium Void</th>
+                <th>Solar Quartz</th>
+                <th>Cyber Flora</th>
+                <th>Contrast</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>--c-bg</code></td>
+                <td class="val">#08090c</td>
+                <td class="val">#120b08</td>
+                <td class="val">#06110d</td>
+                <td style="color: #10b981;">16.8:1</td>
+              </tr>
+              <tr>
+                <td><code>--c-surface</code></td>
+                <td class="val">#111318</td>
+                <td class="val">#1e1410</td>
+                <td class="val">#0e1e17</td>
+                <td style="color: #10b981;">13.4:1</td>
+              </tr>
+              <tr>
+                <td><code>--c-accent</code></td>
+                <td class="val">#5ce1e6</td>
+                <td class="val">#f4a228</td>
+                <td class="val">#bdff52</td>
+                <td style="color: #10b981;">8.2:1</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="hood-col">
+          <h4>Open Design Hand-off &amp; Figma Integration</h4>
+          <pre class="hood-code"><code>Tokens serialized in design/tokens.json.
+Manual vector refinement tasks logged in design/FIGMA_TODO.md.
+Grid geometry aligned to 32px modular spatial units.
+All mockups constructed in responsive CSS/SVG.</code></pre>
+        </div>
+      </div>
+    </details>
   </section>
 
   <script>
