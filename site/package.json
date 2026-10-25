@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && cp -r projects shared dist/ && rm -rf dist/projects/*/.venv",
     "preview": "vite preview"
   },
   "dependencies": {

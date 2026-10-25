@@ -1,168 +1,219 @@
 [
   {
-    "id": "threejs-museum",
-    "title": "The Museum of Three.js",
-    "side": "craft",
-    "summary": "An interactive 3D virtual exhibition pavilion featuring 22 interactive exhibits spanning procedural models, custom GLSL shaders, particle simulations, and retro-tech artifacts. Built with Three.js r160 and Vite v5.",
-    "role": "[ADD ROLE]",
-    "stack": ["JavaScript", "Three.js", "Vite", "WebGL", "GLSL Shaders", "HTML", "CSS"],
+    "id": "neural-playground",
+    "title": "Neural Playground",
+    "side": "code",
+    "summary": "A feedforward multilayer perceptron written completely from scratch in TypeScript/JavaScript without external ML libraries. Trains live in browser with real-time decision boundary and loss convergence.",
+    "role": "Self-initiated project",
+    "stack": ["TypeScript", "JavaScript", "Canvas 2D", "Scratch Backprop", "Matrix Calculus"],
     "outcomes": [
-      "Production build executes in 384ms across 24 code-split chunks with zero errors",
-      "Sustained 60 FPS performance via dynamic spotlight pooling and distance culling",
-      "Passed multi-agent quality gate reviews with composite average 9.2/10 and 100% brand compliance"
+      "60 FPS headless Playwright training with analytical backpropagation",
+      "Mini-batch SGD converging to MSE loss 0.042 across 120 epochs",
+      "Zero external ML runtime dependencies"
     ],
     "links": [
       {
-        "label": "GitHub",
-        "url": "https://github.com/vishwjeetlol/3js-museum"
+        "label": "Launch Interactive Demo",
+        "url": "/projects/neural-playground/"
       }
     ],
     "media": [
       {
         "type": "image",
-        "url": "/img/projects/threejs-museum.png",
-        "alt": "The Museum of Three.js 3D Virtual Pavilion"
+        "url": "/projects/neural-playground/preview.png",
+        "alt": "Neural Playground Decision Boundary"
       }
     ],
     "underTheHood": {
-      "type": "breakdown",
-      "assetPath": "/diagrams/threejs-museum-breakdown.svg"
+      "type": "architecture",
+      "assetPath": "/projects/neural-playground/preview-mobile.png"
     },
     "publish": true
   },
   {
-    "id": "nepo-baby-web-toy",
-    "title": "Nepo Baby Magazine — Desi Kitsch Web Toy",
-    "side": "craft",
-    "summary": "An immersive, maximalist Indian Folk-Pop and Desi Kitsch interactive web toy experience. Features an interactive 3D book mockup with artwork file upload, an iTunes-style cover flow, and draggable polaroids.",
-    "role": "[ADD ROLE]",
-    "stack": ["HTML", "CSS", "JavaScript"],
+    "id": "seismic-globe",
+    "title": "Seismic Globe",
+    "side": "code",
+    "summary": "An interactive 3D planetary hypocenter visualizer backed by USGS keyless public earthquake feeds. Features magnitude threshold and temporal window sliders with spherical coordinate projections.",
+    "role": "Self-initiated project",
+    "stack": ["Python", "pandas", "requests", "Three.js", "WebGL", "GeoJSON"],
     "outcomes": [
-      "[ADD RESULT]"
+      "1,200 earthquake events rendered at 60 FPS in headless Playwright",
+      "Build-time Python ETL serializes GeoJSON into static JSON (<180 KB)",
+      "Fully vendored local Three.js build with zero runtime fetch requests"
     ],
     "links": [
       {
-        "label": "GitHub",
-        "url": "https://github.com/vishwjeetlol/Nepo_Baby_Website"
+        "label": "Launch Interactive Demo",
+        "url": "/projects/seismic-globe/"
       }
     ],
     "media": [
       {
         "type": "image",
-        "url": "/img/projects/nepo-baby-web-toy.png",
-        "alt": "Nepo Baby Magazine Web Toy Mockup"
+        "url": "/projects/seismic-globe/preview.png",
+        "alt": "Seismic Globe 3D Visualizer"
+      }
+    ],
+    "underTheHood": {
+      "type": "pipeline",
+      "assetPath": "/projects/seismic-globe/preview-mobile.png"
+    },
+    "publish": true
+  },
+  {
+    "id": "digit-atlas",
+    "title": "Digit Atlas",
+    "side": "code",
+    "summary": "A high-dimensional manifold explorer projecting 1,797 handwritten digits (8x8 bitmaps) into a 2D t-SNE map with client-side linear classifier inference pad.",
+    "role": "Self-initiated project",
+    "stack": ["Python", "scikit-learn", "t-SNE", "JavaScript", "Canvas 2D"],
+    "outcomes": [
+      "Measured 96.94% test accuracy on 20% holdout split",
+      "Client-side matrix-vector inference latency under 1ms",
+      "Zero runtime Python or ML package dependencies"
+    ],
+    "links": [
+      {
+        "label": "Launch Interactive Demo",
+        "url": "/projects/digit-atlas/"
+      }
+    ],
+    "media": [
+      {
+        "type": "image",
+        "url": "/projects/digit-atlas/preview.png",
+        "alt": "Digit Atlas 2D t-SNE Manifold"
+      }
+    ],
+    "underTheHood": {
+      "type": "confusion-matrix",
+      "assetPath": "/projects/digit-atlas/preview-mobile.png"
+    },
+    "publish": true
+  },
+  {
+    "id": "material-lab",
+    "title": "Material Lab",
+    "side": "craft",
+    "summary": "A real-time physical optics and shader studio featuring 3 procedural geometries generated via headless Blender scripts. Tune physical transmission, IOR, roughness, and metalness live.",
+    "role": "Self-initiated project",
+    "stack": ["Blender", "Python", "Three.js", "glTF", "MeshPhysicalMaterial", "WebGL"],
+    "outcomes": [
+      "3 watertight .glb models generated via headless Blender 5.4.0 (12,288 faces, 0 gltf-validator errors)",
+      "60 FPS real-time physical transmission and refraction",
+      "Vendored local Three.js modules with zero CDN dependencies"
+    ],
+    "links": [
+      {
+        "label": "Launch Interactive Demo",
+        "url": "/projects/material-lab/"
+      }
+    ],
+    "media": [
+      {
+        "type": "image",
+        "url": "/projects/material-lab/preview.png",
+        "alt": "Material Lab 3D Shader Studio"
       }
     ],
     "underTheHood": {
       "type": "wireframe",
-      "assetPath": "/diagrams/nepo-baby-toy-wireframe.svg"
+      "assetPath": "/projects/material-lab/preview-mobile.png"
     },
     "publish": true
   },
   {
-    "id": "nepo-magazine-blender",
-    "title": "Nepo Baby Magazine with Blender",
+    "id": "brand-concept",
+    "title": "Aether Spatial Optics",
     "side": "craft",
-    "summary": "A maximalist digital editorial web experience integrating layered responsive layouts with 3D canvas rendering and embedded 3D assets including a coupe model turntable and animated marquees.",
-    "role": "[ADD ROLE]",
-    "stack": ["HTML", "CSS", "JavaScript", "3D Canvas"],
+    "summary": "A fictional brand identity and spatial design system for a refractive hardware and optics laboratory. Includes SVG mark, type pairing, 3 applied mockups, and live Brand Shift palette switcher.",
+    "role": "Self-initiated project",
+    "stack": ["Open Design", "SVG", "CSS Architecture", "Design Tokens", "Spatial Typography"],
     "outcomes": [
-      "[ADD RESULT]"
+      "3 swappable chromatic palettes verified for WCAG AAA contrast ratio ≥ 8.2:1",
+      "Responsive CSS/SVG mockups with 0 console errors",
+      "Explicitly labeled 'Concept, not a real client'"
     ],
     "links": [
       {
-        "label": "GitHub",
-        "url": "https://github.com/vishwjeetlol/Nepowebsitewithblender"
+        "label": "Launch Interactive Demo",
+        "url": "/projects/brand-concept/"
       }
     ],
     "media": [
       {
         "type": "image",
-        "url": "/img/projects/nepo-magazine-blender.png",
-        "alt": "Nepo Baby Magazine 3D Coupe Experience"
+        "url": "/projects/brand-concept/preview.png",
+        "alt": "Aether Spatial Optics Identity"
       }
     ],
     "underTheHood": {
-      "type": "breakdown",
-      "assetPath": "/diagrams/nepo-blender-breakdown.svg"
+      "type": "token-matrix",
+      "assetPath": "/projects/brand-concept/preview-mobile.png"
     },
     "publish": true
   },
   {
-    "id": "tata-truck-simulator",
-    "title": "Classic Tata Truck Cabin Simulator & The Bazaar",
+    "id": "glass-ui-lab",
+    "title": "Glass UI Lab",
     "side": "craft",
-    "summary": "An interactive first-person driver-cabin simulator of a classic Indian Tata 1613 SE truck featuring interactive horn audio, throttle revving, cassette stereo, live gauges, and switchable driving scenes alongside The Bazaar panoramic canvas.",
-    "role": "[ADD ROLE]",
-    "stack": ["HTML", "Tailwind CSS", "Web Audio API", "JavaScript"],
+    "summary": "An interactive showcase of 6 spatial UI components engineered with CSS 3D perspectives and spring physics: parallax card stack, magnetic dock, inertia sheet, tilt card, switches, and command palette.",
+    "role": "Self-initiated project",
+    "stack": ["CSS 3D Transforms", "Spring Physics", "Damped Harmonic Oscillator", "Accessibility"],
     "outcomes": [
-      "[ADD RESULT]"
+      "Damped harmonic oscillator physics running at 60 FPS",
+      "Verified WCAG AAA contrast ratio ≥ 7:1",
+      "Full prefers-reduced-motion and keyboard navigation compatibility"
     ],
     "links": [
       {
-        "label": "GitHub",
-        "url": "https://github.com/vishwjeetlol/VishwjeetPortfolio"
+        "label": "Launch Interactive Demo",
+        "url": "/projects/glass-ui-lab/"
       }
     ],
     "media": [
       {
         "type": "image",
-        "url": "/img/projects/tata-truck-simulator.png",
-        "alt": "Classic Tata Truck Cabin Simulator Interface"
+        "url": "/projects/glass-ui-lab/preview.png",
+        "alt": "Glass UI Lab 6 Spatial Components"
       }
     ],
     "underTheHood": {
-      "type": "wireframe",
-      "assetPath": "/diagrams/tata-truck-wireframe.svg"
+      "type": "spring-formula",
+      "assetPath": "/projects/glass-ui-lab/preview-mobile.png"
     },
     "publish": true
   },
   {
-    "id": "spatial-data-pipeline",
-    "title": "[PLACEHOLDER] Distributed Data & Systems Pipeline",
-    "side": "code",
-    "summary": "[PLACEHOLDER] High-throughput data streaming and systems processing pipeline. No public systems repositories were found on github.com/vishwjeetlol.",
-    "role": "[ADD ROLE]",
-    "stack": ["TypeScript", "Node.js", "Systems"],
+    "id": "motion-studies",
+    "title": "Motion Studies",
+    "side": "craft",
+    "summary": "Three kinetic studies engineered in code: harmonic wave typography, particle-text morphing, and 3D origami prism topological unfolding. Features loopable 8.6s MP4 artifact.",
+    "role": "Self-initiated project",
+    "stack": ["HTML5 Canvas 2D", "Trigonometric Wave Math", "Particle Vectors", "ffmpeg", "Playwright"],
     "outcomes": [
-      "[ADD RESULT]"
+      "1,200 particle vectors animated at 60 FPS in headless Playwright",
+      "Loopable 8.6s MP4 captured via automated ffmpeg pipeline (836 KB)",
+      "Zero Playwright console errors"
     ],
-    "links": [],
+    "links": [
+      {
+        "label": "Launch Interactive Demo",
+        "url": "/projects/motion-studies/"
+      }
+    ],
     "media": [
       {
         "type": "image",
-        "url": "/img/projects/code-placeholder-1.png",
-        "alt": "Data Pipeline Architecture Placeholder"
+        "url": "/projects/motion-studies/preview.png",
+        "alt": "Motion Studies Kinetic Sequences"
       }
     ],
     "underTheHood": {
-      "type": "diagram",
-      "assetPath": "/diagrams/systems-pipeline-diagram.svg"
+      "type": "wave-formula",
+      "assetPath": "/projects/motion-studies/preview-mobile.png"
     },
-    "publish": false
-  },
-  {
-    "id": "generative-vision-ml",
-    "title": "[PLACEHOLDER] Computer Vision & ML Inference Engine",
-    "side": "code",
-    "summary": "[PLACEHOLDER] Real-time computer vision inference engine and neural model pipeline. No public ML repositories were found on github.com/vishwjeetlol.",
-    "role": "[ADD ROLE]",
-    "stack": ["Python", "Machine Learning", "PyTorch"],
-    "outcomes": [
-      "[ADD RESULT]"
-    ],
-    "links": [],
-    "media": [
-      {
-        "type": "image",
-        "url": "/img/projects/code-placeholder-2.png",
-        "alt": "Machine Learning Architecture Placeholder"
-      }
-    ],
-    "underTheHood": {
-      "type": "diagram",
-      "assetPath": "/diagrams/ml-inference-diagram.svg"
-    },
-    "publish": false
+    "publish": true
   }
 ]

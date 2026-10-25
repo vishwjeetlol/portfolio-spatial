@@ -54,26 +54,27 @@ function renderCards(projects: Project[]) {
     card.className = 'project-card';
     card.setAttribute('data-id', p.id);
 
+    const projectUrl = p.links && p.links.length > 0 ? p.links[0].url : '#';
     const mediaHtml = p.media && p.media.length > 0
-      ? `<div class="card-media-preview"><img src="${p.media[0].url}" alt="${p.media[0].alt || p.title}" loading="lazy" width="600" height="380"></div>`
+      ? `<a href="${projectUrl}" class="card-media-preview" style="display:block; text-decoration:none;"><img src="${p.media[0].url}" alt="${p.media[0].alt || p.title}" loading="lazy" width="600" height="380"></a>`
       : '';
 
     const tagsHtml = p.stack.map(s => `<span class="tag">${s}</span>`).join('');
     const linkHtml = p.links && p.links.length > 0
-      ? `<a href="${p.links[0].url}" target="_blank" rel="noopener noreferrer" class="card-link">${p.links[0].label} &rarr;</a>`
+      ? `<a href="${projectUrl}" class="card-link" style="font-weight:600;">Launch Demo &rarr;</a>`
       : '';
 
     card.innerHTML = `
       <div class="card-top">
-        <h3 class="card-title">${p.title}</h3>
+        <h3 class="card-title"><a href="${projectUrl}" style="color:inherit; text-decoration:none;">${p.title}</a></h3>
         <span class="card-badge">${p.side.toUpperCase()}</span>
       </div>
       ${mediaHtml}
       <p class="card-summary">${p.summary}</p>
       <div class="stack-tags">${tagsHtml}</div>
       <div class="card-actions">
-        <button type="button" class="hood-btn" data-id="${p.id}">See Under the Hood</button>
         ${linkHtml}
+        <button type="button" class="hood-btn" data-id="${p.id}">Under the Hood</button>
       </div>
     `;
 
