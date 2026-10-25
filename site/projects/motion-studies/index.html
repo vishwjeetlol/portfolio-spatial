@@ -4,136 +4,149 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Motion Studies // 3 Kinetic Algorithms in Code</title>
+  <link rel="stylesheet" href="../../shared/styles.css">
   <style>
     :root {
-      --bg: #07080c;
-      --surface: rgba(18, 21, 31, 0.85);
-      --border: rgba(255, 255, 255, 0.12);
-      --text: #f1f3f5;
-      --muted: #8e95a0;
-      --accent: #5ce1e6;
-      --accent-magenta: #cf005e;
-      --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
-      --font-mono: "SF Mono", Menlo, Consolas, monospace;
+      --accent: #eab308;
+      --accent-glow: rgba(234, 179, 8, 0.15);
     }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-sans);
-      width: 100vw;
-      height: 100vh;
+    #motion-canvas {
+      width: 100%;
+      height: 520px;
+      display: block;
+      background: #050608;
+    }
+    .video-preview-box {
+      background: var(--bg-graphite-raised);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-surface);
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      position: relative;
     }
-
-    header {
-      padding: 20px 28px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--border);
-      z-index: 10;
-    }
-    h1 { font-size: 1.35rem; font-weight: 700; }
-    .badge {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      background: rgba(207, 0, 94, 0.15);
-      color: var(--accent-magenta);
-      border: 1px solid rgba(207, 0, 94, 0.3);
-      padding: 4px 10px;
-      border-radius: 9999px;
-    }
-
-    /* Study Nav Tabs */
-    .study-tabs {
-      display: flex;
-      gap: 8px;
-      padding: 12px 28px;
-      background: rgba(255, 255, 255, 0.02);
-      border-bottom: 1px solid var(--border);
-      z-index: 10;
-    }
-    .study-tab {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 8px 16px;
-      border-radius: 9999px;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      cursor: pointer;
-      transition: all 150ms ease;
-    }
-    .study-tab:hover { color: #fff; }
-    .study-tab.active {
-      background: #fff;
-      color: #000;
-      font-weight: bold;
-      border-color: #fff;
-    }
-
-    /* Stage Canvas */
-    .stage-container {
-      flex: 1;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    canvas {
+    .video-preview-box video {
       width: 100%;
-      height: 100%;
+      height: auto;
       display: block;
     }
-
-    /* HUD overlay */
-    .hud-caption {
-      position: absolute;
-      bottom: 24px;
-      left: 28px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      -webkit-backdrop-filter: blur(20px);
-      backdrop-filter: blur(20px);
-      border-radius: 12px;
-      padding: 12px 18px;
+    .study-tab-btn {
+      width: 100%;
+      text-align: left;
+      padding: 10px 12px;
+      border-radius: var(--radius-control);
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 500;
       font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--text);
-      z-index: 10;
-      max-width: 420px;
+      cursor: pointer;
+      transition: all var(--duration-fast) var(--ease-spring);
     }
-    .hud-caption strong { color: var(--accent); }
+    .study-tab-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--border-medium);
+    }
+    .study-tab-btn.active {
+      background: var(--bg-graphite-raised);
+      color: var(--text-primary);
+      border-color: var(--accent);
+      font-weight: 600;
+    }
   </style>
 </head>
 <body>
-  <header>
-    <div>
-      <h1>Motion Studies // Kinetic Algorithms</h1>
-      <span style="font-size: 0.8rem; color: var(--muted);">Algorithmic Motion, Particle Morphing &amp; Spatial Transforms</span>
+  <header class="studio-header">
+    <a href="/portfolio-night/" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M10 12L6 8l4-4"/>
+      </svg>
+      Studio
+    </a>
+    <div class="header-title-group">
+      <span class="header-title">Motion Studies</span>
+      <span class="badge">Craft</span>
     </div>
-    <span class="badge">Self-initiated project</span>
+    <span class="tag-self">Self-initiated project</span>
   </header>
 
-  <nav class="study-tabs">
-    <button class="study-tab active" data-study="0">Study 1: Kinetic Wave Typography</button>
-    <button class="study-tab" data-study="1">Study 2: Particle-Text Morph</button>
-    <button class="study-tab" data-study="2">Study 3: 3D Origami Prism Unfold</button>
-  </nav>
+  <main class="studio-workspace">
+    <!-- Viewport Stage -->
+    <section class="studio-viewport" aria-label="Kinetic Canvas Viewport">
+      <div class="viewport-canvas-wrap">
+        <canvas id="motion-canvas"></canvas>
+      </div>
+      <div class="viewport-telemetry">
+        <div class="telemetry-item">Engine: <span class="telemetry-val">60 FPS Hardware RAF</span></div>
+        <div class="telemetry-item">Active Study: <span id="study-telemetry-val" class="telemetry-val">01 // Kinetic Typography</span></div>
+        <div class="telemetry-item">Capture: <span class="telemetry-val">Loopable MP4 (8.6s)</span></div>
+      </div>
+    </section>
 
-  <div class="stage-container">
-    <canvas id="motion-canvas"></canvas>
-    <div class="hud-caption" id="hud-caption">
-      <strong>Study 1: Kinetic Wave Typography</strong><br>
-      Continuous sinusoidal character baseline modulation &amp; harmonic scale displacement.
-    </div>
-  </div>
+    <!-- Controls Sidebar -->
+    <aside class="studio-panel" aria-label="Study Navigation">
+      <h2 class="panel-title">Kinetic Sequence Selection</h2>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <button class="study-tab-btn study-tab active" data-study="0">
+          1. Kinetic Wave Typography
+        </button>
+        <button class="study-tab-btn study-tab" data-study="1">
+          2. Particle-Text Morph
+        </button>
+        <button class="study-tab-btn study-tab" data-study="2">
+          3. 3D Origami Prism Unfold
+        </button>
+      </div>
+
+      <div class="panel-group" style="margin-top: var(--space-1);">
+        <label>Algorithmic Description</label>
+        <div id="hud-caption" style="font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); line-height: 1.5; background: var(--bg-graphite-raised); padding: 10px; border-radius: var(--radius-control); border: 1px solid var(--border-subtle);">
+          Continuous sinusoidal character baseline modulation &amp; harmonic scale displacement.
+        </div>
+      </div>
+
+      <div class="panel-group">
+        <label>Loop Recording (ffmpeg / Playwright)</label>
+        <div class="video-preview-box">
+          <video src="motion-study.mp4" autoplay loop muted playsinline></video>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Collapsible Under The Hood Drawer -->
+  <section class="under-the-hood">
+    <details class="hood-details" open>
+      <summary class="hood-summary">
+        <span>Under The Hood: Mathematical Formulas &amp; DaVinci Resolve Workflow</span>
+        <span style="font-family: var(--font-mono); font-size: 11px;">[Expand / Collapse]</span>
+      </summary>
+      <div class="hood-content">
+        <div class="hood-col">
+          <h4>Kinetic Modulation &amp; Particle Vector Physics</h4>
+          <pre class="hood-code"><code>// Wave baseline modulation:
+y = (h / (numRows + 1)) * (r + 1) + sin(t * 2 + r * 0.45) * 18
+// Particle spring targeting:
+vx = vx * 0.88 + (targetX - x) * 0.05
+vy = vy * 0.88 + (targetY - y) * 0.05
+// 3D Perspective Projection:
+px = cx + (x3 * scale) / (z2 + distance)
+py = cy + (y3 * scale) / (z2 + distance)</code></pre>
+        </div>
+        <div class="hood-col">
+          <h4>Video Pipeline &amp; Human Post-Production</h4>
+          <pre class="hood-code"><code>Automated Capture:
+  ffmpeg -i playwright-stream.webm -c:v libx264 -crf 18 -pix_fmt yuv420p motion-study.mp4
+Duration: 8.6s (exact loop alignment, 836 KB).
+
+Manual Human Handoff (Logged in NEEDS_HUMAN.md):
+  Film emulation &amp; color timing in DaVinci Resolve (ACEScc space)
+  is reserved as a physical manual pass by the author.</code></pre>
+        </div>
+      </div>
+    </details>
+  </section>
 
   <script src="app.js"></script>
 </body>

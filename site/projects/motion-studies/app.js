@@ -34,7 +34,7 @@ function renderStudy0() {
     const waveY = Math.sin(time * 2 + rowPhase) * 18;
 
     ctx.font = `${Math.round(36 + Math.sin(time * 3 + r) * 12)}px -apple-system, BlinkMacSystemFont, sans-serif`;
-    ctx.fillStyle = r === 3 ? '#5ce1e6' : (r % 2 === 0 ? 'rgba(255,255,255,0.85)' : 'rgba(207,0,94,0.7)');
+    ctx.fillStyle = r === 3 ? '#eab308' : (r % 2 === 0 ? 'rgba(248, 249, 250, 0.95)' : 'rgba(206, 212, 218, 0.3)');
 
     // Letter spacing expansion
     const spacing = 48 + Math.cos(time * 2 + rowPhase) * 14;
@@ -61,7 +61,7 @@ function initParticles() {
       targetY: canvas.height / 2,
       vx: 0,
       vy: 0,
-      color: Math.random() > 0.5 ? '#5ce1e6' : '#bdff52'
+      color: Math.random() > 0.25 ? '#f8f9fa' : '#eab308'
     });
   }
   updateParticleTargets(targetWords[0]);
@@ -183,7 +183,7 @@ function renderStudy2() {
 
   ctx.lineWidth = 2.5;
   edges.forEach(([i, j], edgeIdx) => {
-    ctx.strokeStyle = edgeIdx % 2 === 0 ? '#5ce1e6' : '#cf005e';
+    ctx.strokeStyle = edgeIdx % 2 === 0 ? '#eab308' : 'rgba(248, 249, 250, 0.4)';
     ctx.beginPath();
     ctx.moveTo(proj[i].px, proj[i].py);
     ctx.lineTo(proj[j].px, proj[j].py);
