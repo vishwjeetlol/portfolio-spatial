@@ -119,10 +119,10 @@ function plotEarthquakes() {
     const size = Math.max(0.02, (eq.mag - 2.0) * 0.025);
     const geom = new THREE.SphereGeometry(size, 8, 8);
 
-    // Color based on depth
-    let colorHex = 0x5ce1e6; // shallow (<30km)
-    if (eq.depth >= 30 && eq.depth < 100) colorHex = 0xbdff52; // mid (30-100km)
-    else if (eq.depth >= 100) colorHex = 0xcf005e; // deep (>100km)
+    // Color based on geological hypocenter depth
+    let colorHex = 0xf4a228; // shallow (<30km) Subduction Amber
+    if (eq.depth >= 30 && eq.depth < 100) colorHex = 0xf97316; // intermediate (30-100km) Vermilion
+    else if (eq.depth >= 100) colorHex = 0xdc2626; // deep mantle (>100km) Crimson
 
     const mat = new THREE.MeshBasicMaterial({ color: colorHex });
     const marker = new THREE.Mesh(geom, mat);
