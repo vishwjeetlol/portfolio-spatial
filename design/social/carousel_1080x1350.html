@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+    <style>
+      body {
+        margin: 0; width: 1080px; height: 1350px; background: #0c0e14; color: #fff;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
+        box-sizing: border-box; padding: 80px; display: flex; flex-direction: column;
+        justify-content: space-between; position: relative;
+      }
+      .header {
+        display: flex; justify-content: space-between; align-items: center;
+      }
+      .tag {
+        font-family: monospace; font-size: 24px; color: #bdff52; text-transform: uppercase;
+      }
+      .slide-num {
+        font-family: monospace; font-size: 24px; color: #8e95a0;
+      }
+      .card {
+        background: rgba(255,255,255,0.04); border: 2px solid rgba(255,255,255,0.14);
+        border-radius: 32px; padding: 60px; margin: auto 0;
+      }
+      h2 {
+        font-size: 56px; margin: 0 0 24px 0; color: #fff;
+      }
+      ul {
+        font-size: 30px; line-height: 1.8; color: #ced4da; margin: 0; padding-left: 40px;
+      }
+      li { margin-bottom: 16px; }
+      .footer {
+        font-family: monospace; font-size: 24px; color: #868e96;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <span class="tag">Architecture Breakdown</span>
+      <span class="slide-num">02 / 05</span>
+    </div>
+    <div class="card">
+      <h2>Under the Hood: 3 Rings + Core</h2>
+      <ul>
+        <li><strong>Ring_Outer:</strong> Continuous slow Z-rotation (0.003 rad/frame).</li>
+        <li><strong>Ring_Mid:</strong> Medium counter-axis Y-spin with momentum decay.</li>
+        <li><strong>Ring_Inner:</strong> Fast tilted gimbal response to cursor coordinates.</li>
+        <li><strong>Refractive Core:</strong> Icosahedron mesh with transmission 0.98.</li>
+      </ul>
+    </div>
+    <div class="footer">
+      <span>portfolio-spatial.vercel.app</span>
+    </div>
+  </body>
+  </html>

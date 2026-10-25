@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+    <style>
+      body {
+        margin: 0; width: 1080px; height: 1920px; background: #090a0d; color: #fff;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
+        box-sizing: border-box; padding: 120px 80px; display: flex; flex-direction: column;
+        justify-content: space-between; position: relative; overflow: hidden;
+      }
+      .ambient {
+        position: absolute; inset: 0;
+        background: radial-gradient(circle at 50% 30%, rgba(92,225,230,0.12), transparent 60%),
+                    radial-gradient(circle at 80% 80%, rgba(207,0,94,0.08), transparent 50%);
+      }
+      .top-meta {
+        position: relative; z-index: 2;
+        font-family: monospace; font-size: 28px; color: #adb5bd;
+      }
+      .content {
+        position: relative; z-index: 2; text-align: center; margin: auto 0;
+      }
+      h1 {
+        font-size: 84px; line-height: 1.1; margin: 0 0 32px 0; font-weight: 800;
+      }
+      .tagline {
+        font-size: 38px; line-height: 1.4; color: #ced4da; margin-bottom: 60px;
+      }
+      .pill {
+        display: inline-block; background: #fff; color: #000; font-size: 32px;
+        font-weight: 700; padding: 20px 48px; border-radius: 9999px; text-decoration: none;
+      }
+      .bottom-meta {
+        position: relative; z-index: 2; text-align: center;
+        font-family: monospace; font-size: 24px; color: #6c757d;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ambient"></div>
+    <div class="top-meta">VISHWJEET // SPATIAL STUDIO</div>
+    <div class="content">
+      <h1>NEW CASE STUDY</h1>
+      <div class="tagline">Spatial Dual-Split Portfolio &amp; Real-time 3D Gyroscope</div>
+      <div class="pill">TAP TO EXPLORE</div>
+    </div>
+    <div class="bottom-meta">Locked 60 FPS &bull; Static Architecture &bull; Open Source</div>
+  </body>
+  </html>

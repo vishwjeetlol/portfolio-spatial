@@ -22,3 +22,5 @@ renders/raw/
 
 # Vercel
 .vercel/
+.vercel
+.env*
