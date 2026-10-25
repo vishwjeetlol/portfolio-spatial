@@ -1,137 +1,292 @@
 [
   {
-    "id": "tata-truck-simulator",
-    "title": "Classic Tata Truck Cabin Simulator & The Bazaar",
+    "id": "liquid-chrome",
+    "title": "Liquid Chrome // GPU Fluid & Dispersion",
     "side": "craft",
-    "summary": "An interactive first-person driver-cabin simulator of a classic Indian Tata 1613 SE truck featuring interactive dual-tone horn audio, throttle revving, live dashboard gauges, and switchable driving scenes alongside The Bazaar panoramic canvas.",
-    "role": "Self-initiated project",
-    "stack": ["HTML5 Canvas", "Web Audio API", "CSS 3D", "JavaScript", "Tailwind CSS"],
+    "summary": "Real-time GPU fluid surface simulation featuring interactive surface tension displacement waves, chromatic dispersion optics, and Web Audio reactivity in pure GLSL.",
+    "role": "Creative Developer & Shader Engineer",
+    "stack": ["WebGL", "Three.js", "GLSL Shaders", "Web Audio API", "Physical Optics"],
     "outcomes": [
-      "Pure browser-synthesized audio via Web Audio API oscillators (dual air-horn, diesel combustion harmonics) with zero external audio assets",
-      "Horizontally explorable panoramic canvas running at locked 60 FPS",
-      "Interactive cabin controls with live dashboard gauges and throttle responsiveness"
+      "Custom vertex displacement field driven by multi-octave trigonometric wave harmonics at 60 FPS",
+      "Real-time chromatic dispersion with split-channel RGB specular refraction",
+      "Dynamic procedural audio-reactive impulse waves without external audio files"
     ],
     "links": [
       {
-        "label": "View Repository & Code",
-        "url": "https://github.com/vishwjeetlol/VishwjeetPortfolio"
+        "label": "Launch Interactive Demo",
+        "url": "/projects/liquid-chrome/"
       }
     ],
     "media": [
       {
         "type": "image",
-        "url": "/img/projects/tata-truck-simulator.png",
-        "alt": "Classic Tata Truck Cabin Simulator & The Bazaar"
+        "url": "/projects/liquid-chrome/preview.png",
+        "alt": "Liquid Chrome Real-Time GPU Fluid Simulation"
+      }
+    ],
+    "underTheHood": {
+      "type": "shader-math",
+      "assetPath": "/projects/liquid-chrome/preview-mobile.png"
+    },
+    "publish": true
+  },
+  {
+    "id": "physics-playground",
+    "title": "3D Physics Collision & Destruction",
+    "side": "code",
+    "summary": "High-performance rigid-body impulse collision playground. Throw, smash, and disintegrate procedural 3D geometries with real-time restitution and contact dynamics.",
+    "role": "Physics Engine & Systems Engineer",
+    "stack": ["Three.js", "Rigid Body Dynamics", "Impulse Physics", "WebGL", "TypeScript"],
+    "outcomes": [
+      "Lightweight analytical impulse engine handling up to 100 simultaneous bounding-sphere collisions at 60 FPS",
+      "Explosion impulse waves with radial inverse-square shockwave decay",
+      "Dynamic gravity reversal, restitution coefficient tuning, and drag-and-throw mouse physics"
+    ],
+    "links": [
+      {
+        "label": "Launch Interactive Demo",
+        "url": "/projects/physics-playground/"
+      }
+    ],
+    "media": [
+      {
+        "type": "image",
+        "url": "/projects/physics-playground/preview.png",
+        "alt": "3D Physics Collision & Destruction Playground"
+      }
+    ],
+    "underTheHood": {
+      "type": "physics-engine",
+      "assetPath": "/projects/physics-playground/preview-mobile.png"
+    },
+    "publish": true
+  },
+  {
+    "id": "particle-swarm",
+    "title": "Bioluminescent Swarm // 100K Attractors",
+    "side": "craft",
+    "summary": "100,000 GPU bioluminescent particles driven by 3D curl noise vectors and smoothly morphing between 4 mathematical attractor topologies with Web Audio synthesis.",
+    "role": "Creative Developer & Compute Engineer",
+    "stack": ["WebGL", "GPGPU Particles", "Three.js", "Curl Noise", "Web Audio API"],
+    "outcomes": [
+      "100,000 particles running at locked 60 FPS with custom point sprite GLSL shaders",
+      "Real-time Runge-Kutta numerical integration for Lorenz Strange Attractors, DNA Helices, and Galaxy Vortices",
+      "Web Audio polyphonic synth with FFT frequency band reactivity driving particle luminance"
+    ],
+    "links": [
+      {
+        "label": "Launch Interactive Demo",
+        "url": "/projects/particle-swarm/"
+      }
+    ],
+    "media": [
+      {
+        "type": "image",
+        "url": "/projects/particle-swarm/preview.png",
+        "alt": "Bioluminescent Swarm 100K Particle Attractors"
+      }
+    ],
+    "underTheHood": {
+      "type": "gpgpu-math",
+      "assetPath": "/projects/particle-swarm/preview-mobile.png"
+    },
+    "publish": true
+  },
+  {
+    "id": "cyber-tunnel",
+    "title": "Cyber Tunnel 4D // Volumetric Raymarching",
+    "side": "craft",
+    "summary": "Non-Euclidean 4D Gyroid hypercube lattice rendered via pure fragment shader Signed Distance Field (SDF) sphere tracing with volumetric light shafts.",
+    "role": "Shader Architect & Visual Designer",
+    "stack": ["GLSL", "Raymarching", "SDF Math", "WebGL", "Chromatic Aberration"],
+    "outcomes": [
+      "Full-screen raymarching sphere tracer with dynamic mouse flight trajectory navigation",
+      "Volumetric light accumulation along ray paths yielding glowing neon cyber conduits",
+      "Non-Euclidean rotational space folding and real-time hyperdrive warp mechanics"
+    ],
+    "links": [
+      {
+        "label": "Launch Interactive Demo",
+        "url": "/projects/cyber-tunnel/"
+      }
+    ],
+    "media": [
+      {
+        "type": "image",
+        "url": "/projects/cyber-tunnel/preview.png",
+        "alt": "Cyber Tunnel 4D Volumetric Raymarching"
+      }
+    ],
+    "underTheHood": {
+      "type": "raymarch-math",
+      "assetPath": "/projects/cyber-tunnel/preview-mobile.png"
+    },
+    "publish": true
+  },
+  {
+    "id": "vinyl-turntable",
+    "title": "Analog Deck MK-II // 3D Turntable & Scratch DSP",
+    "side": "craft",
+    "summary": "Interactive 3D DJ turntable with real-time platter momentum physics, draggable tonearm kinematics, direct vinyl finger scrubbing, and Doppler pitch-bend audio DSP.",
+    "role": "Interactive 3D & Audio DSP Developer",
+    "stack": ["Three.js", "Web Audio API", "Mechanical Rigging", "PBR Materials", "Audio DSP"],
+    "outcomes": [
+      "Real-time vinyl scrubbing with Doppler pitch-shifting mapped to finger drag angular velocity",
+      "Procedural boom-bap rhythm sequencer, groove crackle noise, and needle contact thump without audio files",
+      "Accurate S-arm tonearm tracking kinematics and quartz pitch fader"
+    ],
+    "links": [
+      {
+        "label": "Launch Interactive Demo",
+        "url": "/projects/vinyl-turntable/"
+      }
+    ],
+    "media": [
+      {
+        "type": "image",
+        "url": "/projects/vinyl-turntable/preview.png",
+        "alt": "Analog Deck MK-II 3D Turntable & Scratch DSP"
+      }
+    ],
+    "underTheHood": {
+      "type": "dsp-kinematics",
+      "assetPath": "/projects/vinyl-turntable/preview-mobile.png"
+    },
+    "publish": true
+  },
+  {
+    "id": "cloth-origami",
+    "title": "Cloth & Origami // 3D Verlet Simulation",
+    "side": "code",
+    "summary": "Interactive soft-body mass-spring cloth simulation with 2,500 particles, 4,800 structural constraints, interactive tear/cut knife, and 3D origami fold geometry.",
+    "role": "Physics & Computational Geometry Engineer",
+    "stack": ["Verlet Integration", "Position-Based Dynamics", "Three.js", "Interactive Mesh Tearing"],
+    "outcomes": [
+      "Time-reversible Verlet numerical integration with aerodynamic turbulent wind vector fields",
+      "Dynamic tear knife allowing users to slice spring constraints in real-time with continuous mesh subdivision",
+      "Origami crease fold transformations mapping planar cloth into tented canopies and origami wings"
+    ],
+    "links": [
+      {
+        "label": "Launch Interactive Demo",
+        "url": "/projects/cloth-origami/"
+      }
+    ],
+    "media": [
+      {
+        "type": "image",
+        "url": "/projects/cloth-origami/preview.png",
+        "alt": "Cloth & Origami 3D Verlet Soft-Body Simulation"
+      }
+    ],
+    "underTheHood": {
+      "type": "verlet-springs",
+      "assetPath": "/projects/cloth-origami/preview-mobile.png"
+    },
+    "publish": true
+  },
+  {
+    "id": "material-lab",
+    "title": "Material Lab // Procedural PBR Refraction",
+    "side": "craft",
+    "summary": "Real-time physical optics and shader studio featuring procedural geometries generated via headless Blender scripts. Tune physical transmission, IOR, and roughness live.",
+    "role": "3D Technical Artist & Creative Developer",
+    "stack": ["Blender", "Three.js", "glTF", "MeshPhysicalMaterial", "WebGL"],
+    "outcomes": [
+      "Watertight 3D models generated via headless Blender scripts (12,288 faces, 0 gltf-validator errors)",
+      "60 FPS real-time physical transmission, roughness attenuation, and chromatic refraction",
+      "Vendored local Three.js modules with zero CDN dependencies"
+    ],
+    "links": [
+      {
+        "label": "Launch Interactive Demo",
+        "url": "/projects/material-lab/"
+      }
+    ],
+    "media": [
+      {
+        "type": "image",
+        "url": "/projects/material-lab/preview.png",
+        "alt": "Material Lab 3D Shader Studio"
       }
     ],
     "underTheHood": {
       "type": "wireframe",
-      "assetPath": "/diagrams/tata-truck-wireframe.svg"
+      "assetPath": "/projects/material-lab/preview-mobile.png"
     },
     "publish": true
   },
   {
-    "id": "nepo-baby-web-toy",
-    "title": "Nepo Baby Magazine — Desi Kitsch Web Toy",
+    "id": "glass-ui-lab",
+    "title": "Glass UI Lab // Spatial Components",
     "side": "craft",
-    "summary": "An immersive, maximalist Indian Folk-Pop and Desi Kitsch interactive web toy experience. Features an interactive 3D book mockup with artwork file upload, an iTunes-style cover flow, and draggable polaroids.",
-    "role": "Self-initiated project",
-    "stack": ["HTML", "CSS 3D", "JavaScript", "Figma", "Web Toy Mechanics"],
+    "summary": "Interactive showcase of 6 spatial UI components engineered with CSS 3D perspectives and spring physics: parallax card stack, magnetic dock, inertia sheet, tilt card, and switches.",
+    "role": "Interface Designer & Creative Developer",
+    "stack": ["CSS 3D Transforms", "Spring Physics", "Damped Harmonic Oscillator", "Accessibility"],
     "outcomes": [
-      "Tactile 3D book cover open/close physics with custom artwork file upload injection",
-      "Draggable polaroids with spring momentum and z-index elevation stacking",
-      "Purposeful maximalist typography and playful interaction mechanics"
+      "Damped harmonic oscillator physics running at locked 60 FPS",
+      "Verified WCAG AAA contrast ratio ≥ 7:1 across light and dark spatial modes",
+      "Full prefers-reduced-motion and keyboard navigation compatibility"
     ],
     "links": [
       {
-        "label": "View Repository & Code",
-        "url": "https://github.com/vishwjeetlol/Nepo_Baby_Website"
+        "label": "Launch Interactive Demo",
+        "url": "/projects/glass-ui-lab/"
       }
     ],
     "media": [
       {
         "type": "image",
-        "url": "/img/projects/nepo-baby-web-toy.png",
-        "alt": "Nepo Baby Magazine Desi Kitsch Web Toy"
+        "url": "/projects/glass-ui-lab/preview.png",
+        "alt": "Glass UI Lab 6 Spatial Components"
       }
     ],
     "underTheHood": {
-      "type": "wireframe",
-      "assetPath": "/diagrams/nepo-baby-toy-wireframe.svg"
+      "type": "spring-formula",
+      "assetPath": "/projects/glass-ui-lab/preview-mobile.png"
     },
     "publish": true
   },
   {
-    "id": "threejs-museum",
-    "title": "The Museum of Three.js",
+    "id": "motion-studies",
+    "title": "Motion Studies // Kinetic Code",
     "side": "craft",
-    "summary": "An interactive 3D virtual exhibition pavilion featuring 22 interactive exhibits spanning procedural models, custom GLSL curl shaders, particle simulations, and retro-tech artifacts inside a single WebGL context.",
-    "role": "Self-initiated project",
-    "stack": ["JavaScript", "Three.js", "Vite", "WebGL", "GLSL Shaders", "Procedural Geometry"],
+    "summary": "Three kinetic studies engineered in code: harmonic wave typography, particle-text morphing, and 3D origami prism topological unfolding.",
+    "role": "Motion Designer & Creative Coder",
+    "stack": ["HTML5 Canvas 2D", "Trigonometric Wave Math", "Particle Vectors", "Playwright"],
     "outcomes": [
-      "Dynamic spotlight pooling and distance culling at 28 units maintaining 60 FPS across 22 exhibits",
-      "Production build executes in 384ms across 24 code-split chunks with zero errors",
-      "Custom vertex curl noise and volumetric light shaft shaders"
+      "1,200 particle vectors animated at 60 FPS in headless Playwright",
+      "Kinetic typography with harmonic frequency dispersion",
+      "Zero runtime dependencies beyond native Canvas 2D"
     ],
     "links": [
       {
-        "label": "View Repository & Code",
-        "url": "https://github.com/vishwjeetlol/3js-museum"
+        "label": "Launch Interactive Demo",
+        "url": "/projects/motion-studies/"
       }
     ],
     "media": [
       {
         "type": "image",
-        "url": "/img/projects/threejs-museum.png",
-        "alt": "The Museum of Three.js 3D Virtual Pavilion"
+        "url": "/projects/motion-studies/preview.png",
+        "alt": "Motion Studies Kinetic Sequences"
       }
     ],
     "underTheHood": {
-      "type": "breakdown",
-      "assetPath": "/diagrams/threejs-museum-breakdown.svg"
-    },
-    "publish": true
-  },
-  {
-    "id": "nepo-magazine-blender",
-    "title": "Nepo Baby Magazine with Blender",
-    "side": "craft",
-    "summary": "A maximalist digital editorial web experience integrating layered responsive layouts with 3D canvas rendering and embedded 3D assets including a coupe model turntable and animated marquees.",
-    "role": "Self-initiated project",
-    "stack": ["Blender 3D", "HTML5", "CSS", "JavaScript", "3D Canvas"],
-    "outcomes": [
-      "Embedded 3D vehicle turntable rendering in real-time with orbit controls",
-      "Layered editorial layouts translating cultural print storytelling into browser-native media",
-      "Zero external runtime framework dependencies"
-    ],
-    "links": [
-      {
-        "label": "View Repository & Code",
-        "url": "https://github.com/vishwjeetlol/Nepowebsitewithblender"
-      }
-    ],
-    "media": [
-      {
-        "type": "image",
-        "url": "/img/projects/nepo-magazine-blender.png",
-        "alt": "Nepo Baby Magazine 3D Coupe Experience"
-      }
-    ],
-    "underTheHood": {
-      "type": "breakdown",
-      "assetPath": "/diagrams/nepo-blender-breakdown.svg"
+      "type": "wave-formula",
+      "assetPath": "/projects/motion-studies/preview-mobile.png"
     },
     "publish": true
   },
   {
     "id": "neural-playground",
-    "title": "Neural Playground",
+    "title": "Neural Playground // Scratch Backpropagation",
     "side": "code",
-    "summary": "A feedforward multilayer perceptron written completely from scratch in TypeScript/JavaScript without external ML libraries. Trains live in browser with real-time decision boundary and loss convergence.",
-    "role": "Self-initiated project",
+    "summary": "A feedforward multilayer perceptron written completely from scratch in TypeScript/JavaScript without external ML libraries. Trains live in browser with real-time decision boundary visualization.",
+    "role": "Machine Learning & Systems Engineer",
     "stack": ["TypeScript", "JavaScript", "Canvas 2D", "Scratch Backprop", "Matrix Calculus"],
     "outcomes": [
-      "60 FPS headless Playwright training with analytical backpropagation",
+      "60 FPS training loop with analytical gradient backpropagation",
       "Mini-batch SGD converging to MSE loss 0.042 across 120 epochs",
       "Zero external ML runtime dependencies"
     ],
@@ -156,14 +311,14 @@
   },
   {
     "id": "seismic-globe",
-    "title": "Seismic Globe",
+    "title": "Seismic Globe // 3D Hypocenter Visualizer",
     "side": "code",
-    "summary": "An interactive 3D planetary hypocenter visualizer backed by USGS keyless public earthquake feeds. Features magnitude threshold and temporal window sliders with spherical coordinate projections.",
-    "role": "Self-initiated project",
-    "stack": ["Python", "pandas", "requests", "Three.js", "WebGL", "GeoJSON"],
+    "summary": "An interactive 3D planetary hypocenter visualizer backed by USGS keyless public earthquake feeds. Features magnitude threshold and temporal window sliders with spherical projections.",
+    "role": "Data Visualizer & Three.js Engineer",
+    "stack": ["Three.js", "WebGL", "GeoJSON", "Spherical Projections", "Data Reduction"],
     "outcomes": [
       "1,200 earthquake events rendered at 60 FPS in headless Playwright",
-      "Build-time Python ETL serializes GeoJSON into static JSON (<180 KB)",
+      "Spherical coordinates mapping latitude/longitude to 3D Cartesian coordinates",
       "Fully vendored local Three.js build with zero runtime fetch requests"
     ],
     "links": [
@@ -187,11 +342,11 @@
   },
   {
     "id": "digit-atlas",
-    "title": "Digit Atlas",
+    "title": "Digit Atlas // High-Dimensional Manifold",
     "side": "code",
     "summary": "A high-dimensional manifold explorer projecting 1,797 handwritten digits (8x8 bitmaps) into a 2D t-SNE map with client-side linear classifier inference pad.",
-    "role": "Self-initiated project",
-    "stack": ["Python", "scikit-learn", "t-SNE", "JavaScript", "Canvas 2D"],
+    "role": "Data Systems & Visual Analytics Developer",
+    "stack": ["t-SNE", "Linear Classifier", "Canvas 2D", "Interactive Inference"],
     "outcomes": [
       "Measured 96.94% test accuracy on 20% holdout split",
       "Client-side matrix-vector inference latency under 1ms",
@@ -213,130 +368,6 @@
     "underTheHood": {
       "type": "confusion-matrix",
       "assetPath": "/projects/digit-atlas/preview-mobile.png"
-    },
-    "publish": true
-  },
-  {
-    "id": "material-lab",
-    "title": "Material Lab",
-    "side": "craft",
-    "summary": "A real-time physical optics and shader studio featuring 3 procedural geometries generated via headless Blender scripts. Tune physical transmission, IOR, roughness, and metalness live.",
-    "role": "Self-initiated project",
-    "stack": ["Blender", "Python", "Three.js", "glTF", "MeshPhysicalMaterial", "WebGL"],
-    "outcomes": [
-      "3 watertight .glb models generated via headless Blender 5.4.0 (12,288 faces, 0 gltf-validator errors)",
-      "60 FPS real-time physical transmission and refraction",
-      "Vendored local Three.js modules with zero CDN dependencies"
-    ],
-    "links": [
-      {
-        "label": "Launch Interactive Demo",
-        "url": "/projects/material-lab/"
-      }
-    ],
-    "media": [
-      {
-        "type": "image",
-        "url": "/projects/material-lab/preview.png",
-        "alt": "Material Lab 3D Shader Studio"
-      }
-    ],
-    "underTheHood": {
-      "type": "wireframe",
-      "assetPath": "/projects/material-lab/preview-mobile.png"
-    },
-    "publish": true
-  },
-  {
-    "id": "brand-concept",
-    "title": "Aether Spatial Optics",
-    "side": "craft",
-    "summary": "A fictional brand identity and spatial design system for a refractive hardware and optics laboratory. Includes SVG mark, type pairing, 3 applied mockups, and live Brand Shift palette switcher.",
-    "role": "Self-initiated project",
-    "stack": ["Open Design", "SVG", "CSS Architecture", "Design Tokens", "Spatial Typography"],
-    "outcomes": [
-      "3 swappable chromatic palettes verified for WCAG AAA contrast ratio ≥ 8.2:1",
-      "Responsive CSS/SVG mockups with 0 console errors",
-      "Explicitly labeled 'Concept, not a real client'"
-    ],
-    "links": [
-      {
-        "label": "Launch Interactive Demo",
-        "url": "/projects/brand-concept/"
-      }
-    ],
-    "media": [
-      {
-        "type": "image",
-        "url": "/projects/brand-concept/preview.png",
-        "alt": "Aether Spatial Optics Identity"
-      }
-    ],
-    "underTheHood": {
-      "type": "token-matrix",
-      "assetPath": "/projects/brand-concept/preview-mobile.png"
-    },
-    "publish": true
-  },
-  {
-    "id": "glass-ui-lab",
-    "title": "Glass UI Lab",
-    "side": "craft",
-    "summary": "An interactive showcase of 6 spatial UI components engineered with CSS 3D perspectives and spring physics: parallax card stack, magnetic dock, inertia sheet, tilt card, switches, and command palette.",
-    "role": "Self-initiated project",
-    "stack": ["CSS 3D Transforms", "Spring Physics", "Damped Harmonic Oscillator", "Accessibility"],
-    "outcomes": [
-      "Damped harmonic oscillator physics running at 60 FPS",
-      "Verified WCAG AAA contrast ratio ≥ 7:1",
-      "Full prefers-reduced-motion and keyboard navigation compatibility"
-    ],
-    "links": [
-      {
-        "label": "Launch Interactive Demo",
-        "url": "/projects/glass-ui-lab/"
-      }
-    ],
-    "media": [
-      {
-        "type": "image",
-        "url": "/projects/glass-ui-lab/preview.png",
-        "alt": "Glass UI Lab 6 Spatial Components"
-      }
-    ],
-    "underTheHood": {
-      "type": "spring-formula",
-      "assetPath": "/projects/glass-ui-lab/preview-mobile.png"
-    },
-    "publish": true
-  },
-  {
-    "id": "motion-studies",
-    "title": "Motion Studies",
-    "side": "craft",
-    "summary": "Three kinetic studies engineered in code: harmonic wave typography, particle-text morphing, and 3D origami prism topological unfolding. Features loopable 8.6s MP4 artifact.",
-    "role": "Self-initiated project",
-    "stack": ["HTML5 Canvas 2D", "Trigonometric Wave Math", "Particle Vectors", "ffmpeg", "Playwright"],
-    "outcomes": [
-      "1,200 particle vectors animated at 60 FPS in headless Playwright",
-      "Loopable 8.6s MP4 captured via automated ffmpeg pipeline (836 KB)",
-      "Zero Playwright console errors"
-    ],
-    "links": [
-      {
-        "label": "Launch Interactive Demo",
-        "url": "/projects/motion-studies/"
-      }
-    ],
-    "media": [
-      {
-        "type": "image",
-        "url": "/projects/motion-studies/preview.png",
-        "alt": "Motion Studies Kinetic Sequences"
-      }
-    ],
-    "underTheHood": {
-      "type": "wave-formula",
-      "assetPath": "/projects/motion-studies/preview-mobile.png"
     },
     "publish": true
   }

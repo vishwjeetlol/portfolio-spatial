@@ -129,7 +129,15 @@ class SoundEngine {
     });
   }
 
-  // Classic Tata Truck Dual-Tone Air Horn (Procedural Web Audio)
+  public playSubBassTone(durationSec: number = 0.55) {
+    this.playTataHorn(durationSec);
+  }
+
+  public playHarmonicSweep() {
+    this.playEngineRev();
+  }
+
+  // Classic Dual-Tone Air Horn / Sub-Bass Blast (Procedural Web Audio)
   public playTataHorn(durationSec: number = 0.55) {
     if (this.isMuted) return;
     this.initContext();

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Physics Playground // Real-Time 3D Rigid-Body Dynamics &amp; Destruction</title>
+  <link rel="stylesheet" href="../../shared/styles.css">
+  <style>
+    :root {
+      --accent: #f4a228;
+      --accent-glow: rgba(244, 162, 40, 0.2);
+    }
+    #stage-canvas {
+      width: 100%;
+      height: 560px;
+      display: block;
+      cursor: grab;
+      background: radial-gradient(circle at center, #10141f 0%, #06070a 100%);
+    }
+    #stage-canvas:active {
+      cursor: grabbing;
+    }
+  </style>
+  <script src="vendor/three.min.js"></script>
+</head>
+<body>
+  <header class="studio-header">
+    <a href="/" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M10 12L6 8l4-4"/>
+      </svg>
+      Studio
+    </a>
+    <div class="header-title-group">
+      <span class="header-title">Physics Playground</span>
+      <span class="badge">Rigid-Body 3D</span>
+    </div>
+    <span class="tag-self">Interactive Physics Engine</span>
+  </header>
+
+  <main class="studio-workspace">
+    <!-- Viewport Stage -->
+    <section class="studio-viewport" aria-label="3D Physics Arena Viewport">
+      <div class="viewport-canvas-wrap">
+        <canvas id="stage-canvas"></canvas>
+      </div>
+      <div class="viewport-telemetry">
+        <div class="telemetry-item">Active Bodies: <span id="body-count-val" class="telemetry-val">45</span></div>
+        <div class="telemetry-item">Engine: <span id="fps-val" class="telemetry-val">60 FPS</span></div>
+        <div class="telemetry-item">Integrator: <span class="telemetry-val">Semi-Implicit Euler</span></div>
+      </div>
+    </section>
+
+    <!-- Controls Panel -->
+    <aside class="studio-panel" aria-label="Physics Parameters">
+      <h2 class="panel-title">World Dynamics &amp; Forces</h2>
+
+      <div class="panel-group">
+        <label for="gravity-slider">
+          Gravity Force (Y-Axis)
+          <span id="gravity-val" class="val-display">-9.8 m/s&sup2;</span>
+        </label>
+        <input type="range" id="gravity-slider" class="studio-slider" min="-25" max="25" step="0.5" value="-9.8">
+      </div>
+
+      <div class="panel-group">
+        <label for="restitution-slider">
+          Elastic Restitution (Bounciness)
+          <span id="restitution-val" class="val-display">0.75</span>
+        </label>
+        <input type="range" id="restitution-slider" class="studio-slider" min="0.1" max="0.95" step="0.05" value="0.75">
+      </div>
+
+      <div class="panel-group">
+        <label for="friction-slider">
+          Surface Friction
+          <span id="friction-val" class="val-display">0.96</span>
+        </label>
+        <input type="range" id="friction-slider" class="studio-slider" min="0.80" max="0.99" step="0.01" value="0.96">
+      </div>
+
+      <div style="display: flex; gap: var(--space-1); margin-top: var(--space-1);">
+        <button id="blast-btn" class="studio-btn primary" style="flex: 1;">Radial Blast</button>
+        <button id="spawn-btn" class="studio-btn" style="flex: 1;">Spawn +20</button>
+      </div>
+
+      <div style="margin-top: 6px;">
+        <button id="slow-mo-btn" class="studio-btn" style="width: 100%;">Toggle Slow Motion (0.2x)</button>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Collapsible Under The Hood Drawer -->
+  <section class="under-the-hood">
+    <details class="hood-details" open>
+      <summary class="hood-summary">
+        <span>Under The Hood: Impulse Collision Resolution &amp; Spatial Raycasting</span>
+        <span style="font-family: var(--font-mono); font-size: 11px;">[Expand / Collapse]</span>
+      </summary>
+      <div class="hood-content">
+        <div class="hood-col">
+          <h4>Elastic Collision Impulse Resolution</h4>
+          <pre class="hood-code"><code>vec3 delta = b2.pos - b1.pos;
+float dist = length(delta);
+if (dist &lt; (b1.radius + b2.radius)) {
+  vec3 normal = delta / dist;
+  vec3 relVel = b2.vel - b1.vel;
+  float velAlongNormal = dot(relVel, normal);
+  if (velAlongNormal &lt; 0.0) {
+    float j = -(1.0 + restitution) * velAlongNormal / (b1.invMass + b2.invMass);
+    vec3 impulse = normal * j;
+    b1.vel -= impulse * b1.invMass;
+    b2.vel += impulse * b2.invMass;
+  }
+}</code></pre>
+        </div>
+        <div class="hood-col">
+          <h4>Raycast Spring Tether Mechanics</h4>
+          <pre class="hood-code"><code>When pointer presses any mesh:
+1. Raycaster unprojects screen coordinate into 3D world plane
+2. Spring tension force: F = -stiffness * (object.pos - rayTarget)
+3. Angular torque applied proportional to cross product: &tau; = r &times; F
+4. Release fling vector inherits instantaneous pointer momentum</code></pre>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>

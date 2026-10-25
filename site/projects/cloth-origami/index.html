@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloth &amp; Origami // 3D Verlet Integration &amp; Soft-Body Simulation</title>
+  <link rel="stylesheet" href="../../shared/styles.css">
+  <style>
+    :root {
+      --accent: #8b5cf6;
+      --accent-glow: rgba(139, 92, 246, 0.25);
+    }
+    #stage-canvas {
+      width: 100%;
+      height: 560px;
+      display: block;
+      cursor: grab;
+      background: #090a0f;
+    }
+    #stage-canvas:active {
+      cursor: grabbing;
+    }
+    #stage-canvas.cut-mode {
+      cursor: crosshair;
+    }
+  </style>
+  <script src="vendor/three.min.js"></script>
+</head>
+<body>
+  <header class="studio-header">
+    <a href="/" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M10 12L6 8l4-4"/>
+      </svg>
+      Studio
+    </a>
+    <div class="header-title-group">
+      <span class="header-title">Cloth &amp; Origami</span>
+      <span class="badge">Verlet Physics</span>
+    </div>
+    <span class="tag-self">Interactive Soft-Body Simulation</span>
+  </header>
+
+  <main class="studio-workspace">
+    <!-- Viewport Stage -->
+    <section class="studio-viewport" aria-label="Interactive Cloth Stage">
+      <div class="viewport-canvas-wrap">
+        <canvas id="stage-canvas"></canvas>
+      </div>
+      <div class="viewport-telemetry">
+        <div class="telemetry-item">Particles: <span class="telemetry-val">2,500 Mass-Spring Nodes</span></div>
+        <div class="telemetry-item">Constraints: <span class="telemetry-val">4,800 Structural Links</span></div>
+        <div class="telemetry-item">Engine: <span id="fps-val" class="telemetry-val">60 FPS</span></div>
+      </div>
+    </section>
+
+    <!-- Controls Panel -->
+    <aside class="studio-panel" aria-label="Cloth Parameters">
+      <h2 class="panel-title">Soft-Body &amp; Origami Engine</h2>
+
+      <div class="panel-group">
+        <label>Interaction Tool</label>
+        <div class="segmented-control">
+          <button id="tool-drag-btn" class="tool-btn active" data-tool="drag">Drag / Pull</button>
+          <button id="tool-tear-btn" class="tool-btn" data-tool="tear">Tear / Cut Knife</button>
+        </div>
+      </div>
+
+      <div class="panel-group">
+        <label>Origami Folding Structure</label>
+        <div class="segmented-control" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px;">
+          <button class="fold-btn active" data-fold="flat">Hanging Sheet</button>
+          <button class="fold-btn" data-fold="canopy">Tented Canopy</button>
+          <button class="fold-btn" data-fold="fan">Accordion Fan</button>
+          <button class="fold-btn" data-fold="origami">Origami Wing</button>
+        </div>
+      </div>
+
+      <div class="panel-group">
+        <label for="wind-slider">
+          Wind Velocity &amp; Turbulence
+          <span id="wind-val" class="val-display">0.75</span>
+        </label>
+        <input type="range" id="wind-slider" class="studio-slider" min="0.0" max="2.5" step="0.1" value="0.75">
+      </div>
+
+      <div class="panel-group">
+        <label for="stiffness-slider">
+          Fabric Stiffness (Relaxation Steps)
+          <span id="stiffness-val" class="val-display">5</span>
+        </label>
+        <input type="range" id="stiffness-slider" class="studio-slider" min="1" max="10" step="1" value="5">
+      </div>
+
+      <div class="panel-group">
+        <label>Fabric Textile Material</label>
+        <div class="segmented-control">
+          <button class="mat-btn active" data-mat="silk">Violet Silk</button>
+          <button class="mat-btn" data-mat="gold">Mylar Gold</button>
+          <button class="mat-btn" data-mat="wireframe">Physics Mesh</button>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: var(--space-1); margin-top: var(--space-1);">
+        <button id="gust-btn" class="studio-btn primary" style="flex: 1;">Wind Gust</button>
+        <button id="reset-cloth-btn" class="studio-btn" style="flex: 1;">Reset Mesh</button>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Collapsible Under The Hood Drawer -->
+  <section class="under-the-hood">
+    <details class="hood-details" open>
+      <summary class="hood-summary">
+        <span>Under The Hood: Position-Based Dynamics &amp; Verlet Numerical Integration</span>
+        <span style="font-family: var(--font-mono); font-size: 11px;">[Expand / Collapse]</span>
+      </summary>
+      <div class="hood-content">
+        <div class="hood-col">
+          <h4>Verlet Particle Integration Step</h4>
+          <pre class="hood-code"><code>// Time-reversible Verlet integration with drag damping
+vec3 temp = position;
+position += (position - prevPosition) * damping + acceleration * (dt * dt);
+prevPosition = temp;
+// Structural distance constraints (Hooke's relaxation):
+vec3 delta = p2.position - p1.position;
+float diff = (length(delta) - restLength) / length(delta);
+p1.position += delta * 0.5 * diff;
+p2.position -= delta * 0.5 * diff;</code></pre>
+        </div>
+        <div class="hood-col">
+          <h4>Aerodynamic Wind Force &amp; Surface Normals</h4>
+          <pre class="hood-code"><code>// Compute instantaneous triangle normal:
+vec3 normal = cross(v2 - v0, v3 - v0);
+// Aerodynamic lift and drag force proportional to wind angle:
+vec3 relativeWind = windVector - particleVelocity;
+vec3 windForce = normal * dot(normalize(normal), relativeWind);
+particle.applyForce(windForce * windStrength);
+meshGeometry.computeVertexNormals();</code></pre>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>

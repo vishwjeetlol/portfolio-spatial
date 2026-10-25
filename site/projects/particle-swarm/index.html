@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bioluminescent Swarm // 100K GPU Particle Attractors &amp; Curl Noise</title>
+  <link rel="stylesheet" href="../../shared/styles.css">
+  <style>
+    :root {
+      --accent: #00ffcc;
+      --accent-glow: rgba(0, 255, 204, 0.25);
+    }
+    #stage-canvas {
+      width: 100%;
+      height: 560px;
+      display: block;
+      cursor: grab;
+      background: #030712;
+    }
+    #stage-canvas:active {
+      cursor: grabbing;
+    }
+  </style>
+  <script src="vendor/three.min.js"></script>
+</head>
+<body>
+  <header class="studio-header">
+    <a href="/" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M10 12L6 8l4-4"/>
+      </svg>
+      Studio
+    </a>
+    <div class="header-title-group">
+      <span class="header-title">Bioluminescent Swarm</span>
+      <span class="badge">GPGPU Particles</span>
+    </div>
+    <span class="tag-self">100,000 Point Cloud Simulation</span>
+  </header>
+
+  <main class="studio-workspace">
+    <!-- Viewport Stage -->
+    <section class="studio-viewport" aria-label="Interactive Particle Stage">
+      <div class="viewport-canvas-wrap">
+        <canvas id="stage-canvas"></canvas>
+      </div>
+      <div class="viewport-telemetry">
+        <div class="telemetry-item">Particles: <span class="telemetry-val">100,000 Active</span></div>
+        <div class="telemetry-item">Engine: <span id="fps-val" class="telemetry-val">60 FPS</span></div>
+        <div class="telemetry-item">Field: <span id="topology-telemetry" class="telemetry-val">Lorenz Attractor</span></div>
+      </div>
+    </section>
+
+    <!-- Controls Panel -->
+    <aside class="studio-panel" aria-label="Swarm Parameters">
+      <h2 class="panel-title">Attractor &amp; Turbulence Field</h2>
+
+      <div class="panel-group">
+        <label>Topology Geometry</label>
+        <div class="segmented-control" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px;">
+          <button class="topology-btn active" data-topo="lorenz">Lorenz Attractor</button>
+          <button class="topology-btn" data-topo="helix">DNA Double Helix</button>
+          <button class="topology-btn" data-topo="galaxy">Galaxy Vortex</button>
+          <button class="topology-btn" data-topo="neural">Neural Sphere</button>
+        </div>
+      </div>
+
+      <div class="panel-group">
+        <label for="turbulence-slider">
+          Curl Noise Turbulence
+          <span id="turbulence-val" class="val-display">0.60</span>
+        </label>
+        <input type="range" id="turbulence-slider" class="studio-slider" min="0.0" max="2.0" step="0.05" value="0.60">
+      </div>
+
+      <div class="panel-group">
+        <label for="size-slider">
+          Particle Core Size
+          <span id="size-val" class="val-display">2.2</span>
+        </label>
+        <input type="range" id="size-slider" class="studio-slider" min="0.5" max="5.0" step="0.1" value="2.2">
+      </div>
+
+      <div class="panel-group">
+        <label>Bioluminescent Palette</label>
+        <div class="segmented-control">
+          <button class="palette-btn active" data-palette="cyan">Abyssal Cyan</button>
+          <button class="palette-btn" data-palette="aurora">Neon Aurora</button>
+          <button class="palette-btn" data-palette="solar">Solar Flare</button>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: var(--space-1); margin-top: var(--space-1);">
+        <button id="audio-synth-btn" class="studio-btn primary" style="flex: 1;">Audio Reactive: OFF</button>
+        <button id="vortex-btn" class="studio-btn" style="flex: 1;">Gravity Pulse</button>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Collapsible Under The Hood Drawer -->
+  <section class="under-the-hood">
+    <details class="hood-details" open>
+      <summary class="hood-summary">
+        <span>Under The Hood: Mathematical Attractors &amp; 3D Curl Noise Interpolation</span>
+        <span style="font-family: var(--font-mono); font-size: 11px;">[Expand / Collapse]</span>
+      </summary>
+      <div class="hood-content">
+        <div class="hood-col">
+          <h4>Lorenz Strange Attractor System</h4>
+          <pre class="hood-code"><code>// Differential Runge-Kutta numerical integration
+float dx = sigma * (y - x) * dt;
+float dy = (x * (rho - z) - y) * dt;
+float dz = (x * y - beta * z) * dt;
+x += dx; y += dy; z += dz;
+// Lorenz parameters: sigma = 10.0, rho = 28.0, beta = 8/3</code></pre>
+        </div>
+        <div class="hood-col">
+          <h4>GPU Curl Noise Vertex Displacement</h4>
+          <pre class="hood-code"><code>vec3 curl = curlNoise(pos * 0.25 + vec3(0.0, uTime * 0.15, 0.0));
+vec3 targetPos = mix(position, aTarget, uMorph);
+vec3 finalPos = targetPos + curl * (uTurbulence * (1.0 + uAudioBass));
+gl_PointSize = aSize * (350.0 / -mvPosition.z) * (1.0 + uAudioBass * 1.5);
+gl_Position = projectionMatrix * modelViewMatrix * vec4(finalPos, 1.0);</code></pre>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -88,12 +88,12 @@
     
     <div class="panorama-controls-bar">
       <div class="station-jump-group">
-        <button class="station-jump-btn" data-offset="0">🚚 Tata Truck Cabin</button>
-        <button class="station-jump-btn" data-offset="550">📖 Nepo Baby Magazine</button>
-        <button class="station-jump-btn" data-offset="1100">🏛️ Three.js Museum</button>
-        <button class="station-jump-btn" data-offset="1650">🧠 Neural Playground</button>
-        <button class="station-jump-btn" data-offset="2200">🌍 Seismic Globe</button>
-        <button class="station-jump-btn" data-offset="2750">💎 Material Lab</button>
+        <button class="station-jump-btn" data-offset="0">💧 Liquid Chrome</button>
+        <button class="station-jump-btn" data-offset="540">💥 Physics Playground</button>
+        <button class="station-jump-btn" data-offset="1080">✨ Bioluminescent Swarm</button>
+        <button class="station-jump-btn" data-offset="1620">🌌 Cyber Tunnel</button>
+        <button class="station-jump-btn" data-offset="2160">🎧 Vinyl Turntable</button>
+        <button class="station-jump-btn" data-offset="2700">🪁 Cloth &amp; Origami</button>
       </div>
       <div class="hud-badge desktop-only" style="font-size: 0.72rem;">
         <span>Drag to Explore &bull; Wheel to Pan</span>
@@ -121,29 +121,29 @@
     </p>
   </section>
 
-  <!-- INTERACTIVE PLAYROOM: Tata Truck 1613 SE Audio Dashboard -->
+  <!-- INTERACTIVE PLAYROOM: Real-Time Audio DSP Frequency Console -->
   <section class="playroom-section" aria-label="Interactive Audio Synthesizer Dashboard">
     <div class="playroom-card">
       <div>
         <span class="playroom-badge">Browser Web Audio API &bull; Zero External Audio Files</span>
-        <h2 class="playroom-title">Classic Tata Truck Cabin &amp; Audio Synthesizer</h2>
+        <h2 class="playroom-title">Spatial Audio &amp; Harmonic Frequency Synthesizer</h2>
         <p class="playroom-desc">
-          Demonstrating Vishwjeet's audio-tactile philosophy: rather than downloading static MP3 sound files, real-time audio is generated directly via mathematical oscillator waveforms and biquad frequency filters in the browser. Test the live cabin controls below.
+          Demonstrating Vishwjeet's audio-tactile philosophy: rather than downloading static MP3 sound files, real-time spatial audio is generated directly via mathematical oscillator waveforms and biquad frequency filters in the browser. Test the live harmonic controls below.
         </p>
         <div class="playroom-actions">
           <button class="playroom-btn" id="play-horn-btn">
-            <span>📢 Sound Dual Air-Horn</span>
+            <span>⚡ Trigger Sub-Bass Harmonic Blast</span>
           </button>
           <button class="playroom-btn secondary" id="play-rev-btn">
-            <span>⚡ Rev Diesel Throttle</span>
+            <span>🌊 Modulate FM Frequency Sweep</span>
           </button>
-          <a href="https://github.com/vishwjeetlol/VishwjeetPortfolio" target="_blank" rel="noopener noreferrer" class="playroom-btn secondary">
-            <span>View Full Simulator Code &rarr;</span>
+          <a href="/projects/vinyl-turntable/" class="playroom-btn secondary">
+            <span>🎧 Launch 3D Vinyl Turntable &rarr;</span>
           </a>
         </div>
       </div>
 
-      <!-- Live Speedometer / Tachometer Needle Gauge -->
+      <!-- Live Frequency Telemetry / Gauge -->
       <div class="gauge-cluster">
         <svg class="gauge-svg" viewBox="0 0 180 100">
           <path d="M 20 90 A 70 70 0 0 1 160 90" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="8" stroke-linecap="round"/>
@@ -151,7 +151,7 @@
           <line id="speedo-needle" class="needle" x1="90" y1="90" x2="90" y2="30" stroke="#f4a228" stroke-width="3" stroke-linecap="round"/>
           <circle cx="90" cy="90" r="7" fill="#ffffff"/>
         </svg>
-        <span class="gauge-label">Live Tachometer Telemetry</span>
+        <span class="gauge-label">Live Audio VU Telemetry</span>
       </div>
     </div>
   </section>
@@ -159,7 +159,7 @@
   <!-- Search & Segmented Switch -->
   <section class="controls-section" aria-label="Project Controls and Filter">
     <div class="search-bar-wrap">
-      <input type="search" id="project-search" placeholder="Filter 11 projects by stack, keyword, or architecture..." aria-label="Search projects">
+      <input type="search" id="project-search" placeholder="Filter 12 projects by stack, keyword, or architecture..." aria-label="Search projects">
     </div>
     <div class="mobile-switcher mobile-only" role="tablist" aria-label="Discipline Switcher">
       <button class="switch-btn active" role="tab" aria-selected="true" id="tab-code" data-target="code">Code</button>
@@ -173,7 +173,7 @@
     <div class="split-column col-code" id="view-code" role="tabpanel" aria-labelledby="tab-code">
       <div class="col-sticky-header">
         <h2 class="col-heading">Code // Systems</h2>
-        <span class="col-sub">ML &bull; Neural Networks &bull; GeoJSON Pipelines</span>
+        <span class="col-sub">Physics Engines &bull; Verlet Dynamics &bull; Neural Networks</span>
       </div>
       <div class="cards-stack" id="cards-code">
         <!-- Rendered dynamically from projects.json -->
@@ -183,8 +183,8 @@
     <!-- Right Column: CRAFT -->
     <div class="split-column col-craft" id="view-craft" role="tabpanel" aria-labelledby="tab-craft">
       <div class="col-sticky-header">
-        <h2 class="col-heading">Craft // Realtime &amp; Toys</h2>
-        <span class="col-sub">3D Shaders &bull; Web Audio &bull; Desi Kitsch Editorial</span>
+        <h2 class="col-heading">Craft // Realtime &amp; Shaders</h2>
+        <span class="col-sub">GPU Shaders &bull; Raymarching &bull; 3D Audio DSP</span>
       </div>
       <div class="cards-stack" id="cards-craft">
         <!-- Rendered dynamically from projects.json -->

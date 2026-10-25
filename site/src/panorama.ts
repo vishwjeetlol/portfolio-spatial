@@ -21,6 +21,69 @@ export class PanoramaWorld {
   private time: number = 0;
   private particles: { x: number; y: number; s: number; alpha: number; speed: number }[] = [];
 
+  private stations = [
+    {
+      id: 'liquid-chrome',
+      x: 280,
+      title: 'LIQUID CHROME // GPU FLUID',
+      subtitle: 'Real-Time GLSL Fluid Dispersion & Fresnel Optics',
+      badge: 'CRAFT // GLSL SHADER',
+      color: '#5ce1e6',
+      link: '/projects/liquid-chrome/',
+      icon: '💧'
+    },
+    {
+      id: 'physics-playground',
+      x: 820,
+      title: '3D PHYSICS PLAYGROUND',
+      subtitle: 'Rigid-Body Real-Time Impulse Destruction Engine',
+      badge: 'CODE // RIGID BODY',
+      color: '#ff0055',
+      link: '/projects/physics-playground/',
+      icon: '💥'
+    },
+    {
+      id: 'particle-swarm',
+      x: 1360,
+      title: 'BIOLUMINESCENT SWARM',
+      subtitle: '100K Particle Attractors & 3D Curl Noise Field',
+      badge: 'CRAFT // GPGPU PARTICLES',
+      color: '#00ffcc',
+      link: '/projects/particle-swarm/',
+      icon: '✨'
+    },
+    {
+      id: 'cyber-tunnel',
+      x: 1900,
+      title: 'CYBER TUNNEL 4D',
+      subtitle: 'Volumetric SDF Sphere Tracing & Non-Euclidean Shaders',
+      badge: 'CRAFT // SDF RAYMARCH',
+      color: '#ff0077',
+      link: '/projects/cyber-tunnel/',
+      icon: '🌌'
+    },
+    {
+      id: 'vinyl-turntable',
+      x: 2440,
+      title: 'ANALOG DECK MK-II',
+      subtitle: '3D Turntable Mechanics & Web Audio Scratch DSP',
+      badge: 'CRAFT // 3D & DSP',
+      color: '#ff9900',
+      link: '/projects/vinyl-turntable/',
+      icon: '🎧'
+    },
+    {
+      id: 'cloth-origami',
+      x: 2980,
+      title: 'CLOTH & ORIGAMI',
+      subtitle: '3D Verlet Integration & Soft-Body Tear Knife Simulation',
+      badge: 'CODE // VERLET PHYSICS',
+      color: '#8b5cf6',
+      link: '/projects/cloth-origami/',
+      icon: '🪁'
+    }
+  ];
+
   constructor(container: HTMLElement, canvas: HTMLCanvasElement) {
     this.container = container;
     this.canvas = canvas;
@@ -104,13 +167,31 @@ export class PanoramaWorld {
       }
     }, { passive: true });
 
-    // Wheel horizontal support
-    this.canvas.addEventListener('wheel', (e) => {
-      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-      this.targetScrollX += delta * 1.2;
-      this.targetScrollX = Math.max(0, Math.min(this.maxScrollX, this.targetScrollX));
-      e.preventDefault();
-    }, { passive: false });
+    // Click on Station Cards to Launch Directly
+    this.canvas.addEventListener('click', (e) => {
+      if (Math.abs(e.clientX - this.startMouseX) > 8) return;
+      const rect = this.canvas.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+      const groundY = this.canvas.height - 90;
+      const cardW = 280;
+      const cardH = 170;
+      const cardY = groundY - cardH - 30;
+
+      for (const st of this.stations) {
+        const screenX = st.x - this.scrollX;
+        if (
+          clickX >= screenX - cardW / 2 &&
+          clickX <= screenX + cardW / 2 &&
+          clickY >= cardY &&
+          clickY <= cardY + cardH
+        ) {
+          sound.playChime();
+          window.location.href = st.link;
+          break;
+        }
+      }
+    });
   }
 
   public scrollToStation(xOffset: number) {
@@ -181,71 +262,7 @@ export class PanoramaWorld {
     const ctx = this.ctx;
     const sx = this.scrollX;
 
-    // Stations Data
-    const stations = [
-      {
-        id: 'tata-truck',
-        x: 280,
-        title: 'TATA 1613 SE CABIN // THE BAZAAR',
-        subtitle: 'First-Person Driving Simulator & Web Audio Horn',
-        badge: 'CRAFT // SIMULATOR',
-        color: '#f4a228',
-        link: 'https://github.com/vishwjeetlol/VishwjeetPortfolio',
-        icon: '🚚'
-      },
-      {
-        id: 'nepo-baby',
-        x: 820,
-        title: 'NEPO BABY MAGAZINE',
-        subtitle: 'Desi Kitsch Interactive Book & Web Toy',
-        badge: 'CRAFT // EDITORIAL',
-        color: '#cf005e',
-        link: 'https://github.com/vishwjeetlol/Nepo_Baby_Website',
-        icon: '📖'
-      },
-      {
-        id: 'threejs-museum',
-        x: 1360,
-        title: 'THE MUSEUM OF THREE.JS',
-        subtitle: '22 Virtual Exhibits, GLSL Curl Shaders & Spotlight Pools',
-        badge: 'CRAFT // WEBGL',
-        color: '#5ce1e6',
-        link: 'https://github.com/vishwjeetlol/3js-museum',
-        icon: '🏛️'
-      },
-      {
-        id: 'neural-playground',
-        x: 1900,
-        title: 'NEURAL PLAYGROUND',
-        subtitle: 'Scratch TS/JS Backpropagation & Decision Boundary',
-        badge: 'CODE // SYSTEMS',
-        color: '#5ce1e6',
-        link: '/projects/neural-playground/',
-        icon: '🧠'
-      },
-      {
-        id: 'seismic-globe',
-        x: 2440,
-        title: 'SEISMIC GLOBE 3D',
-        subtitle: '30-Day USGS Planetary Hypocenter Visualization',
-        badge: 'CODE // SPATIAL',
-        color: '#f4a228',
-        link: '/projects/seismic-globe/',
-        icon: '🌍'
-      },
-      {
-        id: 'material-lab',
-        x: 2980,
-        title: 'MATERIAL OPTICS LAB',
-        subtitle: 'Headless Blender Procedural PBR Refraction Studio',
-        badge: 'CRAFT // OPTICS',
-        color: '#ced4da',
-        link: '/projects/material-lab/',
-        icon: '💎'
-      }
-    ];
-
-    stations.forEach(st => {
+    this.stations.forEach(st => {
       const screenX = st.x - sx;
       if (screenX < -320 || screenX > this.canvas.width + 320) return;
 

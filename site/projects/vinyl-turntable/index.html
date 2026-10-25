@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vinyl Turntable // Interactive 3D Audio Deck &amp; Scratch Physics</title>
+  <link rel="stylesheet" href="../../shared/styles.css">
+  <style>
+    :root {
+      --accent: #ff9900;
+      --accent-glow: rgba(255, 153, 0, 0.25);
+    }
+    #stage-canvas {
+      width: 100%;
+      height: 560px;
+      display: block;
+      cursor: grab;
+      background: #111317;
+    }
+    #stage-canvas:active {
+      cursor: grabbing;
+    }
+  </style>
+  <script src="vendor/three.min.js"></script>
+</head>
+<body>
+  <header class="studio-header">
+    <a href="/" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M10 12L6 8l4-4"/>
+      </svg>
+      Studio
+    </a>
+    <div class="header-title-group">
+      <span class="header-title">Analog Deck MK-II</span>
+      <span class="badge">3D Physics &amp; DSP</span>
+    </div>
+    <span class="tag-self">Interactive Turntable &amp; Scratch Engine</span>
+  </header>
+
+  <main class="studio-workspace">
+    <!-- Viewport Stage -->
+    <section class="studio-viewport" aria-label="Interactive 3D Turntable Stage">
+      <div class="viewport-canvas-wrap">
+        <canvas id="stage-canvas"></canvas>
+      </div>
+      <div class="viewport-telemetry">
+        <div class="telemetry-item">Platter: <span id="platter-telemetry" class="telemetry-val">STOPPED</span></div>
+        <div class="telemetry-item">Speed: <span id="rpm-telemetry" class="telemetry-val">33.3 RPM</span></div>
+        <div class="telemetry-item">Pitch: <span id="pitch-telemetry" class="telemetry-val">0.0%</span></div>
+        <div class="telemetry-item">Engine: <span id="fps-val" class="telemetry-val">60 FPS</span></div>
+      </div>
+    </section>
+
+    <!-- Controls Panel -->
+    <aside class="studio-panel" aria-label="Deck Controls">
+      <h2 class="panel-title">Deck Controls &amp; DSP</h2>
+
+      <div class="panel-group">
+        <label>Transport &amp; Needle Cue</label>
+        <div style="display: flex; gap: var(--space-1);">
+          <button id="start-stop-btn" class="studio-btn primary" style="flex: 1;">Start Platter</button>
+          <button id="cue-btn" class="studio-btn" style="flex: 1;">Drop Needle</button>
+        </div>
+      </div>
+
+      <div class="panel-group">
+        <label>Platter Nominal Velocity</label>
+        <div class="segmented-control">
+          <button class="rpm-btn active" data-rpm="33">33⅓ RPM</button>
+          <button class="rpm-btn" data-rpm="45">45 RPM</button>
+        </div>
+      </div>
+
+      <div class="panel-group">
+        <label for="pitch-slider">
+          Quartz Pitch Fader
+          <span id="pitch-val" class="val-display">0.0%</span>
+        </label>
+        <input type="range" id="pitch-slider" class="studio-slider" min="-8" max="8" step="0.1" value="0.0">
+      </div>
+
+      <div class="panel-group">
+        <label>Direct Scratch &amp; Camera</label>
+        <div class="segmented-control">
+          <button class="cam-btn active" data-cam="dj">DJ Overhead</button>
+          <button class="cam-btn" data-cam="iso">Isometric 45°</button>
+          <button class="cam-btn" data-cam="macro">Needle Macro</button>
+        </div>
+      </div>
+
+      <div class="panel-group">
+        <label>Platter Chassis Finish</label>
+        <div class="segmented-control">
+          <button class="chassis-btn active" data-chassis="matte">Matte Black</button>
+          <button class="chassis-btn" data-chassis="walnut">Vintage Walnut</button>
+          <button class="chassis-btn" data-chassis="silver">Brushed Silver</button>
+        </div>
+      </div>
+
+      <div style="margin-top: var(--space-2); padding: 8px 10px; background: rgba(255,153,0,0.08); border: 1px solid rgba(255,153,0,0.25); border-radius: 4px; font-size: 11px; line-height: 1.4; color: var(--text-dim);">
+        <strong style="color: #ffaa00;">Direct Scratching:</strong> Click &amp; drag directly on the vinyl disc to scrub and scratch the needle with live Doppler pitch bending!
+      </div>
+    </aside>
+  </main>
+
+  <!-- Collapsible Under The Hood Drawer -->
+  <section class="under-the-hood">
+    <details class="hood-details" open>
+      <summary class="hood-summary">
+        <span>Under The Hood: Mechanical Tonearm Kinematics &amp; Web Audio DSP Scratching</span>
+        <span style="font-family: var(--font-mono); font-size: 11px;">[Expand / Collapse]</span>
+      </summary>
+      <div class="hood-content">
+        <div class="hood-col">
+          <h4>Platter Momentum &amp; Scratch Angular Velocity</h4>
+          <pre class="hood-code"><code>// Angular momentum integration with slipmat friction
+if (isScratching) {
+  float deltaAngle = currentMouseAngle - prevMouseAngle;
+  angularVelocity = deltaAngle / dt;
+} else if (isMotorRunning) {
+  angularVelocity += (targetVelocity - angularVelocity) * torqueCoeff;
+} else {
+  angularVelocity *= frictionDamping;
+}
+vinylMesh.rotation.y += angularVelocity * dt;</code></pre>
+        </div>
+        <div class="hood-col">
+          <h4>Real-time Doppler Pitch-Shift Synthesis</h4>
+          <pre class="hood-code"><code>// Modulate audio playback rate via instantaneous surface speed
+float nominalSpeed = targetRPM * (2.0 * PI / 60.0);
+float speedRatio = angularVelocity / nominalSpeed;
+audioPlaybackRate.setValueAtTime(abs(speedRatio), audioCtx.currentTime);
+// Crackle noise generator &amp; needle contact impulse
+crackleGain.gain.value = isNeedleDown ? (0.04 + abs(speedRatio) * 0.02) : 0.0;</code></pre>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>

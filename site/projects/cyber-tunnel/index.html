@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber Tunnel // Volumetric 4D Raymarching &amp; Non-Euclidean Shaders</title>
+  <link rel="stylesheet" href="../../shared/styles.css">
+  <style>
+    :root {
+      --accent: #ff0077;
+      --accent-glow: rgba(255, 0, 119, 0.25);
+    }
+    #stage-canvas {
+      width: 100%;
+      height: 560px;
+      display: block;
+      cursor: crosshair;
+      background: #000;
+    }
+  </style>
+  <script src="vendor/three.min.js"></script>
+</head>
+<body>
+  <header class="studio-header">
+    <a href="/" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M10 12L6 8l4-4"/>
+      </svg>
+      Studio
+    </a>
+    <div class="header-title-group">
+      <span class="header-title">Cyber Tunnel</span>
+      <span class="badge">SDF Raymarching</span>
+    </div>
+    <span class="tag-self">Volumetric Fragment Shader Experience</span>
+  </header>
+
+  <main class="studio-workspace">
+    <!-- Viewport Stage -->
+    <section class="studio-viewport" aria-label="Interactive Raymarching Stage">
+      <div class="viewport-canvas-wrap">
+        <canvas id="stage-canvas"></canvas>
+      </div>
+      <div class="viewport-telemetry">
+        <div class="telemetry-item">Renderer: <span class="telemetry-val">Pure GLSL Fragment Shading</span></div>
+        <div class="telemetry-item">Engine: <span id="fps-val" class="telemetry-val">60 FPS</span></div>
+        <div class="telemetry-item">Geometry: <span class="telemetry-val">Infinite 4D Gyroid Lattice</span></div>
+      </div>
+    </section>
+
+    <!-- Controls Panel -->
+    <aside class="studio-panel" aria-label="Raymarch Parameters">
+      <h2 class="panel-title">SDF Geometry &amp; Optics</h2>
+
+      <div class="panel-group">
+        <label for="speed-slider">
+          Flight Velocity &amp; Warp
+          <span id="speed-val" class="val-display">1.40</span>
+        </label>
+        <input type="range" id="speed-slider" class="studio-slider" min="0.2" max="3.5" step="0.1" value="1.40">
+      </div>
+
+      <div class="panel-group">
+        <label for="twist-slider">
+          Non-Euclidean Twist
+          <span id="twist-val" class="val-display">0.50</span>
+        </label>
+        <input type="range" id="twist-slider" class="studio-slider" min="0.0" max="1.5" step="0.05" value="0.50">
+      </div>
+
+      <div class="panel-group">
+        <label for="glow-slider">
+          Volumetric Emission Glow
+          <span id="glow-val" class="val-display">1.20</span>
+        </label>
+        <input type="range" id="glow-slider" class="studio-slider" min="0.4" max="2.5" step="0.1" value="1.20">
+      </div>
+
+      <div class="panel-group">
+        <label>Neon Cyber Palette</label>
+        <div class="segmented-control">
+          <button class="palette-btn active" data-palette="synthwave">Synthwave</button>
+          <button class="palette-btn" data-palette="matrix">Matrix Terminal</button>
+          <button class="palette-btn" data-palette="hyper">Solar Neon</button>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: var(--space-1); margin-top: var(--space-1);">
+        <button id="hyperdrive-btn" class="studio-btn primary" style="flex: 1;">Hyperdrive Warp</button>
+        <button id="invert-btn" class="studio-btn" style="flex: 1;">Invert Field</button>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Collapsible Under The Hood Drawer -->
+  <section class="under-the-hood">
+    <details class="hood-details" open>
+      <summary class="hood-summary">
+        <span>Under The Hood: Sphere Tracing Signed Distance Fields (SDF) in GLSL</span>
+        <span style="font-family: var(--font-mono); font-size: 11px;">[Expand / Collapse]</span>
+      </summary>
+      <div class="hood-content">
+        <div class="hood-col">
+          <h4>SDF Gyroid 4D Repetition Operator</h4>
+          <pre class="hood-code"><code>// Infinite periodic minimal surface with space-folding
+vec3 q = mod(p + vec3(0.0, 0.0, uTime * uSpeed), 4.0) - 2.0;
+// Rotational non-euclidean twist around Z flight axis
+float angle = p.z * uTwist * 0.15;
+mat2 rot = mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
+q.xy = rot * q.xy;
+// Gyroid distance equation: dot(sin(p), cos(p.zxy))
+float gyroid = abs(dot(sin(q * 1.57), cos(q.zxy * 1.57))) - 0.22;</code></pre>
+        </div>
+        <div class="hood-col">
+          <h4>Volumetric Sphere Tracing &amp; Glow Accumulation</h4>
+          <pre class="hood-code"><code>float dO = 0.0;
+vec3 glow = vec3(0.0);
+for (int i = 0; i &lt; 80; i++) {
+  vec3 pos = ro + rd * dO;
+  float dS = mapScene(pos);
+  // Accumulate volumetric light from near-misses
+  glow += uPaletteNeon * exp(-abs(dS) * 3.2) * (1.0 / 80.0) * uGlow;
+  dO += max(dS * 0.7, 0.02);
+  if (dO &gt; 50.0 || abs(dS) &lt; 0.002) break;
+}
+vec3 col = glow + computeShading(pos, normal);</code></pre>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>

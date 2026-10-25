@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liquid Chrome // Real-Time GPU Fluid Simulation &amp; Refraction</title>
+  <link rel="stylesheet" href="../../shared/styles.css">
+  <style>
+    :root {
+      --accent: #5ce1e6;
+      --accent-glow: rgba(92, 225, 230, 0.2);
+    }
+    #stage-canvas {
+      width: 100%;
+      height: 560px;
+      display: block;
+      cursor: crosshair;
+      background: #000;
+    }
+  </style>
+  <script src="vendor/three.min.js"></script>
+</head>
+<body>
+  <header class="studio-header">
+    <a href="/" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M10 12L6 8l4-4"/>
+      </svg>
+      Studio
+    </a>
+    <div class="header-title-group">
+      <span class="header-title">Liquid Chrome</span>
+      <span class="badge">GLSL Shader</span>
+    </div>
+    <span class="tag-self">Interactive WebGL Experience</span>
+  </header>
+
+  <main class="studio-workspace">
+    <!-- Viewport Stage -->
+    <section class="studio-viewport" aria-label="Interactive Fluid Stage">
+      <div class="viewport-canvas-wrap">
+        <canvas id="stage-canvas"></canvas>
+      </div>
+      <div class="viewport-telemetry">
+        <div class="telemetry-item">Renderer: <span class="telemetry-val">Custom GLSL Surface</span></div>
+        <div class="telemetry-item">Engine: <span id="fps-val" class="telemetry-val">60 FPS</span></div>
+        <div class="telemetry-item">Grid: <span class="telemetry-val">128&times;128 Mesh Subdivisions</span></div>
+      </div>
+    </section>
+
+    <!-- Controls Panel -->
+    <aside class="studio-panel" aria-label="Fluid Parameters">
+      <h2 class="panel-title">Fluid Physics &amp; Optics</h2>
+
+      <div class="panel-group">
+        <label for="viscosity-slider">
+          Viscosity &amp; Surface Tension
+          <span id="viscosity-val" class="val-display">0.45</span>
+        </label>
+        <input type="range" id="viscosity-slider" class="studio-slider" min="0.1" max="1.0" step="0.05" value="0.45">
+      </div>
+
+      <div class="panel-group">
+        <label for="dispersion-slider">
+          Chromatic Dispersion
+          <span id="dispersion-val" class="val-display">0.80</span>
+        </label>
+        <input type="range" id="dispersion-slider" class="studio-slider" min="0.0" max="2.0" step="0.05" value="0.80">
+      </div>
+
+      <div class="panel-group">
+        <label for="speed-slider">
+          Wave Propagation Speed
+          <span id="speed-val" class="val-display">1.20</span>
+        </label>
+        <input type="range" id="speed-slider" class="studio-slider" min="0.2" max="3.0" step="0.1" value="1.20">
+      </div>
+
+      <div class="panel-group">
+        <label>Chromatic Palette</label>
+        <div class="segmented-control">
+          <button class="palette-btn active" data-palette="0">Mercury</button>
+          <button class="palette-btn" data-palette="1">Cyberpunk</button>
+          <button class="palette-btn" data-palette="2">Solar Gold</button>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: var(--space-1); margin-top: var(--space-1);">
+        <button id="pulse-btn" class="studio-btn primary" style="flex: 1;">Impact Pulse</button>
+        <button id="audio-react-btn" class="studio-btn" style="flex: 1;">Audio Pulse</button>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Collapsible Under The Hood Drawer -->
+  <section class="under-the-hood">
+    <details class="hood-details" open>
+      <summary class="hood-summary">
+        <span>Under The Hood: Custom GLSL Displacement &amp; Fresnel Optics</span>
+        <span style="font-family: var(--font-mono); font-size: 11px;">[Expand / Collapse]</span>
+      </summary>
+      <div class="hood-content">
+        <div class="hood-col">
+          <h4>GLSL Vertex Displacement Field</h4>
+          <pre class="hood-code"><code>vec3 pos = position;
+float wave = sin(pos.x * 4.0 + uTime * uSpeed) * cos(pos.y * 4.0 + uTime * uSpeed);
+float dist = distance(uv, uMouse);
+float ripple = sin(dist * 24.0 - uTime * 6.0) * exp(-dist * 5.0 * uViscosity);
+pos.z += (wave * 0.15 + ripple * 0.4);
+vNormal = normalMatrix * normalize(normal + vec3(ripple * 0.2));
+gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);</code></pre>
+        </div>
+        <div class="hood-col">
+          <h4>Chromatic Aberration &amp; Fresnel Specular</h4>
+          <pre class="hood-code"><code>float fresnel = pow(1.0 - max(dot(vNormal, vec3(0.0, 0.0, 1.0)), 0.0), 3.0);
+vec3 rReflect = reflect(vec3(0.0, 0.0, -1.0), vNormal + uDispersion * 0.04);
+vec3 gReflect = reflect(vec3(0.0, 0.0, -1.0), vNormal);
+vec3 bReflect = reflect(vec3(0.0, 0.0, -1.0), vNormal - uDispersion * 0.04);
+vec3 col = vec3(rReflect.z, gReflect.z, bReflect.z) * 0.5 + 0.5;
+col += fresnel * uPaletteAccent;
+gl_FragColor = vec4(col, 1.0);</code></pre>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>

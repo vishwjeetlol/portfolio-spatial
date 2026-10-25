@@ -64,6 +64,12 @@ async function testVercelDist() {
 
   // Test each project URL directly in dist
   const projects = [
+    'liquid-chrome',
+    'physics-playground',
+    'particle-swarm',
+    'cyber-tunnel',
+    'vinyl-turntable',
+    'cloth-origami',
     'neural-playground',
     'seismic-globe',
     'digit-atlas',
