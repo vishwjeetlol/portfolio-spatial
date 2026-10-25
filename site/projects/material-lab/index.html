@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Material Lab // Procedural 3D Shader &amp; Physical Optics Studio</title>
+  <style>
+    :root {
+      --bg: #090a0f;
+      --surface: rgba(18, 21, 31, 0.85);
+      --border: rgba(255, 255, 255, 0.12);
+      --text: #f1f3f5;
+      --muted: #8e95a0;
+      --accent: #5ce1e6;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: "SF Mono", Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+    #stage-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: grab;
+    }
+    #stage-canvas:active { cursor: grabbing; }
+
+    /* HUD Header */
+    .hud-header {
+      position: absolute;
+      top: 20px;
+      left: 24px;
+      right: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .hud-badge {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      border-radius: 9999px;
+      padding: 6px 16px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--text);
+      pointer-events: auto;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .badge-tag {
+      background: rgba(207, 0, 94, 0.15);
+      color: #cf005e;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+    }
+
+    /* Floating Studio Controls Drawer */
+    .studio-panel {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      width: 320px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      -webkit-backdrop-filter: blur(24px);
+      backdrop-filter: blur(24px);
+      border-radius: 16px;
+      padding: 20px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .panel-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+    .control-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    label {
+      font-size: 0.78rem;
+      font-family: var(--font-mono);
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+    }
+    select, input[type="range"] {
+      width: 100%;
+      background: #181d2c;
+      border: 1px solid var(--border);
+      color: #fff;
+      border-radius: 6px;
+      padding: 6px;
+      accent-color: var(--accent);
+    }
+    .preset-row {
+      display: flex;
+      gap: 6px;
+    }
+    .preset-btn {
+      flex: 1;
+      background: #202638;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      cursor: pointer;
+    }
+    .preset-btn:hover { background: #2f3852; }
+    .wireframe-btn {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 8px;
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 150ms ease;
+    }
+    .wireframe-btn.active {
+      background: var(--accent);
+      color: #090a0f;
+    }
+
+    /* Object Selector Tabs */
+    .object-selector {
+      position: absolute;
+      top: 80px;
+      left: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 10;
+    }
+    .obj-tab {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      color: var(--muted);
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      cursor: pointer;
+      text-align: left;
+      transition: all 180ms ease;
+    }
+    .obj-tab:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
+    .obj-tab.active {
+      background: #ffffff;
+      color: #000;
+      font-weight: bold;
+      border-color: #ffffff;
+    }
+  </style>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./vendor/three.module.js",
+      "three/examples/jsm/loaders/GLTFLoader.js": "./vendor/GLTFLoader.js"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div class="hud-header">
+    <div class="hud-badge">
+      <span>MATERIAL LAB // 3D PHYSICAL SHADER STUDIO</span>
+      <span class="badge-tag">Self-initiated project</span>
+    </div>
+  </div>
+
+  <!-- 3D Object Switcher -->
+  <div class="object-selector">
+    <button class="obj-tab active" data-model="twisted_torus_knot">1. Twisted Torus Knot</button>
+    <button class="obj-tab" data-model="faceted_shard">2. Faceted Crystalline Shard</button>
+    <button class="obj-tab" data-model="ribbed_vase">3. Fluted Ribbed Vase</button>
+  </div>
+
+  <!-- Material Tuner Panel -->
+  <div class="studio-panel">
+    <div class="panel-title">
+      <span>Material Parameters</span>
+      <span style="font-size: 0.72rem; color: var(--accent);" id="mat-label">Optical Glass</span>
+    </div>
+
+    <div class="preset-row">
+      <button class="preset-btn" id="preset-glass">Clear Glass</button>
+      <button class="preset-btn" id="preset-titanium">Titanium</button>
+      <button class="preset-btn" id="preset-emerald">Emerald</button>
+    </div>
+
+    <div class="control-row">
+      <label for="slider-trans">Transmission: <span id="val-trans">0.96</span></label>
+      <input type="range" id="slider-trans" min="0" max="1" step="0.02" value="0.96">
+    </div>
+
+    <div class="control-row">
+      <label for="slider-ior">Index of Refraction (IOR): <span id="val-ior">1.52</span></label>
+      <input type="range" id="slider-ior" min="1.0" max="2.4" step="0.02" value="1.52">
+    </div>
+
+    <div class="control-row">
+      <label for="slider-rough">Roughness: <span id="val-rough">0.05</span></label>
+      <input type="range" id="slider-rough" min="0" max="1" step="0.02" value="0.05">
+    </div>
+
+    <div class="control-row">
+      <label for="slider-metal">Metalness: <span id="val-metal">0.00</span></label>
+      <input type="range" id="slider-metal" min="0" max="1" step="0.02" value="0.00">
+    </div>
+
+    <button class="wireframe-btn" id="toggle-wireframe">Under The Hood: Wireframe Mode</button>
+  </div>
+
+  <canvas id="stage-canvas"></canvas>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
