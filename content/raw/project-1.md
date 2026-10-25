@@ -1,9 +1,10 @@
 ---
-title: The Museum of Three.js (3js-museum)
-side: craft
-role: [ADD ROLE]
-stack: [JavaScript, Three.js, Vite, WebGL, GLSL Shaders, HTML, CSS]
+title: Neural Playground
+side: code
+role: "Creative direction and build (AI-assisted, self-initiated)"
+stack: [TypeScript, JavaScript, Canvas 2D, Scratch Backprop, Matrix Calculus]
 publish: false
+preview: site/projects/neural-playground/preview.png
 ---
-The Museum of Three.js is an interactive 3D virtual exhibition pavilion (Pavilion Vol. 04) featuring 22 interactive exhibits spanning procedural 3D models, shaders, particle simulations, and retro-tech artifacts. Built with Three.js r160 and Vite v5, it incorporates custom GPU vertex curl shaders, Catmull-Rom camera navigation paths, and dynamic light pooling.
-Outcome: Production build finishes in 384ms across 24 chunks with zero errors, sustaining 60 FPS with distance culling and passing multi-agent quality gate reviews with all criteria >= 8.5/10.
+A live neural network training simulator written completely from scratch in TypeScript without external ML libraries. It visualizes continuous decision boundary updates across non-linear 2D datasets (spiral, concentric circles, XOR) with configurable hidden layer depth, width, and learning rate.
+Outcome: Trained live in browser at measured 60 FPS headless with analytical mini-batch SGD converging across 80 epochs to an MSE loss < 0.05.

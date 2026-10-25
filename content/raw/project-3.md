@@ -1,9 +1,10 @@
 ---
-title: Nepo Baby Magazine with Blender (Nepowebsitewithblender)
-side: craft
-role: [ADD ROLE]
-stack: [HTML, CSS, JavaScript, 3D Canvas]
+title: Digit Atlas
+side: code
+role: "Creative direction and build (AI-assisted, self-initiated)"
+stack: [Python, scikit-learn, NumPy, t-SNE, JavaScript, Canvas 2D]
 publish: false
+preview: site/projects/digit-atlas/preview.png
 ---
-A maximalist digital editorial website for Nepo Baby Magazine integrating layered web sections with 3D canvas rendering and embedded 3D assets including a coupe model turntable. The experience features animated marquee text strips, vibrant retro-pop styling, and custom typography across editorial sections.
-Outcome: [ADD RESULT]
+A high-dimensional data manifold visualizer that projects 1,797 handwritten 8x8 digit vectors into 2D space via non-linear t-SNE. Includes an interactive draw pad executing real-time in-browser linear classification against exported model weights with zero runtime network overhead.
+Outcome: Measured 95.83% test accuracy on holdout test set (360 samples), serialized 1,797 manifold points, and achieved sub-5ms client-side inference latency.
