@@ -3,229 +3,155 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digit Atlas // 2D t-SNE Embedding &amp; Real-time Inference</title>
+  <title>Digit Atlas // 2D t-SNE Embedding &amp; In-Browser Inference</title>
+  <link rel="stylesheet" href="../../shared/styles.css">
   <style>
     :root {
-      --bg: #090a0f;
-      --surface: #12151f;
-      --border: rgba(255, 255, 255, 0.12);
-      --text: #f1f3f5;
-      --muted: #8e95a0;
-      --accent: #5ce1e6;
-      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --font-mono: "SF Mono", Menlo, Consolas, monospace;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-sans);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      padding: 24px;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--border);
-    }
-    h1 { font-size: 1.35rem; font-weight: 700; }
-    .badge {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      background: rgba(92, 225, 230, 0.1);
-      color: var(--accent);
-      border: 1px solid rgba(92, 225, 230, 0.3);
-      padding: 4px 10px;
-      border-radius: 9999px;
-    }
-    .layout {
-      display: grid;
-      grid-template-columns: 1fr 360px;
-      gap: 24px;
-      flex: 1;
-    }
-    .panel {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    h2 { font-size: 0.95rem; color: var(--accent); font-family: var(--font-mono); text-transform: uppercase; }
-    
-    /* Map Canvas */
-    .map-container {
-      position: relative;
-      flex: 1;
-      min-height: 520px;
-      display: flex;
-      flex-direction: column;
+      --accent: #a3e635;
+      --accent-glow: rgba(163, 230, 53, 0.15);
     }
     #atlas-canvas {
       width: 100%;
-      height: 100%;
-      background: #080a0e;
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      height: 480px;
+      background: #050608;
+      border-radius: var(--radius-surface);
+      border: 1px solid var(--border-subtle);
       cursor: crosshair;
+      display: block;
     }
     .legend-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 10px;
+      gap: 12px;
+      margin-top: var(--space-2);
       font-family: var(--font-mono);
-      font-size: 0.75rem;
+      font-size: 11px;
     }
-    .legend-item { display: flex; align-items: center; gap: 4px; }
-    .color-swatch { width: 10px; height: 10px; border-radius: 50%; }
-
-    /* Interactive Side Panel */
-    .sidebar {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-secondary);
     }
-    .pad-card {
-      background: #0d1017;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
+    .color-swatch {
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+    }
+    .draw-container {
+      background: var(--bg-graphite-raised);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-surface);
+      padding: var(--space-2);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: var(--space-2);
     }
     #draw-pad {
-      background: #000;
-      border: 2px solid var(--accent);
-      border-radius: 8px;
+      background: #000000;
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-control);
       cursor: crosshair;
       touch-action: none;
+      display: block;
     }
-    .btn-row { display: flex; gap: 8px; width: 100%; }
-    button {
-      flex: 1;
-      background: #202636;
-      border: 1px solid var(--border);
-      color: #fff;
-      padding: 8px;
-      border-radius: 6px;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      cursor: pointer;
-    }
-    button:hover { background: #2c344a; }
     .pred-result {
       font-family: var(--font-mono);
-      font-size: 1rem;
-      color: #bdff52;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
       text-align: center;
     }
-
-    /* Magnified Inspect Sample */
     .inspect-box {
       display: flex;
-      gap: 14px;
+      gap: var(--space-2);
       align-items: center;
-      background: #0d1017;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px;
+      background: var(--bg-graphite-raised);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-control);
+      padding: var(--space-2);
     }
     #sample-canvas {
-      width: 64px;
-      height: 64px;
-      border: 1px solid var(--border);
+      width: 48px;
+      height: 48px;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-control);
       image-rendering: pixelated;
-      background: #000;
+      background: #000000;
+      flex-shrink: 0;
     }
     .sample-meta {
       font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--muted);
+      font-size: 11px;
+      color: var(--text-secondary);
       line-height: 1.5;
-    }
-
-    /* Under The Hood Details */
-    .hood-toggle-btn {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      cursor: pointer;
-      align-self: flex-start;
     }
     .conf-matrix-grid {
       display: grid;
       grid-template-columns: repeat(10, 1fr);
       gap: 2px;
-      background: #080a0e;
-      padding: 8px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
+      background: var(--bg-void);
+      padding: 6px;
+      border-radius: var(--radius-control);
+      border: 1px solid var(--border-subtle);
+      max-width: 320px;
     }
     .matrix-cell {
       aspect-ratio: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.65rem;
+      font-size: 10px;
       font-family: var(--font-mono);
       border-radius: 2px;
     }
   </style>
 </head>
 <body>
-  <header>
-    <div>
-      <h1>Digit Atlas // 2D t-SNE &amp; Browser Inference</h1>
-      <span style="font-size: 0.8rem; color: var(--muted);">1,797 Handwritten Digits Projected from 64-Dimensional Space</span>
+  <header class="studio-header">
+    <a href="/portfolio-night/" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M10 12L6 8l4-4"/>
+      </svg>
+      Studio
+    </a>
+    <div class="header-title-group">
+      <span class="header-title">Digit Atlas</span>
+      <span class="badge">Code</span>
     </div>
-    <span class="badge">Self-initiated project</span>
+    <span class="tag-self">Self-initiated project</span>
   </header>
 
-  <div class="layout">
-    <!-- Map Stage -->
-    <div class="panel map-container">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <h2>2D t-SNE Embedding Manifold</h2>
-        <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent);">
-          Accuracy: <strong id="acc-text">96.94%</strong>
-        </span>
+  <main class="studio-workspace">
+    <!-- Viewport Stage: 2D t-SNE Embedding -->
+    <section class="studio-viewport" aria-label="t-SNE Manifold Canvas">
+      <div class="viewport-canvas-wrap" style="padding: var(--space-3); flex-direction: column;">
+        <canvas id="atlas-canvas"></canvas>
+        <div class="legend-row" id="legend-row"></div>
       </div>
-      <canvas id="atlas-canvas"></canvas>
-      <div class="legend-row" id="legend-row"></div>
-    </div>
+      <div class="viewport-telemetry">
+        <div class="telemetry-item">Embedding: <span class="telemetry-val">2D t-SNE (Perplexity 30)</span></div>
+        <div class="telemetry-item">Test Accuracy: <span id="acc-text" class="telemetry-val">96.94%</span></div>
+        <div class="telemetry-item">Corpus: <span class="telemetry-val">1,797 Digits (8&times;8)</span></div>
+      </div>
+    </section>
 
-    <!-- Sidebar: Draw & Inspect -->
-    <div class="sidebar">
-      <!-- Draw-a-digit Pad -->
-      <div class="panel">
-        <h2>Draw a Digit (Live Inference)</h2>
-        <div class="pad-card">
-          <canvas id="draw-pad" width="160" height="160"></canvas>
-          <div class="btn-row">
-            <button id="clear-btn">Clear Canvas</button>
-            <button id="classify-btn" style="background: var(--accent); color: #090a0f; font-weight: bold;">Predict</button>
-          </div>
-          <div class="pred-result" id="pred-result">Prediction: &mdash;</div>
+    <!-- Controls & Interactive Pads Sidebar -->
+    <aside class="studio-panel" aria-label="Interactive Inference Controls">
+      <h2 class="panel-title">Draw a Digit (In-Browser Inference)</h2>
+
+      <div class="draw-container">
+        <canvas id="draw-pad" width="160" height="160"></canvas>
+        <div style="display: flex; gap: var(--space-1); width: 100%;">
+          <button id="clear-btn" class="studio-btn" style="flex: 1;">Clear</button>
+          <button id="classify-btn" class="studio-btn primary" style="flex: 1;">Predict</button>
         </div>
+        <div class="pred-result" id="pred-result">Prediction: &mdash;</div>
       </div>
 
-      <!-- Selected Sample Inspector -->
-      <div class="panel">
-        <h2>Hover / Click Point Inspector</h2>
+      <div class="panel-group">
+        <label>Selected Manifold Point</label>
         <div class="inspect-box">
           <canvas id="sample-canvas" width="8" height="8"></canvas>
           <div class="sample-meta" id="sample-meta">
@@ -234,18 +160,35 @@
         </div>
       </div>
 
-      <!-- Under The Hood Panel -->
-      <div class="panel">
-        <button class="hood-toggle-btn" id="hood-toggle">Under The Hood &darr;</button>
-        <div id="hood-content" hidden>
-          <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); margin-bottom: 8px;">
-            Confusion Matrix (10 &times; 10 Holdout Test Evaluation):
-          </div>
+      <div style="margin-top: var(--space-1);">
+        <button id="hood-toggle" class="studio-btn" style="width: 100%;">Inspect Evaluation Matrix</button>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Collapsible Under The Hood Drawer -->
+  <section class="under-the-hood">
+    <div id="hood-content" class="hood-details" hidden style="margin-bottom: var(--space-3); padding: var(--space-3);">
+      <h3 style="font-size: 13px; font-weight: 600; text-transform: uppercase; color: var(--accent); margin-bottom: var(--space-2);">
+        Architecture &amp; Confusion Matrix
+      </h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); align-items: start;">
+        <div>
+          <h4 style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px;">Pipeline Architecture</h4>
+          <pre class="hood-code"><code>1. scikit-learn load_digits (1,797 samples, 64 features)
+2. StandardScaler + LogisticRegression (L2 penalty)
+3. Measured Test Accuracy: 96.94% on 20% holdout split
+4. t-SNE 2D manifold projection (Perplexity=30, Iter=1000)
+5. Export model_weights.json (Coefficients + Intercepts)
+6. Pure JavaScript inference matrix-vector multiplication</code></pre>
+        </div>
+        <div>
+          <h4 style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px;">10&times;10 Holdout Confusion Matrix</h4>
           <div class="conf-matrix-grid" id="conf-matrix"></div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
   <script src="app.js"></script>
 </body>
