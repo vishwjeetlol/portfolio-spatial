@@ -1,0 +1,13 @@
+{
+  "totalEvents": 2010,
+  "exportedEvents": 1200,
+  "maxMagnitude": 7.7,
+  "minMagnitude": 2.45,
+  "avgMagnitude": 3.9,
+  "maxDepthKm": 642.6,
+  "minDepthKm": -3.2,
+  "avgDepthKm": 52.2,
+  "earliestDate": "2026-09-26",
+  "latestDate": "2026-10-26",
+  "source": "USGS (United States Geological Survey) Keyless Public GeoJSON Feed"
+}

@@ -24,3 +24,5 @@ renders/raw/
 .vercel/
 .vercel
 .env*
+.venv/
+**/.venv/

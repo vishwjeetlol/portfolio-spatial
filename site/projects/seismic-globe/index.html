@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seismic Globe // USGS Real-time 30-Day Earthquake Visualizer</title>
+  <style>
+    :root {
+      --bg: #090a0f;
+      --surface: rgba(18, 21, 31, 0.85);
+      --border: rgba(255, 255, 255, 0.12);
+      --text: #f1f3f5;
+      --muted: #8e95a0;
+      --accent: #5ce1e6;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: "SF Mono", Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+    #globe-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: grab;
+    }
+    #globe-canvas:active { cursor: grabbing; }
+
+    /* Top HUD */
+    .hud-header {
+      position: absolute;
+      top: 20px;
+      left: 24px;
+      right: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .hud-badge {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      border-radius: 9999px;
+      padding: 6px 16px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--text);
+      pointer-events: auto;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .badge-tag {
+      background: rgba(92, 225, 230, 0.15);
+      color: var(--accent);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+    }
+
+    /* Floating Controls Card */
+    .controls-card {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      width: 320px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      -webkit-backdrop-filter: blur(24px);
+      backdrop-filter: blur(24px);
+      border-radius: 16px;
+      padding: 20px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .control-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    label {
+      font-size: 0.78rem;
+      font-family: var(--font-mono);
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+    }
+    input[type="range"] {
+      width: 100%;
+      background: #1e2333;
+      accent-color: var(--accent);
+    }
+    .legend {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 4px; }
+
+    /* Under The Hood Drawer */
+    .hood-btn {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      padding: 8px 16px;
+      border-radius: 9999px;
+      cursor: pointer;
+      z-index: 20;
+    }
+    .hood-panel {
+      position: absolute;
+      top: 70px;
+      right: 24px;
+      width: 380px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      -webkit-backdrop-filter: blur(24px);
+      backdrop-filter: blur(24px);
+      border-radius: 16px;
+      padding: 20px;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .hood-panel[hidden] { display: none; }
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      font-family: var(--font-mono);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 4px 0;
+    }
+    .stat-val { color: var(--accent); }
+    .pipeline-diagram {
+      background: #0d1017;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      line-height: 1.4;
+      color: var(--muted);
+    }
+
+    /* Tooltip */
+    #tooltip {
+      position: absolute;
+      pointer-events: none;
+      background: rgba(14, 17, 26, 0.92);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      color: #fff;
+      display: none;
+      z-index: 50;
+      white-space: nowrap;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+</head>
+<body>
+  <div class="hud-header">
+    <div class="hud-badge">
+      <span>SEISMIC GLOBE // 30-DAY USGS EARTHQUAKE FEED</span>
+      <span class="badge-tag">Self-initiated project</span>
+    </div>
+  </div>
+
+  <button class="hood-btn" id="toggle-hood">Under The Hood &darr;</button>
+
+  <div class="hood-panel" id="hood-panel" hidden>
+    <h3 style="font-size: 0.95rem; color: var(--accent);">Pipeline &amp; Summary Stats</h3>
+    <div class="pipeline-diagram">
+USGS Public Feed (GeoJSON)
+        &darr;
+Python ETL (pandas, requests)
+[Clean nulls, filter M&ge;2.5, depth parse]
+        &darr;
+Static earthquakes.json (1,200 pts)
+        &darr;
+Three.js Spherical Coordinates &amp; Instanced Mesh
+    </div>
+    <div id="stats-container"></div>
+  </div>
+
+  <div class="controls-card">
+    <div class="card-title">
+      <span>Filter &amp; Telemetry</span>
+      <span style="font-size:0.75rem; color:var(--accent);" id="active-count">0 events</span>
+    </div>
+    <div class="control-row">
+      <label for="mag-filter">Min Magnitude: <span id="mag-val">3.0</span></label>
+      <input type="range" id="mag-filter" min="2.5" max="7.0" step="0.1" value="3.0">
+    </div>
+    <div class="control-row">
+      <label for="time-filter">Window: <span id="time-val">30 Days</span></label>
+      <input type="range" id="time-filter" min="1" max="30" step="1" value="30">
+    </div>
+    <div class="legend">
+      <span><span class="dot" style="background:#5ce1e6;"></span>&lt;30km</span>
+      <span><span class="dot" style="background:#bdff52;"></span>30-100km</span>
+      <span><span class="dot" style="background:#cf005e;"></span>&gt;100km</span>
+    </div>
+  </div>
+
+  <div id="tooltip"></div>
+  <canvas id="globe-canvas"></canvas>
+
+  <script src="app.js"></script>
+</body>
+</html>
