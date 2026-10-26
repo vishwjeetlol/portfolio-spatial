@@ -98,14 +98,12 @@ function initHeroStage() {
     });
   }
 
-  // Hero City Chip Quick Philately Navigation
+  // Quick City Navigation (if any present)
   document.querySelectorAll<HTMLButtonElement>('.hero-city-chip').forEach(chip => {
     chip.addEventListener('click', () => {
       const cityId = chip.getAttribute('data-city');
-      if (cityId) {
-        if (coverplayInstance) {
-          coverplayInstance.goToCity(cityId);
-        }
+      if (cityId && coverplayInstance) {
+        coverplayInstance.goToCity(cityId);
         sound.playStampThump();
         const coverplaySection = document.getElementById('coverplay');
         if (coverplaySection) {

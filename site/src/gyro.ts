@@ -11,7 +11,6 @@ export class GyroscopeScene {
   private ringInner!: THREE.Mesh;
   private core!: THREE.Mesh;
   private coreLight!: THREE.PointLight;
-  private particleCloud!: THREE.Points;
 
   private targetTiltX: number = 0;
   private targetTiltY: number = 0;
@@ -54,46 +53,46 @@ export class GyroscopeScene {
       this.renderer.setSize(width, height);
       this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-      // 24k Bombay Gold Material for Outer Ring
-      const goldMat = new THREE.MeshStandardMaterial({
-        color: 0xffb703,
-        metalness: 0.96,
-        roughness: 0.18
-      });
-
-      // Electric Rani Pink Material for Mid Ring
-      const raniMat = new THREE.MeshStandardMaterial({
-        color: 0xff007f,
-        metalness: 0.92,
+      // Aerospace Titanium Outer Ring
+      const titaniumMat = new THREE.MeshStandardMaterial({
+        color: 0x3a3e47,
+        metalness: 0.94,
         roughness: 0.22
       });
 
-      // Peacock Cyan Material for Inner Ring
-      const peacockMat = new THREE.MeshStandardMaterial({
-        color: 0x00f0ff,
-        metalness: 0.95,
-        roughness: 0.16
+      // Warm Champagne Brass Mid Ring
+      const brassMat = new THREE.MeshStandardMaterial({
+        color: 0xc8a265,
+        metalness: 0.92,
+        roughness: 0.24
       });
 
-      // Refractive Optical Glass Core Material
+      // Polished Platinum-Silver Inner Ring
+      const platinumMat = new THREE.MeshStandardMaterial({
+        color: 0xe8edf2,
+        metalness: 0.96,
+        roughness: 0.14
+      });
+
+      // Refractive Optical Crystal Core
       const glassMat = new THREE.MeshPhysicalMaterial({
         color: 0xffffff,
-        transmission: 0.96,
+        transmission: 0.98,
         opacity: 1,
         transparent: true,
-        roughness: 0.05,
-        ior: 1.55,
-        reflectivity: 0.95
+        roughness: 0.04,
+        ior: 1.52,
+        reflectivity: 0.9
       });
 
       // Ring Geometries
-      this.ringOuter = new THREE.Mesh(new THREE.TorusGeometry(2.4, 0.08, 24, 80), goldMat);
-      this.ringMid = new THREE.Mesh(new THREE.TorusGeometry(1.8, 0.07, 20, 64), raniMat);
-      this.ringInner = new THREE.Mesh(new THREE.TorusGeometry(1.2, 0.06, 20, 64), peacockMat);
+      this.ringOuter = new THREE.Mesh(new THREE.TorusGeometry(2.4, 0.08, 24, 80), titaniumMat);
+      this.ringMid = new THREE.Mesh(new THREE.TorusGeometry(1.8, 0.07, 20, 64), brassMat);
+      this.ringInner = new THREE.Mesh(new THREE.TorusGeometry(1.2, 0.06, 20, 64), platinumMat);
       this.core = new THREE.Mesh(new THREE.IcosahedronGeometry(0.65, 3), glassMat);
 
-      // Glowing Inner Core Point Light
-      this.coreLight = new THREE.PointLight(0xffa500, 3.5, 8);
+      // Subtle Warm Core Illumination
+      this.coreLight = new THREE.PointLight(0xffecd1, 2.2, 6);
       this.scene.add(this.coreLight);
 
       this.scene.add(this.ringOuter);
@@ -101,63 +100,16 @@ export class GyroscopeScene {
       this.scene.add(this.ringInner);
       this.scene.add(this.core);
 
-      // Procedural Floating Golden & Cyan Stardust Particle Field (400 points)
-      const particleCount = 400;
-      const particleGeo = new THREE.BufferGeometry();
-      const positions = new Float32Array(particleCount * 3);
-      const colors = new Float32Array(particleCount * 3);
-
-      const colorPalette = [
-        new THREE.Color(0xffb703), // 24k Gold
-        new THREE.Color(0xff007f), // Rani Pink
-        new THREE.Color(0x00f0ff), // Peacock Cyan
-        new THREE.Color(0xffffff)  // Diamond Starlight
-      ];
-
-      for (let i = 0; i < particleCount; i++) {
-        // Spherical distribution around the gyroscope
-        const radius = 1.8 + Math.random() * 3.2;
-        const theta = Math.random() * Math.PI * 2;
-        const phi = Math.acos(Math.random() * 2 - 1);
-
-        positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
-        positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
-        positions[i * 3 + 2] = radius * Math.cos(phi);
-
-        const chosenColor = colorPalette[Math.floor(Math.random() * colorPalette.length)];
-        colors[i * 3] = chosenColor.r;
-        colors[i * 3 + 1] = chosenColor.g;
-        colors[i * 3 + 2] = chosenColor.b;
-      }
-
-      particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      particleGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-      const particleMat = new THREE.PointsMaterial({
-        size: 0.06,
-        vertexColors: true,
-        transparent: true,
-        opacity: 0.85,
-        blending: THREE.AdditiveBlending
-      });
-
-      this.particleCloud = new THREE.Points(particleGeo, particleMat);
-      this.scene.add(this.particleCloud);
-
-      // Studio Lighting with Indian Pop-Futurism Spectrum
-      const light1 = new THREE.DirectionalLight(0xffb703, 3.2); // Warm 24k Gold key light
-      light1.position.set(6, 8, 6);
+      // Architectural Studio Lighting
+      const light1 = new THREE.DirectionalLight(0xfff8ee, 2.6);
+      light1.position.set(5, 8, 5);
       this.scene.add(light1);
 
-      const light2 = new THREE.DirectionalLight(0xff007f, 2.4); // Vivid Rani Pink rim light
-      light2.position.set(-6, -4, 4);
+      const light2 = new THREE.DirectionalLight(0xd1e0ff, 1.4);
+      light2.position.set(-6, -4, -3);
       this.scene.add(light2);
 
-      const light3 = new THREE.DirectionalLight(0x00f0ff, 2.0); // Peacock Cyan underfill
-      light3.position.set(0, -6, -4);
-      this.scene.add(light3);
-
-      const ambient = new THREE.AmbientLight(0x181028, 2.2); // Rich Midnight Indigo ambient
+      const ambient = new THREE.AmbientLight(0x0f1115, 1.8);
       this.scene.add(ambient);
 
       this.bindEvents();
@@ -292,19 +244,14 @@ export class GyroscopeScene {
       this.ringMid.rotation.x += this.dragVelocityY;
     }
 
-    // Continuous ring differential spin & kinetic stardust drift
-    this.ringOuter.rotation.z += 0.003;
-    this.ringMid.rotation.y += 0.007;
-    this.ringInner.rotation.x += 0.012;
-    this.core.rotation.y += 0.015;
-
-    if (this.particleCloud) {
-      this.particleCloud.rotation.y -= 0.0015;
-      this.particleCloud.rotation.x += 0.0008;
-    }
+    // Continuous ring differential spin
+    this.ringOuter.rotation.z += 0.0025;
+    this.ringMid.rotation.y += 0.005;
+    this.ringInner.rotation.x += 0.008;
+    this.core.rotation.y += 0.01;
 
     if (this.coreLight) {
-      this.coreLight.intensity = 2.8 + Math.sin(now * 0.004) * 0.8;
+      this.coreLight.intensity = 2.0 + Math.sin(now * 0.002) * 0.35;
     }
 
     this.scene.rotation.x = this.currentTiltX;
