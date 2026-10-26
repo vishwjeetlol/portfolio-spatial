@@ -195,6 +195,10 @@ function initModals() {
   const cvModal = document.getElementById('cv-modal');
   const closeCvBtn = document.getElementById('close-cv-modal');
 
+  const bragModal = document.getElementById('brag-modal');
+  const closeBragBtn = document.getElementById('close-brag-modal');
+  const copyBragBtn = document.getElementById('copy-brag-btn');
+
   document.querySelectorAll<HTMLElement>('.open-cv-modal-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -205,9 +209,38 @@ function initModals() {
     });
   });
 
+  document.querySelectorAll<HTMLElement>('.open-brag-modal-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (bragModal) {
+        bragModal.removeAttribute('hidden');
+        trapFocus(bragModal);
+      }
+    });
+  });
+
   if (closeCvBtn && cvModal) {
     closeCvBtn.addEventListener('click', () => {
       cvModal.setAttribute('hidden', 'true');
+    });
+  }
+
+  if (closeBragBtn && bragModal) {
+    closeBragBtn.addEventListener('click', () => {
+      bragModal.setAttribute('hidden', 'true');
+    });
+  }
+
+  if (copyBragBtn) {
+    copyBragBtn.addEventListener('click', () => {
+      const shareText = `Vishwjeet Chavan — Architectural Spatial Systems Portfolio & WebGL Cover Flow
+Engineered with Dembrandt design tokens, Genjutsu physical optics, and multi-device responsive calibration.
+Live at: https://portfolio-spatial-eight.vercel.app`;
+      navigator.clipboard.writeText(shareText).then(() => {
+        const orig = copyBragBtn.textContent;
+        copyBragBtn.textContent = '✓ Copied to Clipboard!';
+        setTimeout(() => { copyBragBtn.textContent = orig; }, 2000);
+      });
     });
   }
 
@@ -236,10 +269,11 @@ function initModals() {
       if (hireModal && !hireModal.hasAttribute('hidden')) hireModal.setAttribute('hidden', 'true');
       if (hoodModal && !hoodModal.hasAttribute('hidden')) hoodModal.setAttribute('hidden', 'true');
       if (cvModal && !cvModal.hasAttribute('hidden')) cvModal.setAttribute('hidden', 'true');
+      if (bragModal && !bragModal.hasAttribute('hidden')) bragModal.setAttribute('hidden', 'true');
     }
   });
 
-  [hireModal, hoodModal, cvModal].forEach((m) => {
+  [hireModal, hoodModal, cvModal, bragModal].forEach((m) => {
     if (m) {
       m.addEventListener('click', (e) => {
         if (e.target === m) m.setAttribute('hidden', 'true');

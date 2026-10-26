@@ -44,12 +44,18 @@
   padding: 0;
 }
 
+html {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
 body {
   background-color: var(--bg-base);
   color: var(--silver-100);
   font-family: var(--font-sans);
   min-height: 100vh;
   overflow-x: hidden;
+  max-width: 100vw;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -1746,7 +1752,7 @@ label {
 }
 
 .spec-label {
-  color: #64748b;
+  color: #94a3b8;
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.06em;
@@ -1773,7 +1779,7 @@ label {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.1em;
-  color: #64748b;
+  color: #94a3b8;
   margin-top: 14px;
   margin-bottom: 6px;
   text-transform: uppercase;
@@ -2011,6 +2017,7 @@ label {
   position: relative;
   z-index: 10;
   scroll-margin-top: 100px;
+  overflow: hidden;
 }
 
 .coverplay-header {
@@ -2040,13 +2047,14 @@ label {
 .coverflow-stage {
   position: relative;
   width: 100%;
+  max-width: 100%;
   height: 480px;
   perspective: 1100px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 24px;
-  overflow: visible;
+  overflow: hidden;
   touch-action: pan-y;
   cursor: grab;
   user-select: none;
@@ -2124,7 +2132,7 @@ label {
   font-family: var(--font-mono);
   font-weight: 800;
   font-size: 0.95rem;
-  color: var(--stamp-primary, #ea580c);
+  color: var(--stamp-deep, #111827);
 }
 
 .stamp-art-stage {
@@ -2220,7 +2228,8 @@ label {
 .stamp-pincode {
   font-family: var(--font-mono);
   font-size: 0.62rem;
-  color: #64748b;
+  color: #334155;
+  font-weight: 600;
 }
 
 .stamp-ornament {
@@ -2455,6 +2464,106 @@ label {
 
   .hero-city-ticker {
     width: calc(100vw - 48px);
+  }
+}
+
+/* ===================================================
+   LAUNCH SHOWCASE REEL MODAL (/BRAG ARTIFACT)
+   =================================================== */
+
+.brag-modal-surface {
+  max-width: 840px;
+  background: rgba(14, 16, 22, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  -webkit-backdrop-filter: blur(28px);
+  backdrop-filter: blur(28px);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.75);
+  border-radius: 16px;
+  padding: 32px;
+}
+
+.brag-modal-subtitle {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #94a3b8;
+  margin-bottom: 24px;
+}
+
+.brag-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.brag-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: all 180ms ease;
+}
+
+.brag-card:hover {
+  border-color: rgba(200, 162, 101, 0.35);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.brag-badge {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: #c8a265;
+  font-weight: 700;
+}
+
+.brag-card h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.brag-card p {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #94a3b8;
+}
+
+.brag-share-box {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.brag-share-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: #c8a265;
+  font-weight: 600;
+}
+
+.brag-share-code {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 10px 12px;
+  border-radius: 6px;
+  word-break: break-all;
+}
+
+@media (max-width: 640px) {
+  .brag-cards-grid {
+    grid-template-columns: 1fr;
   }
 }
 

@@ -57,7 +57,8 @@
       <a href="#philosophy" class="hud-nav-link">05. Philosophy</a>
       <a href="#systems" class="hud-nav-link">06. Systems</a>
       <button type="button" class="hud-nav-link open-cv-modal-btn" style="background:none;border:none;cursor:pointer;font-family:inherit;font-size:inherit;">07. CV</button>
-      <a href="/writing/" class="hud-nav-link">08. Notes</a>
+      <button type="button" class="hud-nav-link open-brag-modal-btn" style="background:none;border:none;cursor:pointer;font-family:inherit;font-size:inherit;color:#c8a265;">✦ Reel</button>
+      <a href="/writing/" class="hud-nav-link">09. Notes</a>
     </nav>
 
     <div class="hud-actions">
@@ -69,6 +70,10 @@
           <span class="sound-bar"></span>
         </div>
         <span id="sound-label">AUDIO ON</span>
+      </button>
+
+      <button type="button" class="hud-badge hover-pill open-brag-modal-btn desktop-only" aria-label="Open Launch Reel">
+        <span>✦ Launch Reel</span>
       </button>
 
       <div class="hud-badge desktop-only">
@@ -811,6 +816,53 @@
       </div>
       <div class="cv-doc-wrap">
         <iframe src="/cv/index.html" style="width: 100%; height: 75vh; border: none; border-radius: 8px;" title="Vishwjeet Chavan CV Document"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Interactive Project Launch Reel (/brag showcase) -->
+  <div class="modal-backdrop" id="brag-modal" role="dialog" aria-modal="true" aria-labelledby="brag-modal-title" hidden>
+    <div class="modal-surface brag-modal-surface">
+      <div class="modal-header">
+        <div>
+          <span class="section-tag" style="color: #c8a265;">LAUNCH SHOWCASE // /BRAG</span>
+          <h2 id="brag-modal-title" style="margin-top: 4px; font-size: 1.5rem; font-weight: 700; color: #fff;">Engineering Highlights &amp; Systems Reel</h2>
+        </div>
+        <button class="modal-close-btn" id="close-brag-modal" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body brag-modal-body">
+        <p class="brag-modal-subtitle">
+          Curated architectural breakdown of Vishwjeet Chavan's spatial creative technology portfolio. Built with zero slop, locked 60 FPS, and pure WebGL + Web Audio DSP.
+        </p>
+
+        <div class="brag-cards-grid">
+          <div class="brag-card">
+            <span class="brag-badge">01 // OPTICS</span>
+            <h3>Physical 3D Apparatus</h3>
+            <p>Three.js gyroscope with aerospace titanium, warm champagne brass, and a physical refractive crystal core responding with pointer inertia.</p>
+          </div>
+          <div class="brag-card">
+            <span class="brag-badge">02 // PHILATELY</span>
+            <h3>3D Apple Cover Flow</h3>
+            <p>Classic iTunes perspective carousel reimagined with bespoke Indian postal art, PIN codes, and live rubber postmark physics across 8 cities.</p>
+          </div>
+          <div class="brag-card">
+            <span class="brag-badge">03 // LABS</span>
+            <h3>6 Flagship Creative Labs</h3>
+            <p>Procedural liquid chrome, gravitational physics, particle swarms, cyber tunnels, vinyl audio scratchers, and generative origami.</p>
+          </div>
+          <div class="brag-card">
+            <span class="brag-badge">04 // AUDIO DSP</span>
+            <h3>100% Synthesized Audio</h3>
+            <p>Zero external MP3/WAV files. Pure mathematical Web Audio oscillators, biquad filters, and noise transients responding with zero latency.</p>
+          </div>
+        </div>
+
+        <div class="brag-share-box">
+          <span class="brag-share-label">SHAREABLE SUMMARY:</span>
+          <code class="brag-share-code">Vishwjeet Chavan — Spatial Creative Engineering: 60 FPS Three.js Optical Gyroscope + 3D Apple Cover Flow Indian Philately + 6 WebGL Labs + Pure Web Audio DSP. https://portfolio-spatial-eight.vercel.app</code>
+          <button type="button" class="hero-btn-primary" id="copy-brag-btn" style="padding: 10px 20px; font-size: 0.82rem; cursor: pointer;">📋 Copy Launch Summary</button>
+        </div>
       </div>
     </div>
   </div>
