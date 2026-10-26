@@ -14,7 +14,7 @@
   <meta property="og:title" content="Vishwjeet Chavan — Creative Developer · Interactive Designer">
   <meta property="og:description" content="Turning ideas into distinctive digital experiences: custom web development, interactive design, creative coding, and visual storytelling.">
   <meta property="og:site_name" content="Vishwjeet Chavan Studio">
-  <meta property="og:image" content="/img/gyro-poster.png">
+  <meta property="og:image" content="/projects/liquid-chrome/preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
@@ -22,7 +22,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Vishwjeet Chavan — Creative Developer · Interactive Designer">
   <meta name="twitter:description" content="High-fidelity 3D, physics-driven interfaces, and creative digital experiences.">
-  <meta name="twitter:image" content="/img/gyro-poster.png">
+  <meta name="twitter:image" content="/projects/liquid-chrome/preview.png">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -48,18 +48,14 @@
       <span class="hud-brand">VISHWJEET CHAVAN // CREATIVE DEVELOPER</span>
     </div>
 
-    <!-- Mode Selector -->
-    <div class="mode-switcher desktop-only" role="tablist" aria-label="Experience Mode Switcher">
-      <button class="mode-toggle-btn active" data-mode="panorama" role="tab" aria-selected="true">
-        🌐 Panorama World
-      </button>
-      <button class="mode-toggle-btn" data-mode="gyro" role="tab" aria-selected="false">
-        🧭 3D Gyroscope
-      </button>
-      <button class="mode-toggle-btn" data-mode="manifesto" role="tab" aria-selected="false">
-        📖 Manifesto
-      </button>
-    </div>
+    <!-- Quick Jump Nav -->
+    <nav class="hud-nav desktop-only" aria-label="Main Navigation">
+      <a href="#hero" class="hud-nav-link">01. Studio</a>
+      <a href="#exhibition" class="hud-nav-link">02. Exhibitions</a>
+      <a href="#philosophy" class="hud-nav-link">03. Philosophy</a>
+      <a href="#systems" class="hud-nav-link">04. Systems</a>
+      <a href="/writing/" class="hud-nav-link">05. Notes</a>
+    </nav>
 
     <div class="hud-actions">
       <!-- Procedural Sound Toggle -->
@@ -77,171 +73,377 @@
       </div>
 
       <a href="https://github.com/vishwjeetlol" target="_blank" rel="noopener noreferrer" class="hud-badge hover-pill" aria-label="GitHub Profile">
-        <span>GitHub</span>
+        <span>GitHub ↗</span>
       </a>
     </div>
   </header>
 
-  <!-- STAGE 1: Interactive Panorama Stage (Default) -->
-  <section class="panorama-stage" id="panorama-stage" aria-label="Interactive Panorama Exploration">
-    <canvas id="panorama-canvas" role="img" aria-label="Horizontally explorable interactive world canvas with parallax depth and stations"></canvas>
-    
-    <div class="panorama-controls-bar">
-      <div class="station-jump-group">
-        <button class="station-jump-btn" data-offset="0">💧 Liquid Chrome</button>
-        <button class="station-jump-btn" data-offset="540">💥 Physics Playground</button>
-        <button class="station-jump-btn" data-offset="1080">✨ Bioluminescent Swarm</button>
-        <button class="station-jump-btn" data-offset="1620">🌌 Cyber Tunnel</button>
-        <button class="station-jump-btn" data-offset="2160">🎧 Vinyl Turntable</button>
-        <button class="station-jump-btn" data-offset="2700">🪁 Cloth &amp; Origami</button>
-      </div>
-      <div class="hud-badge desktop-only" style="font-size: 0.72rem;">
-        <span>Drag to Explore &bull; Wheel to Pan</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- STAGE 2: 3D Gyroscope Stage (Toggleable) -->
-  <section class="hero-stage" id="gyro-stage" aria-label="3D Interactive Gyroscope" hidden>
+  <!-- HERO SECTION: Full-Bleed 3D Kinetic Stage -->
+  <section class="hero-stage" id="hero" aria-label="Interactive 3D Kinetic Hero Stage">
     <div class="hero-canvas-wrap">
-      <canvas id="gyro-canvas" role="img" aria-label="Interactive 3D brushed-titanium gyroscope with optical refractive glass core"></canvas>
-      <noscript>
-        <img src="/img/gyro-poster.png" alt="3D Gyroscope Visual" class="hero-poster-fallback">
-      </noscript>
+      <canvas id="gyro-canvas" role="img" aria-label="Interactive 3D titanium gyroscope with optical refractive glass core"></canvas>
     </div>
-    <div class="hero-instruction desktop-only" aria-hidden="true">
-      &larr; Tilt Left for Code &bull; Drag to Spin with Inertia &bull; Tilt Right for Craft &rarr;
+
+    <!-- Hero Display Typography Overlay -->
+    <div class="hero-text-overlay">
+      <div class="hero-badge-pill">
+        <span class="pulse-marker"></span>
+        <span>CREATIVE DEVELOPMENT &bull; SPATIAL SHADERS &bull; AUDIO DSP</span>
+      </div>
+      <h1 class="hero-display-title">
+        THE BROWSER IS A<br>
+        <span class="glow-gradient-text">CREATIVE MEDIUM.</span><br>
+        <span class="hero-serif-sub">NOT A FILING CABINET.</span>
+      </h1>
+      <p class="hero-lead">
+        Independent creative developer working at the intersection of technology, physical optics, and interactive storytelling. Turning digital spaces into experiences that people actually remember.
+      </p>
+      <div class="hero-cta-group">
+        <a href="#exhibition" class="hero-btn-primary">
+          <span>Explore 6 Flagship Labs ↓</span>
+        </a>
+        <button id="hero-pulse-btn" class="hero-btn-secondary">
+          <span>⚡ Audio Impulse</span>
+        </button>
+      </div>
     </div>
   </section>
 
-  <!-- Bio & Core Statement (Directly from Vishwjeet's Philosophy) -->
-  <section class="bio-section" aria-label="Bio and Core Philosophy">
-    <p class="bio-text">
-      Independent creative developer working at the intersection of technology, design, and interactive storytelling. A website doesn't have to be a static place where information lives—it can be an experience in itself. Functionality and personality must coexist.
-    </p>
-  </section>
+  <!-- FLAGSHIP EXHIBITION: 6 High-Tech Creative Coding Laboratories -->
+  <section class="exhibition-section" id="exhibition" aria-label="Flagship Creative Coding Exhibition">
+    <div class="exhibition-header">
+      <div class="exhibition-header-top">
+        <span class="section-tag">SELECTED WORKS // 01 &ndash; 06</span>
+        <span class="badge-accent">AWARD-WINNING CREATIVE TECH</span>
+      </div>
+      <h2 class="section-hero-title">The Kinetic Laboratories</h2>
+      <p class="section-hero-desc">
+        Six original, uncompromised creative coding systems. Built with raw GLSL shaders, 3D rigid-body impulses, GPGPU curl noise vectors, volumetric raymarching, and real-time Web Audio DSP.
+      </p>
+    </div>
 
-  <!-- INTERACTIVE PLAYROOM: Real-Time Audio DSP Frequency Console -->
-  <section class="playroom-section" aria-label="Interactive Audio Synthesizer Dashboard">
-    <div class="playroom-card">
-      <div>
-        <span class="playroom-badge">Browser Web Audio API &bull; Zero External Audio Files</span>
-        <h2 class="playroom-title">Spatial Audio &amp; Harmonic Frequency Synthesizer</h2>
-        <p class="playroom-desc">
-          Demonstrating Vishwjeet's audio-tactile philosophy: rather than downloading static MP3 sound files, real-time spatial audio is generated directly via mathematical oscillator waveforms and biquad frequency filters in the browser. Test the live harmonic controls below.
-        </p>
-        <div class="playroom-actions">
-          <button class="playroom-btn" id="play-horn-btn">
-            <span>⚡ Trigger Sub-Bass Harmonic Blast</span>
-          </button>
-          <button class="playroom-btn secondary" id="play-rev-btn">
-            <span>🌊 Modulate FM Frequency Sweep</span>
-          </button>
-          <a href="/projects/vinyl-turntable/" class="playroom-btn secondary">
-            <span>🎧 Launch 3D Vinyl Turntable &rarr;</span>
+    <div class="exhibition-grid">
+      <!-- 01: Liquid Chrome -->
+      <article class="exhibition-portal" data-id="liquid-chrome">
+        <div class="portal-media-wrap">
+          <a href="/projects/liquid-chrome/" class="portal-link-img" aria-label="Launch Liquid Chrome">
+            <img src="/projects/liquid-chrome/preview.png" alt="Liquid Chrome Real-Time GPU Fluid Simulation" loading="eager" width="1440" height="900">
+            <div class="portal-overlay-lens">
+              <span class="lens-tag">ENTER LAB ↗</span>
+            </div>
           </a>
         </div>
-      </div>
+        <div class="portal-info">
+          <div class="portal-meta-line">
+            <span class="portal-num">01 // 06</span>
+            <span class="portal-badge">GLSL FLUID DYNAMICS</span>
+          </div>
+          <h3 class="portal-title">
+            <a href="/projects/liquid-chrome/">Liquid Chrome</a>
+          </h3>
+          <p class="portal-hook">&ldquo;Melting the browser with multi-octave surface tension waves and split-channel Fresnel chromatic dispersion.&rdquo;</p>
+          <p class="portal-desc">
+            Custom GPU vertex displacement field coupled with split-channel RGB refraction optics and procedural Web Audio wave reactivity.
+          </p>
+          <div class="portal-tags">
+            <span class="tag">WebGL</span>
+            <span class="tag">GLSL Shaders</span>
+            <span class="tag">Fresnel Optics</span>
+            <span class="tag">Web Audio API</span>
+          </div>
+          <div class="portal-actions">
+            <a href="/projects/liquid-chrome/" class="portal-btn-primary">Launch Interactive Lab ↗</a>
+            <button type="button" class="portal-btn-secondary hood-btn" data-id="liquid-chrome">Under The Hood</button>
+          </div>
+        </div>
+      </article>
 
-      <!-- Live Frequency Telemetry / Gauge -->
-      <div class="gauge-cluster">
-        <svg class="gauge-svg" viewBox="0 0 180 100">
-          <path d="M 20 90 A 70 70 0 0 1 160 90" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="8" stroke-linecap="round"/>
-          <path d="M 20 90 A 70 70 0 0 1 100 20" fill="none" stroke="#f4a228" stroke-width="8" stroke-linecap="round"/>
-          <line id="speedo-needle" class="needle" x1="90" y1="90" x2="90" y2="30" stroke="#f4a228" stroke-width="3" stroke-linecap="round"/>
-          <circle cx="90" cy="90" r="7" fill="#ffffff"/>
-        </svg>
-        <span class="gauge-label">Live Audio VU Telemetry</span>
-      </div>
+      <!-- 02: Physics Playground -->
+      <article class="exhibition-portal" data-id="physics-playground">
+        <div class="portal-media-wrap">
+          <a href="/projects/physics-playground/" class="portal-link-img" aria-label="Launch Physics Playground">
+            <img src="/projects/physics-playground/preview.png" alt="3D Physics Collision & Destruction Playground" loading="lazy" width="1440" height="900">
+            <div class="portal-overlay-lens">
+              <span class="lens-tag">ENTER LAB ↗</span>
+            </div>
+          </a>
+        </div>
+        <div class="portal-info">
+          <div class="portal-meta-line">
+            <span class="portal-num">02 // 06</span>
+            <span class="portal-badge">RIGID-BODY IMPULSES</span>
+          </div>
+          <h3 class="portal-title">
+            <a href="/projects/physics-playground/">Physics Playground</a>
+          </h3>
+          <p class="portal-hook">&ldquo;Tactile 3D rigid-body kinetic impulses you can throw, smash, and disintegrate in real time.&rdquo;</p>
+          <p class="portal-desc">
+            Lightweight analytical impulse engine handling up to 100 simultaneous bounding hulls at 60 FPS with radial inverse-square shockwaves.
+          </p>
+          <div class="portal-tags">
+            <span class="tag">Three.js</span>
+            <span class="tag">Rigid Body Physics</span>
+            <span class="tag">Impulse Solver</span>
+            <span class="tag">Destruction</span>
+          </div>
+          <div class="portal-actions">
+            <a href="/projects/physics-playground/" class="portal-btn-primary">Launch Interactive Lab ↗</a>
+            <button type="button" class="portal-btn-secondary hood-btn" data-id="physics-playground">Under The Hood</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 03: Bioluminescent Swarm -->
+      <article class="exhibition-portal" data-id="particle-swarm">
+        <div class="portal-media-wrap">
+          <a href="/projects/particle-swarm/" class="portal-link-img" aria-label="Launch Bioluminescent Swarm">
+            <img src="/projects/particle-swarm/preview.png" alt="Bioluminescent Swarm 100K Particle Attractors" loading="lazy" width="1440" height="900">
+            <div class="portal-overlay-lens">
+              <span class="lens-tag">ENTER LAB ↗</span>
+            </div>
+          </a>
+        </div>
+        <div class="portal-info">
+          <div class="portal-meta-line">
+            <span class="portal-num">03 // 06</span>
+            <span class="portal-badge">100K GPGPU PARTICLES</span>
+          </div>
+          <h3 class="portal-title">
+            <a href="/projects/particle-swarm/">Bioluminescent Swarm</a>
+          </h3>
+          <p class="portal-hook">&ldquo;100,000 living particles breathing through Lorenz attractor equations and 3D curl noise turbulence.&rdquo;</p>
+          <p class="portal-desc">
+            Vertex shader topology morphing between DNA double helices, galaxy spiral vortexes, and chaotic attractors with real-time Web Audio FFT analysis.
+          </p>
+          <div class="portal-tags">
+            <span class="tag">GPGPU</span>
+            <span class="tag">Curl Noise</span>
+            <span class="tag">Lorenz Attractor</span>
+            <span class="tag">Point Sprites</span>
+          </div>
+          <div class="portal-actions">
+            <a href="/projects/particle-swarm/" class="portal-btn-primary">Launch Interactive Lab ↗</a>
+            <button type="button" class="portal-btn-secondary hood-btn" data-id="particle-swarm">Under The Hood</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 04: Cyber Tunnel 4D -->
+      <article class="exhibition-portal" data-id="cyber-tunnel">
+        <div class="portal-media-wrap">
+          <a href="/projects/cyber-tunnel/" class="portal-link-img" aria-label="Launch Cyber Tunnel 4D">
+            <img src="/projects/cyber-tunnel/preview.png" alt="Cyber Tunnel 4D Volumetric Raymarching" loading="lazy" width="1440" height="900">
+            <div class="portal-overlay-lens">
+              <span class="lens-tag">ENTER LAB ↗</span>
+            </div>
+          </a>
+        </div>
+        <div class="portal-info">
+          <div class="portal-meta-line">
+            <span class="portal-num">04 // 06</span>
+            <span class="portal-badge">VOLUMETRIC RAYMARCHING</span>
+          </div>
+          <h3 class="portal-title">
+            <a href="/projects/cyber-tunnel/">Cyber Tunnel 4D</a>
+          </h3>
+          <p class="portal-hook">&ldquo;Pure fragment shader Signed Distance Field sphere tracing into an infinite non-Euclidean Gyroid lattice.&rdquo;</p>
+          <p class="portal-desc">
+            Camera look-around steering, volumetric neon fog emission along ray steps, and real-time hyperdrive warp mechanics with zero polygon geometry.
+          </p>
+          <div class="portal-tags">
+            <span class="tag">GLSL Fragment Shader</span>
+            <span class="tag">SDF Math</span>
+            <span class="tag">Sphere Tracing</span>
+            <span class="tag">Raymarching</span>
+          </div>
+          <div class="portal-actions">
+            <a href="/projects/cyber-tunnel/" class="portal-btn-primary">Launch Interactive Lab ↗</a>
+            <button type="button" class="portal-btn-secondary hood-btn" data-id="cyber-tunnel">Under The Hood</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 05: Analog Deck MK-II -->
+      <article class="exhibition-portal" data-id="vinyl-turntable">
+        <div class="portal-media-wrap">
+          <a href="/projects/vinyl-turntable/" class="portal-link-img" aria-label="Launch Analog Deck MK-II">
+            <img src="/projects/vinyl-turntable/preview.png" alt="Analog Deck MK-II 3D Turntable & Scratch DSP" loading="lazy" width="1440" height="900">
+            <div class="portal-overlay-lens">
+              <span class="lens-tag">ENTER LAB ↗</span>
+            </div>
+          </a>
+        </div>
+        <div class="portal-info">
+          <div class="portal-meta-line">
+            <span class="portal-num">05 // 06</span>
+            <span class="portal-badge">3D RIGGING &amp; DSP</span>
+          </div>
+          <h3 class="portal-title">
+            <a href="/projects/vinyl-turntable/">Analog Deck MK-II</a>
+          </h3>
+          <p class="portal-hook">&ldquo;Tactile vinyl scratching mapped to mouse velocity with real-time Doppler pitch bending and platter momentum.&rdquo;</p>
+          <p class="portal-desc">
+            Procedural 3D turntable model, draggable tonearm kinematics, groove crackle noise generator, and built-in boom-bap rhythm sequencer with zero audio files.
+          </p>
+          <div class="portal-tags">
+            <span class="tag">Three.js</span>
+            <span class="tag">Web Audio API</span>
+            <span class="tag">Scratch DSP</span>
+            <span class="tag">Mechanical Physics</span>
+          </div>
+          <div class="portal-actions">
+            <a href="/projects/vinyl-turntable/" class="portal-btn-primary">Launch Interactive Lab ↗</a>
+            <button type="button" class="portal-btn-secondary hood-btn" data-id="vinyl-turntable">Under The Hood</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 06: Cloth & Origami -->
+      <article class="exhibition-portal" data-id="cloth-origami">
+        <div class="portal-media-wrap">
+          <a href="/projects/cloth-origami/" class="portal-link-img" aria-label="Launch Cloth & Origami">
+            <img src="/projects/cloth-origami/preview.png" alt="Cloth & Origami 3D Verlet Soft-Body Simulation" loading="lazy" width="1440" height="900">
+            <div class="portal-overlay-lens">
+              <span class="lens-tag">ENTER LAB ↗</span>
+            </div>
+          </a>
+        </div>
+        <div class="portal-info">
+          <div class="portal-meta-line">
+            <span class="portal-num">06 // 06</span>
+            <span class="portal-badge">VERLET SOFT-BODY DYNAMICS</span>
+          </div>
+          <h3 class="portal-title">
+            <a href="/projects/cloth-origami/">Cloth &amp; Origami</a>
+          </h3>
+          <p class="portal-hook">&ldquo;2,500 particle soft-body mass-spring grid with interactive knife slicing and origami folding constraints.&rdquo;</p>
+          <p class="portal-desc">
+            Time-reversible Verlet numerical integration, aerodynamic wind vector fields, and real-time dynamic mesh tearing under mouse knife strokes.
+          </p>
+          <div class="portal-tags">
+            <span class="tag">Verlet Integration</span>
+            <span class="tag">Position-Based Dynamics</span>
+            <span class="tag">Spring Physics</span>
+            <span class="tag">Mesh Tearing</span>
+          </div>
+          <div class="portal-actions">
+            <a href="/projects/cloth-origami/" class="portal-btn-primary">Launch Interactive Lab ↗</a>
+            <button type="button" class="portal-btn-secondary hood-btn" data-id="cloth-origami">Under The Hood</button>
+          </div>
+        </div>
+      </article>
     </div>
   </section>
 
-  <!-- Search & Segmented Switch -->
-  <section class="controls-section" aria-label="Project Controls and Filter">
-    <div class="search-bar-wrap">
-      <input type="search" id="project-search" placeholder="Filter 12 projects by stack, keyword, or architecture..." aria-label="Search projects">
-    </div>
-    <div class="mobile-switcher mobile-only" role="tablist" aria-label="Discipline Switcher">
-      <button class="switch-btn active" role="tab" aria-selected="true" id="tab-code" data-target="code">Code</button>
-      <button class="switch-btn" role="tab" aria-selected="false" id="tab-craft" data-target="craft">Craft</button>
-    </div>
-  </section>
-
-  <!-- Spatial Dual-Split Project Showcase -->
-  <main class="dual-split-container" id="projects-container">
-    <!-- Left Column: CODE -->
-    <div class="split-column col-code" id="view-code" role="tabpanel" aria-labelledby="tab-code">
-      <div class="col-sticky-header">
-        <h2 class="col-heading">Code // Systems</h2>
-        <span class="col-sub">Physics Engines &bull; Verlet Dynamics &bull; Neural Networks</span>
-      </div>
-      <div class="cards-stack" id="cards-code">
-        <!-- Rendered dynamically from projects.json -->
-      </div>
-    </div>
-
-    <!-- Right Column: CRAFT -->
-    <div class="split-column col-craft" id="view-craft" role="tabpanel" aria-labelledby="tab-craft">
-      <div class="col-sticky-header">
-        <h2 class="col-heading">Craft // Realtime &amp; Shaders</h2>
-        <span class="col-sub">GPU Shaders &bull; Raymarching &bull; 3D Audio DSP</span>
-      </div>
-      <div class="cards-stack" id="cards-craft">
-        <!-- Rendered dynamically from projects.json -->
-      </div>
-    </div>
-  </main>
-
-  <!-- STAGE 3: The Editorial Manifesto Section -->
-  <section class="manifesto-section" id="manifesto-section" aria-label="Design and Creative Philosophy Manifesto">
-    <div class="manifesto-header">
-      <span class="tag">01 &ndash; 10 // PHILOSOPHICAL MANIFESTO</span>
-      <h2 class="manifesto-lead">
-        The browser is a creative medium, not a filing cabinet.<br>
-        <em>Functionality and personality should coexist.</em>
+  <!-- PHILOSOPHY SECTION: The Contrast Manifesto -->
+  <section class="philosophy-section" id="philosophy" aria-label="Creative Philosophy Manifesto">
+    <div class="philosophy-lead-wrap">
+      <span class="section-tag">01 &ndash; 04 // THE CONTRAST</span>
+      <h2 class="philosophy-hero-quote">
+        &ldquo;Memorable brands <em>make people feel</em>.<br>
+        Forgettable brands <em>list features</em>.&rdquo;
       </h2>
+      <p class="philosophy-lead-sub">
+        The browser is a canvas for imagination. Here is how I think about digital design, interactive craft, and engineering.
+      </p>
     </div>
 
-    <div class="manifesto-grid">
-      <div class="manifesto-block">
-        <span class="manifesto-num">01. WHO I AM</span>
-        <h3 class="manifesto-title">Thinking Beyond the Page</h3>
-        <p class="manifesto-body">
-          Rather than approaching digital projects as a collection of pages, sections, and buttons, Vish thinks about how the entire experience comes together. What makes someone curious enough to keep exploring? How can an interaction communicate a brand's personality better than another paragraph of text? How can sound, motion, and unexpected details turn an ordinary website into something people actually remember?
+    <div class="philosophy-card-grid">
+      <div class="philosophy-card">
+        <span class="p-num">01. STORYTELLING OVER SPECS</span>
+        <h3 class="p-title">Telling a Story, Not Listing Facts</h3>
+        <p class="p-body">
+          Commodity websites list specs like a technical jacket: "5 buttons, React, 3 columns". Memorable experiences sell an ethos—adventure, beauty, curiosity, and atmosphere.
         </p>
       </div>
 
-      <div class="manifesto-block">
-        <span class="manifesto-num">02. THE WAY I THINK</span>
-        <h3 class="manifesto-title">Connecting Design and Implementation</h3>
-        <p class="manifesto-body">
-          Vish approaches projects from the perspective of both a designer and a builder. The technical possibilities of a browser can influence a visual concept, while the visual concept determines how the underlying experience needs to be engineered. Not every project needs to be experimental, but every project should have a point of view.
+      <div class="philosophy-card">
+        <span class="p-num">02. EMOTION OVER INFORMATION</span>
+        <h3 class="p-title">Making People Feel Something</h3>
+        <p class="p-body">
+          Data gets filtered out; feeling sticks. An interactive fluid ripple or tactile vinyl scratching creates a playful emotional spark that visitors remember long after they close the tab.
         </p>
       </div>
 
-      <div class="manifesto-block">
-        <span class="manifesto-num">04. WHAT I BRING</span>
-        <h3 class="manifesto-title">Unifying Isolated Disciplines</h3>
-        <p class="manifesto-body">
-          From creative coding and custom navigation to real-time WebGL, 3D asset pipeline engineering, and pure browser Web Audio synthesis. The value lies in taking a concept beyond static mockups and translating it into a working, responsive, and robust digital environment.
+      <div class="philosophy-card">
+        <span class="p-num">03. ATMOSPHERE IS THE PRODUCT</span>
+        <h3 class="p-title">Sensory Experiential Design</h3>
+        <p class="p-body">
+          The difference between an atmospheric coffee sanctuary and a cold transaction window. Visual depth, spatial sound, and filmic lighting turn an ordinary visit into an encounter.
         </p>
       </div>
 
-      <div class="manifesto-block">
-        <span class="manifesto-num">07. KINDS OF PROJECTS</span>
-        <h3 class="manifesto-title">Where Personality Matters</h3>
-        <p class="manifesto-body">
-          Independent magazines and editorial publications, creative studios, cultural projects, fashion and emerging consumer brands, founders looking to give a product a distinctive digital identity, and clients who want interactive portfolios or unconventional personal websites.
+      <div class="philosophy-card">
+        <span class="p-num">04. PROVE COMPETENCE BY BUILDING</span>
+        <h3 class="p-title">Show, Don't Proclaim</h3>
+        <p class="p-body">
+          Don't plaster certificate badges and tell people to trust you. Build custom 60 FPS shaders, rigid-body physics engines, and sub-second builds that speak for themselves.
         </p>
       </div>
     </div>
+  </section>
 
-    <!-- Pull Quote Banner -->
-    <div class="manifesto-quote-banner">
-      <blockquote>
-        &ldquo;Vishwjeet Chavan is a creative developer who turns ideas into distinctive digital experiences, combining custom web development, interactive design, creative coding, and visual storytelling to build work that functions as well as it feels.&rdquo;
-      </blockquote>
-      <cite>&mdash; In One Sentence // Section 10</cite>
+  <!-- SECONDARY LABS: Systems & Experiments -->
+  <section class="secondary-labs-section" id="systems" aria-label="Experimental Systems and Optics">
+    <div class="labs-header">
+      <span class="section-tag">EXPERIMENTAL SYSTEMS // 07 &ndash; 12</span>
+      <h2 class="labs-title">Optics, Data &amp; Neural Systems</h2>
+    </div>
+
+    <div class="labs-grid">
+      <a href="/projects/material-lab/" class="lab-pill-card">
+        <div class="lab-pill-top">
+          <span class="lab-pill-badge">OPTICS</span>
+          <span class="lab-pill-arrow">↗</span>
+        </div>
+        <h4 class="lab-pill-title">Material Optics Lab</h4>
+        <p class="lab-pill-desc">Headless Blender procedural glass caustics &amp; physical refraction.</p>
+      </a>
+
+      <a href="/projects/glass-ui-lab/" class="lab-pill-card">
+        <div class="lab-pill-top">
+          <span class="lab-pill-badge">SPATIAL UI</span>
+          <span class="lab-pill-arrow">↗</span>
+        </div>
+        <h4 class="lab-pill-title">Glass UI Lab</h4>
+        <p class="lab-pill-desc">6 spatial components engineered with CSS 3D &amp; spring physics.</p>
+      </a>
+
+      <a href="/projects/motion-studies/" class="lab-pill-card">
+        <div class="lab-pill-top">
+          <span class="lab-pill-badge">KINETIC</span>
+          <span class="lab-pill-arrow">↗</span>
+        </div>
+        <h4 class="lab-pill-title">Motion Studies</h4>
+        <p class="lab-pill-desc">Kinetic typography &amp; harmonic particle vector unfolding.</p>
+      </a>
+
+      <a href="/projects/neural-playground/" class="lab-pill-card">
+        <div class="lab-pill-top">
+          <span class="lab-pill-badge">SYSTEMS</span>
+          <span class="lab-pill-arrow">↗</span>
+        </div>
+        <h4 class="lab-pill-title">Neural Playground</h4>
+        <p class="lab-pill-desc">Scratch multilayer perceptron with live backpropagation boundary.</p>
+      </a>
+
+      <a href="/projects/seismic-globe/" class="lab-pill-card">
+        <div class="lab-pill-top">
+          <span class="lab-pill-badge">SPATIAL DATA</span>
+          <span class="lab-pill-arrow">↗</span>
+        </div>
+        <h4 class="lab-pill-title">Seismic Globe 3D</h4>
+        <p class="lab-pill-desc">30-day USGS planetary hypocenters on interactive 3D globe.</p>
+      </a>
+
+      <a href="/projects/digit-atlas/" class="lab-pill-card">
+        <div class="lab-pill-top">
+          <span class="lab-pill-badge">MANIFOLD</span>
+          <span class="lab-pill-arrow">↗</span>
+        </div>
+        <h4 class="lab-pill-title">Digit Atlas</h4>
+        <p class="lab-pill-desc">2D t-SNE manifold explorer with sub-millisecond linear classifier.</p>
+      </a>
     </div>
   </section>
 
@@ -283,7 +485,7 @@
         <span class="dock-icon">&Xi;</span>
         <span>2. CV + GitHub</span>
       </a>
-      <a href="/writing" class="dock-btn">
+      <a href="/writing/" class="dock-btn">
         <span class="dock-icon">&Phi;</span>
         <span>3. Technical Notes</span>
       </a>

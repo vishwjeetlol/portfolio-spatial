@@ -58,9 +58,14 @@ async function testVercelDist() {
   await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
   await page.waitForTimeout(1000);
 
-  // Check how many project cards rendered
-  const cardCount = await page.locator('.project-card').count();
-  console.log(`Rendered project cards: ${cardCount}`);
+  // Check how many exhibition portals rendered
+  const portalCount = await page.locator('.exhibition-portal').count();
+  const labCount = await page.locator('.lab-pill-card').count();
+  console.log(`Rendered exhibition portals: ${portalCount}, secondary labs: ${labCount}`);
+
+  // Take screenshot of new homepage
+  await page.screenshot({ path: path.join(__dirname, 'homepage_desktop.png'), fullPage: false });
+  console.log('Saved homepage_desktop.png');
 
   // Test each project URL directly in dist
   const projects = [
