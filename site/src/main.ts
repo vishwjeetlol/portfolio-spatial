@@ -64,6 +64,13 @@ function initHeroStage() {
       }
     });
   }
+
+  const hornBtn = document.getElementById('persona-horn-btn');
+  if (hornBtn) {
+    hornBtn.addEventListener('click', () => {
+      sound.playTataHorn(0.75);
+    });
+  }
 }
 
 // 3. Load Projects for Under the Hood Modals
@@ -144,6 +151,25 @@ function initModals() {
   const hoodModal = document.getElementById('hood-modal');
   const closeHoodBtn = document.getElementById('close-hood-modal');
 
+  const cvModal = document.getElementById('cv-modal');
+  const closeCvBtn = document.getElementById('close-cv-modal');
+
+  document.querySelectorAll<HTMLElement>('.open-cv-modal-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (cvModal) {
+        cvModal.removeAttribute('hidden');
+        trapFocus(cvModal);
+      }
+    });
+  });
+
+  if (closeCvBtn && cvModal) {
+    closeCvBtn.addEventListener('click', () => {
+      cvModal.setAttribute('hidden', 'true');
+    });
+  }
+
   if (openHireBtn && hireModal) {
     openHireBtn.addEventListener('click', () => {
       hireModal.removeAttribute('hidden');
@@ -168,10 +194,11 @@ function initModals() {
     if (e.key === 'Escape') {
       if (hireModal && !hireModal.hasAttribute('hidden')) hireModal.setAttribute('hidden', 'true');
       if (hoodModal && !hoodModal.hasAttribute('hidden')) hoodModal.setAttribute('hidden', 'true');
+      if (cvModal && !cvModal.hasAttribute('hidden')) cvModal.setAttribute('hidden', 'true');
     }
   });
 
-  [hireModal, hoodModal].forEach((m) => {
+  [hireModal, hoodModal, cvModal].forEach((m) => {
     if (m) {
       m.addEventListener('click', (e) => {
         if (e.target === m) m.setAttribute('hidden', 'true');

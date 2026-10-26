@@ -21,6 +21,15 @@
   --accent-lime: #bdff52;
   --accent-magenta: #cf005e;
 
+  /* Desi Kitsch & Indian Pop-Futurism Design Tokens */
+  --desi-saffron: #ff8400;
+  --desi-marigold: #ff9d00;
+  --desi-rani: #ff007f;
+  --desi-gulabi: #ff2a8d;
+  --desi-peacock: #00f0ff;
+  --desi-haldi: #ffd700;
+  --desi-gold-border: rgba(255, 215, 0, 0.4);
+
   --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
   --font-mono: "SF Mono", Menlo, Monaco, Consolas, monospace;
 
@@ -1526,3 +1535,470 @@ label {
   color: var(--accent-cyan);
   margin-top: 14px;
 }
+
+/* ==========================================================================
+   DESI KITSCH & INDIAN POP-FUTURISM ENHANCEMENTS
+   ========================================================================== */
+
+.desi-gradient-text {
+  background: linear-gradient(135deg, #ff9933 0%, #ff007f 50%, #00f0ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.truck-tape {
+  display: block;
+  height: 6px;
+  width: 100%;
+  background: repeating-linear-gradient(45deg, #ffd700, #ffd700 10px, #1a1622 10px, #1a1622 20px);
+  border-radius: 4px;
+  opacity: 0.85;
+}
+
+.desi-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.desi-badge.saffron {
+  background: rgba(255, 122, 0, 0.14);
+  border-color: rgba(255, 122, 0, 0.45);
+  color: #ff9933;
+}
+
+.desi-badge.gold {
+  background: rgba(255, 215, 0, 0.14);
+  border-color: rgba(255, 215, 0, 0.45);
+  color: #ffd700;
+}
+
+.desi-badge.rani {
+  background: rgba(255, 0, 127, 0.14);
+  border-color: rgba(255, 0, 127, 0.45);
+  color: #ff2a8d;
+}
+
+.desi-badge.peacock {
+  background: rgba(0, 240, 255, 0.14);
+  border-color: rgba(0, 240, 255, 0.45);
+  color: #00f0ff;
+}
+
+.desi-badge.marigold {
+  background: rgba(255, 153, 0, 0.14);
+  border-color: rgba(255, 153, 0, 0.45);
+  color: #ffaa22;
+}
+
+.desi-badge.lime {
+  background: rgba(189, 255, 82, 0.14);
+  border-color: rgba(189, 255, 82, 0.45);
+  color: #bdff52;
+}
+
+/* ==========================================================================
+   THE PERSONA SECTION: VISHWJEET CHAVAN // THE DESI ALCHEMIST
+   ========================================================================== */
+
+.persona-section {
+  max-width: 1280px;
+  margin: 40px auto 100px;
+  padding: 0 24px;
+  position: relative;
+  z-index: 10;
+}
+
+.persona-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.persona-top-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.desi-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.persona-card {
+  background: linear-gradient(145deg, rgba(24, 20, 32, 0.85) 0%, rgba(13, 11, 20, 0.92) 100%);
+  border: 1px solid rgba(255, 215, 0, 0.28);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 215, 0, 0.2);
+  border-radius: 20px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.persona-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255, 0, 127, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.persona-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.persona-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.persona-avatar-wrap {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  border-radius: 16px;
+  padding: 32px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  box-shadow: inset 0 0 24px rgba(255, 215, 0, 0.05);
+}
+
+.desi-ornament-corner {
+  position: absolute;
+  font-size: 0.75rem;
+  color: var(--desi-haldi);
+  opacity: 0.8;
+  line-height: 1;
+}
+
+.desi-ornament-corner.top-left { top: 8px; left: 8px; }
+.desi-ornament-corner.top-right { top: 8px; right: 8px; }
+.desi-ornament-corner.bottom-left { bottom: 8px; left: 8px; }
+.desi-ornament-corner.bottom-right { bottom: 8px; right: 8px; }
+
+.persona-sigil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.sigil-icon {
+  font-size: 2.8rem;
+  filter: drop-shadow(0 0 16px rgba(255, 0, 127, 0.5));
+}
+
+.sigil-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.sigil-sub {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  color: var(--desi-saffron);
+  text-transform: uppercase;
+}
+
+.persona-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--silver-300);
+}
+
+.pulse-marker.orange {
+  background: var(--desi-saffron);
+  box-shadow: 0 0 8px var(--desi-saffron);
+}
+
+.persona-quick-specs {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+}
+
+.spec-label {
+  color: var(--silver-500);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.spec-val {
+  color: #fff;
+  font-weight: 600;
+}
+
+.spec-val.gold {
+  color: var(--desi-haldi);
+  font-family: var(--font-mono);
+}
+
+.persona-action-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.desi-btn {
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 180ms ease;
+  font-family: var(--font-sans);
+}
+
+.desi-btn.primary {
+  background: linear-gradient(135deg, #ff9933 0%, #ff007f 100%);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 14px rgba(255, 0, 127, 0.35);
+}
+
+.desi-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 0, 127, 0.5);
+}
+
+.desi-btn.secondary {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  color: #fff;
+}
+
+.desi-btn.secondary:hover {
+  background: rgba(255, 215, 0, 0.12);
+  border-color: var(--desi-haldi);
+  color: var(--desi-haldi);
+}
+
+/* Persona Main Content */
+.persona-main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.persona-tagline-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.section-tag.desi {
+  color: var(--desi-saffron);
+}
+
+.persona-title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+
+.persona-quote {
+  font-size: 1.18rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--silver-200);
+  border-left: 3px solid var(--desi-saffron);
+  padding-left: 18px;
+  margin: 0;
+}
+
+.persona-story {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 0.96rem;
+  line-height: 1.65;
+  color: var(--silver-400);
+}
+
+.persona-story em {
+  color: var(--desi-haldi);
+  font-style: normal;
+  font-weight: 600;
+}
+
+.commandments-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.commandment-card {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 180ms ease;
+}
+
+.commandment-card:hover {
+  border-color: rgba(255, 215, 0, 0.35);
+  background: rgba(255, 215, 0, 0.03);
+}
+
+.c-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--desi-saffron);
+  letter-spacing: 0.08em;
+}
+
+.commandment-card h4 {
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.commandment-card p {
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--silver-500);
+}
+
+.truck-slogan-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 14px 20px;
+  background: repeating-linear-gradient(45deg, rgba(255, 215, 0, 0.08), rgba(255, 215, 0, 0.08) 10px, transparent 10px, transparent 20px);
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  border-radius: 8px;
+  margin-top: 6px;
+}
+
+.slogan-ornament {
+  color: var(--desi-saffron);
+  font-size: 0.85rem;
+}
+
+.slogan-text {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--desi-haldi);
+}
+
+/* ==========================================================================
+   INTERACTIVE CV MODAL
+   ========================================================================== */
+
+.cv-modal-surface {
+  max-width: 960px;
+  width: 95%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  background: #0f1218;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.8);
+  border-radius: 18px;
+}
+
+.cv-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.cv-header-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cv-actions-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cv-doc-wrap {
+  padding: 24px;
+  overflow-y: auto;
+  max-height: calc(90vh - 80px);
+  background: #ffffff;
+  color: #111827;
+  border-radius: 0 0 18px 18px;
+}
+
+@media (max-width: 960px) {
+  .persona-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .commandments-grid {
+    grid-template-columns: 1fr;
+  }
+  .persona-card {
+    padding: 24px;
+  }
+}
+

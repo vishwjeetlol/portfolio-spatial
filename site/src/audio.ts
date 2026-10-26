@@ -129,12 +129,52 @@ class SoundEngine {
     });
   }
 
-  public playSubBassTone(durationSec: number = 0.55) {
-    this.playTataHorn(durationSec);
+  public playSubBassTone(_durationSec: number = 0.55) {
+    this.playDesiSitarPluck();
   }
 
   public playHarmonicSweep() {
     this.playEngineRev();
+  }
+
+  // Resonant Indian Acoustic Pluck & Sitar Drone Harmonic (Web Audio Procedural Synthesis)
+  public playDesiSitarPluck() {
+    if (this.isMuted) return;
+    this.initContext();
+    if (!this.ctx) return;
+
+    const t = this.ctx.currentTime;
+    const dur = 1.2;
+    // D3, A3, D4, F#4 (Raag Kalyan / Bhupali overtone stack)
+    const notes = [146.83, 220.00, 293.66, 369.99, 440.00];
+
+    notes.forEach((freq, i) => {
+      if (!this.ctx) return;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      const filter = this.ctx.createBiquadFilter();
+
+      osc.type = i % 2 === 0 ? 'sawtooth' : 'triangle';
+      osc.frequency.setValueAtTime(freq, t + i * 0.03);
+      // Subtle microtonal pitch glide (meend)
+      osc.frequency.exponentialRampToValueAtTime(freq * 1.018, t + i * 0.03 + 0.12);
+      osc.frequency.exponentialRampToValueAtTime(freq, t + i * 0.03 + 0.35);
+
+      filter.type = 'bandpass';
+      filter.frequency.setValueAtTime(freq * 2.2, t + i * 0.03);
+      filter.Q.value = 4.0;
+
+      gain.gain.setValueAtTime(0.001, t + i * 0.03);
+      gain.gain.linearRampToValueAtTime(0.07 / (i + 1), t + i * 0.03 + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t + i * 0.03 + dur);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(this.ctx.destination);
+
+      osc.start(t + i * 0.03);
+      osc.stop(t + i * 0.03 + dur);
+    });
   }
 
   // Classic Dual-Tone Air Horn / Sub-Bass Blast (Procedural Web Audio)
