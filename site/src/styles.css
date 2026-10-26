@@ -158,14 +158,15 @@ body {
 .hero-stage {
   position: relative;
   width: 100%;
-  height: 92vh;
-  min-height: 640px;
+  min-height: 94vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   z-index: 10;
   overflow: hidden;
+  background: radial-gradient(circle at 50% 38%, rgba(255, 132, 0, 0.16) 0%, rgba(255, 0, 127, 0.11) 32%, rgba(10, 8, 18, 0.96) 74%), #08060e;
+  border-bottom: 2px dashed rgba(255, 183, 3, 0.2);
 }
 
 .hero-canvas-wrap {
@@ -190,8 +191,8 @@ body {
 .hero-text-overlay {
   position: relative;
   z-index: 10;
-  max-width: 980px;
-  padding: 0 24px;
+  max-width: 1040px;
+  padding: 40px 24px 20px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -203,26 +204,31 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(18, 22, 30, 0.85);
-  border: 1px solid rgba(92, 225, 230, 0.3);
+  background: rgba(18, 14, 28, 0.88);
+  border: 1px solid rgba(255, 183, 3, 0.4);
   border-radius: 9999px;
-  padding: 6px 18px;
+  padding: 7px 20px;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--accent-cyan);
+  font-size: 0.78rem;
+  color: var(--desi-gold);
   letter-spacing: 0.12em;
-  margin-bottom: 24px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  margin-bottom: 22px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6), 0 0 16px rgba(255, 183, 3, 0.2);
   pointer-events: auto;
 }
 
 .pulse-marker {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: var(--accent-lime);
   box-shadow: 0 0 10px var(--accent-lime);
   animation: pulse 2s infinite ease-in-out;
+}
+
+.pulse-marker.orange {
+  background: #ff8400;
+  box-shadow: 0 0 12px #ff8400;
 }
 
 @keyframes pulse {
@@ -231,13 +237,20 @@ body {
 }
 
 .hero-display-title {
-  font-size: clamp(2.4rem, 6.4vw, 5.2rem);
-  font-weight: 850;
-  line-height: 1.05;
+  font-size: clamp(2.4rem, 6.2vw, 5.2rem);
+  font-weight: 900;
+  line-height: 1.04;
   letter-spacing: -0.035em;
   color: #ffffff;
   margin-bottom: 20px;
-  text-shadow: 0 12px 48px rgba(0, 0, 0, 0.9);
+  text-shadow: 0 14px 48px rgba(0, 0, 0, 0.95);
+}
+
+.desi-glow-title {
+  background: linear-gradient(135deg, #ffd700 0%, #ff8400 40%, #ff007f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 28px rgba(255, 0, 127, 0.55));
 }
 
 .glow-gradient-text {
@@ -250,25 +263,27 @@ body {
   font-family: Georgia, serif;
   font-style: italic;
   font-weight: 400;
-  color: var(--silver-300);
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
 }
 
 .hero-lead {
-  font-size: clamp(1rem, 2vw, 1.22rem);
-  line-height: 1.6;
-  color: var(--silver-300);
-  max-width: 64ch;
-  margin-bottom: 34px;
-  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.85);
+  font-size: clamp(1rem, 1.8vw, 1.24rem);
+  line-height: 1.62;
+  color: #d1d5db;
+  max-width: 68ch;
+  margin-bottom: 30px;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.9);
   pointer-events: auto;
 }
 
 .hero-cta-group {
   display: flex;
-  gap: 16px;
+  gap: 14px;
   justify-content: center;
   flex-wrap: wrap;
   pointer-events: auto;
+  margin-bottom: 8px;
 }
 
 .hero-btn-primary {
@@ -277,7 +292,7 @@ body {
   font-family: var(--font-mono);
   font-size: 0.88rem;
   font-weight: 700;
-  padding: 14px 28px;
+  padding: 13px 26px;
   border-radius: 9999px;
   text-decoration: none;
   display: inline-flex;
@@ -287,9 +302,17 @@ body {
   box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
 }
 
-.hero-btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(255, 255, 255, 0.35);
+.hero-btn-primary.coverplay-launch-btn {
+  background: linear-gradient(135deg, #ff007f 0%, #ffd700 100%);
+  color: #0b0914;
+  font-weight: 800;
+  border: none;
+  box-shadow: 0 6px 24px rgba(255, 0, 127, 0.45);
+}
+
+.hero-btn-primary.coverplay-launch-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 32px rgba(255, 0, 127, 0.65);
 }
 
 .hero-btn-secondary {
@@ -298,15 +321,108 @@ body {
   color: #ffffff;
   font-family: var(--font-mono);
   font-size: 0.88rem;
-  padding: 14px 24px;
+  font-weight: 600;
+  padding: 13px 22px;
   border-radius: 9999px;
   cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   transition: all 180ms ease;
+}
+
+.hero-btn-secondary.photobooth-launch-btn {
+  background: rgba(0, 240, 255, 0.12);
+  border: 1px solid rgba(0, 240, 255, 0.45);
+  color: #00f0ff;
+}
+
+.hero-btn-secondary.photobooth-launch-btn:hover {
+  background: rgba(0, 240, 255, 0.25);
+  border-color: #00f0ff;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.35);
+  transform: translateY(-2px);
+}
+
+.hero-btn-secondary.persona-launch-btn {
+  background: rgba(255, 183, 3, 0.12);
+  border: 1px solid rgba(255, 183, 3, 0.45);
+  color: #ffd700;
+}
+
+.hero-btn-secondary.persona-launch-btn:hover {
+  background: rgba(255, 183, 3, 0.25);
+  border-color: #ffd700;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(255, 183, 3, 0.35);
+  transform: translateY(-2px);
 }
 
 .hero-btn-secondary:hover {
   background: rgba(255, 255, 255, 0.15);
   border-color: #fff;
+}
+
+/* 8-City Postal Philately Marquee */
+.hero-city-ticker {
+  margin-top: 26px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(18, 14, 28, 0.82);
+  border: 1px solid rgba(255, 183, 3, 0.3);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-radius: 9999px;
+  padding: 6px 14px;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  pointer-events: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.hero-city-ticker::-webkit-scrollbar {
+  display: none;
+}
+
+.ticker-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--desi-saffron);
+  white-space: nowrap;
+}
+
+.ticker-cities {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.hero-city-chip {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 9999px;
+  padding: 4px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #e5e7eb;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 180ms ease;
+}
+
+.hero-city-chip:hover {
+  background: rgba(255, 0, 127, 0.25);
+  border-color: #ff007f;
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 0 14px rgba(255, 0, 127, 0.45);
 }
 
 /* ===================================================
@@ -889,51 +1005,52 @@ body {
 /* Magnetic Dock */
 .magnetic-dock-wrap {
   position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 100;
+  bottom: 20px;
+  right: 24px;
+  left: auto;
+  transform: none;
+  z-index: 85;
 }
 
 .magnetic-dock {
-  background: rgba(18, 20, 26, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  -webkit-backdrop-filter: blur(32px);
-  backdrop-filter: blur(32px);
+  background: rgba(14, 11, 24, 0.88);
+  border: 1px solid rgba(255, 183, 3, 0.35);
+  -webkit-backdrop-filter: blur(28px);
+  backdrop-filter: blur(28px);
   border-radius: 9999px;
-  padding: 8px 14px;
+  padding: 6px 14px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.65);
+  gap: 10px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.75), 0 0 16px rgba(255, 183, 3, 0.15);
 }
 
 .dock-btn {
   background: transparent;
   border: 1px solid transparent;
-  color: var(--silver-300);
-  padding: 8px 16px;
+  color: #d1d5db;
+  padding: 6px 14px;
   border-radius: 9999px;
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-size: 0.82rem;
+  font-weight: 600;
   text-decoration: none;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
-  transition: all 200ms var(--spring-smooth);
+  gap: 6px;
+  transition: all 180ms var(--spring-smooth);
 }
 
 .dock-btn:hover {
   color: #fff;
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 183, 3, 0.4);
 }
 
 .dock-btn.primary-btn {
-  background: var(--silver-50);
+  background: linear-gradient(135deg, #ffd700 0%, #ff8400 100%);
   color: #090a0d;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .dock-btn.primary-btn:hover {
@@ -1759,24 +1876,43 @@ label {
 .spec-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 12px;
   font-size: 0.82rem;
 }
 
 .spec-label {
-  color: var(--silver-500);
+  color: #9ca3af;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  width: 74px;
+  margin-top: 2px;
 }
 
 .spec-val {
   color: #fff;
   font-weight: 600;
+  text-align: right;
+  line-height: 1.35;
 }
 
 .spec-val.gold {
   color: var(--desi-haldi);
   font-family: var(--font-mono);
+}
+
+.persona-soundboard-title {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--desi-saffron);
+  margin-top: 16px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 .persona-action-btns {
@@ -2399,6 +2535,64 @@ label {
 @media (max-width: 960px) {
   .booth-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ===================================================
+   IMPECCABLE CRAFT FLOOR: THEMED SURFACES & SELECTION
+   =================================================== */
+
+::selection {
+  background: #ff007f;
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background: #ff007f;
+  color: #ffffff;
+}
+
+/* Custom Themed Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #08060e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff9933 0%, #ff007f 100%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ffd700 0%, #ff2a8d 100%);
+}
+
+/* Focus Rings with Desi Haldi / Gold Accent */
+:focus-visible {
+  outline: 2px solid #ffd700;
+  outline-offset: 3px;
+}
+
+@media (max-width: 768px) {
+  .magnetic-dock-wrap {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: calc(100% - 32px);
+    max-width: 400px;
+  }
+
+  .magnetic-dock {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero-city-ticker {
+    width: calc(100vw - 48px);
   }
 }
 

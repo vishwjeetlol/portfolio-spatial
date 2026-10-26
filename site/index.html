@@ -45,7 +45,7 @@
   <header class="hud-header">
     <div class="hud-badge">
       <span class="status-dot"></span>
-      <span class="hud-brand">VISHWJEET CHAVAN // DESI CYBERPUNK</span>
+      <span class="hud-brand">VISHWJEET CHAVAN // IIIT DHARWAD (2026–2030)</span>
     </div>
 
     <!-- Quick Jump Nav -->
@@ -84,30 +84,53 @@
   <!-- HERO SECTION: Full-Bleed 3D Kinetic Stage -->
   <section class="hero-stage" id="hero" aria-label="Interactive 3D Kinetic Hero Stage">
     <div class="hero-canvas-wrap">
-      <canvas id="gyro-canvas" role="img" aria-label="Interactive 3D titanium gyroscope with optical refractive glass core"></canvas>
+      <canvas id="gyro-canvas" role="img" aria-label="Interactive 3D 24k gold, rani pink and peacock cyan gyroscope with optical refractive glass core"></canvas>
     </div>
 
     <!-- Hero Display Typography Overlay -->
     <div class="hero-text-overlay">
       <div class="hero-badge-pill">
         <span class="pulse-marker orange"></span>
-        <span>🌶️ BOMBAY BAZAAR ENERGY &bull; 60 FPS GLSL &bull; AUDIO DSP</span>
+        <span>🌶️ BOMBAY BAZAAR ENERGY &bull; IIIT DHARWAD ('26&ndash;'30) &bull; 60 FPS GLSL</span>
       </div>
       <h1 class="hero-display-title">
         THE BROWSER IS A<br>
-        <span class="desi-gradient-text">CREATIVE MEDIUM.</span><br>
-        <span class="hero-serif-sub">NOT A FILING CABINET.</span>
+        <span class="desi-glow-title">KINETIC BAZAAR.</span><br>
+        <span class="hero-serif-sub">NOT A STERILE RESUME.</span>
       </h1>
       <p class="hero-lead">
-        Independent creative developer working at the intersection of Bombay street maximalism, physical optics, and interactive storytelling. Turning digital spaces into unforgettable spectacles with spice, soul, and 60 FPS kinetic horsepower.
+        Creative technologist combining Bombay street maximalism, physical optics, procedural Web Audio, and 60 FPS GLSL shaders. Engineering unforgettable spatial spectacles with spice, soul, and zero slop.
       </p>
+
+      <!-- High-Impact Desi Kitsch & Coverplay Portals Deck -->
       <div class="hero-cta-group">
-        <a href="#exhibition" class="hero-btn-primary">
-          <span>Explore 6 Flagship Labs ↓</span>
+        <a href="#coverplay" class="hero-btn-primary coverplay-launch-btn">
+          <span>📮 3D Apple Coverplay</span>
         </a>
-        <button id="hero-pulse-btn" class="hero-btn-secondary">
-          <span>🪘 Desi Sonic Impulse</span>
+        <a href="#coverplay-booth" class="hero-btn-secondary photobooth-launch-btn">
+          <span>📸 Indian Stamp Booth</span>
+        </a>
+        <a href="#persona" class="hero-btn-secondary persona-launch-btn">
+          <span>🪷 Desi Persona &amp; Horn</span>
+        </a>
+        <button type="button" class="hero-btn-secondary open-cv-modal-btn">
+          <span>📄 View CV (IIIT Dharwad '26&ndash;'30)</span>
         </button>
+      </div>
+
+      <!-- Live 8-City Postal Philately Marquee -->
+      <div class="hero-city-ticker" aria-label="Quick Select Indian City Stamps">
+        <span class="ticker-label">📮 8 CITIES POSTMARKED:</span>
+        <div class="ticker-cities">
+          <button type="button" class="hero-city-chip" data-city="mumbai" title="Explore Bombay ₹25 Stamp"><span>🇮🇳 BOMBAY ₹25</span></button>
+          <button type="button" class="hero-city-chip" data-city="dharwad" title="Explore Dharwad ₹15 Stamp"><span>🎓 DHARWAD ₹15</span></button>
+          <button type="button" class="hero-city-chip" data-city="bengaluru" title="Explore Bengaluru ₹50 Stamp"><span>⚡ BENGALURU ₹50</span></button>
+          <button type="button" class="hero-city-chip" data-city="delhi" title="Explore Delhi ₹30 Stamp"><span>🏛️ DELHI ₹30</span></button>
+          <button type="button" class="hero-city-chip" data-city="varanasi" title="Explore Varanasi ₹20 Stamp"><span>🪔 VARANASI ₹20</span></button>
+          <button type="button" class="hero-city-chip" data-city="kolkata" title="Explore Kolkata ₹10 Stamp"><span>🚋 KOLKATA ₹10</span></button>
+          <button type="button" class="hero-city-chip" data-city="goa" title="Explore Goa ₹40 Stamp"><span>🌊 GOA ₹40</span></button>
+          <button type="button" class="hero-city-chip" data-city="jaipur" title="Explore Jaipur ₹35 Stamp"><span>🏰 JAIPUR ₹35</span></button>
+        </div>
       </div>
     </div>
   </section>
@@ -148,12 +171,16 @@
 
             <div class="persona-quick-specs">
               <div class="spec-row">
-                <span class="spec-label">Discipline</span>
-                <span class="spec-val">Spatial Creative Dev</span>
+                <span class="spec-label">Education</span>
+                <span class="spec-val gold">B.Tech CSE &bull; IIIT Dharwad ('26&ndash;'30)</span>
               </div>
               <div class="spec-row">
-                <span class="spec-label">Fuel</span>
-                <span class="spec-val">Cutting Chai + Pure GLSL</span>
+                <span class="spec-label">Base</span>
+                <span class="spec-val">Bombay &bull; Dharwad, India</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-label">Discipline</span>
+                <span class="spec-val">Spatial WebGL &bull; DSP Audio</span>
               </div>
               <div class="spec-row">
                 <span class="spec-label">Philosophy</span>
@@ -165,12 +192,21 @@
               </div>
             </div>
 
+            <div class="persona-soundboard-title">
+              <span>🔊 DESI PROCEDURAL SOUNDBOARD</span>
+            </div>
             <div class="persona-action-btns">
-              <button class="desi-btn primary" id="persona-horn-btn" type="button">
-                <span>🛺 Honk Horn (Web Audio)</span>
+              <button class="desi-btn primary" id="persona-horn-btn" type="button" title="Tata Commercial Air Horn">
+                <span>🛺 Tata Air Horn</span>
               </button>
-              <button class="desi-btn secondary open-cv-modal-btn" type="button">
-                <span>📄 View Full CV</span>
+              <button class="desi-btn secondary" id="persona-rhythm-btn" type="button" title="Raag Kalyan Sitar Drone Harmonic">
+                <span>🪕 Sitar Harmonic</span>
+              </button>
+              <button class="desi-btn secondary" id="persona-chime-btn" type="button" title="Temple Brass Bell Chime">
+                <span>🔔 Temple Chime</span>
+              </button>
+              <button class="desi-btn secondary open-cv-modal-btn" type="button" title="Open A4 Curriculum Vitae">
+                <span>📄 Open A4 CV</span>
               </button>
             </div>
           </div>

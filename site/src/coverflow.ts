@@ -367,6 +367,13 @@ export class CoverplayEngine {
     }
   }
 
+  public goToCity(cityId: string) {
+    const idx = this.stamps.findIndex(s => s.id.toLowerCase() === cityId.toLowerCase());
+    if (idx !== -1) {
+      this.goToIndex(idx);
+    }
+  }
+
   private updateActiveDetails() {
     const stamp = this.stamps[this.currentIndex];
     const titleEl = document.getElementById('coverplay-city-title');

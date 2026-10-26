@@ -83,6 +83,37 @@ function initHeroStage() {
       sound.playTataHorn(0.75);
     });
   }
+
+  const rhythmBtn = document.getElementById('persona-rhythm-btn');
+  if (rhythmBtn) {
+    rhythmBtn.addEventListener('click', () => {
+      sound.playDesiSitarPluck();
+    });
+  }
+
+  const chimeBtn = document.getElementById('persona-chime-btn');
+  if (chimeBtn) {
+    chimeBtn.addEventListener('click', () => {
+      sound.playChime();
+    });
+  }
+
+  // Hero City Chip Quick Philately Navigation
+  document.querySelectorAll<HTMLButtonElement>('.hero-city-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const cityId = chip.getAttribute('data-city');
+      if (cityId) {
+        if (coverplayInstance) {
+          coverplayInstance.goToCity(cityId);
+        }
+        sound.playStampThump();
+        const coverplaySection = document.getElementById('coverplay');
+        if (coverplaySection) {
+          coverplaySection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+  });
 }
 
 // 3. Load Projects for Under the Hood Modals
