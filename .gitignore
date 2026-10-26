@@ -26,3 +26,12 @@ renders/raw/
 .env*
 .venv/
 **/.venv/
+
+# Impeccable Engine & Agent Harnesses
+**/scripts/bin/
+.agent/
+.agents/
+.codex/
+.grok/
+.kiro/
+.opencode/
