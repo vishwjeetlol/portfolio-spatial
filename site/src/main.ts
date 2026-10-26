@@ -1,5 +1,6 @@
 import { GyroscopeScene } from './gyro.ts';
 import { sound } from './audio.ts';
+import { CoverplayEngine } from './coverflow.ts';
 
 interface Project {
   id: string;
@@ -17,16 +18,27 @@ interface Project {
 
 let allProjects: Project[] = [];
 let gyroInstance: GyroscopeScene | null = null;
+let coverplayInstance: CoverplayEngine | null = null;
 
 document.addEventListener('DOMContentLoaded', async () => {
   initAudioControls();
   initHeroStage();
+  initCoverplay();
   await loadProjects();
   initModals();
   initPortalTiltEffects();
   initGlobalSoundEffects();
   initSmoothScroll();
 });
+
+function initCoverplay() {
+  try {
+    coverplayInstance = new CoverplayEngine('coverplay');
+    (window as unknown as { coverplayInstance: CoverplayEngine }).coverplayInstance = coverplayInstance;
+  } catch (err) {
+    console.warn('Coverplay init skipped or container not found:', err);
+  }
+}
 
 // 1. Audio Controls & HUD Sound Toggle
 function initAudioControls() {

@@ -52,11 +52,12 @@
     <nav class="hud-nav desktop-only" aria-label="Main Navigation">
       <a href="#hero" class="hud-nav-link">01. Studio</a>
       <a href="#persona" class="hud-nav-link">02. Persona</a>
-      <a href="#exhibition" class="hud-nav-link">03. Exhibitions</a>
-      <a href="#philosophy" class="hud-nav-link">04. Philosophy</a>
-      <a href="#systems" class="hud-nav-link">05. Systems</a>
-      <button type="button" class="hud-nav-link open-cv-modal-btn" style="background:none;border:none;cursor:pointer;font-family:inherit;font-size:inherit;">06. CV</button>
-      <a href="/writing/" class="hud-nav-link">07. Notes</a>
+      <a href="#coverplay" class="hud-nav-link">03. Coverplay</a>
+      <a href="#exhibition" class="hud-nav-link">04. Exhibitions</a>
+      <a href="#philosophy" class="hud-nav-link">05. Philosophy</a>
+      <a href="#systems" class="hud-nav-link">06. Systems</a>
+      <button type="button" class="hud-nav-link open-cv-modal-btn" style="background:none;border:none;cursor:pointer;font-family:inherit;font-size:inherit;">07. CV</button>
+      <a href="/writing/" class="hud-nav-link">08. Notes</a>
     </nav>
 
     <div class="hud-actions">
@@ -221,6 +222,122 @@
               <span class="slogan-text">&ldquo;DEKHO MAGAR PYAAR SE &bull; AUR 60 FPS PAR&rdquo;</span>
               <span class="slogan-ornament">✦</span>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLE COVERPLAY & POST STAMP PHOTO BOOTH -->
+  <section class="coverplay-section" id="coverplay" aria-label="Apple Coverplay & Indian City Stamp Photo Booth">
+    <div class="coverplay-header">
+      <span class="section-tag desi">3D SPATIAL COVERPLAY // 03</span>
+      <h2 class="coverplay-title">
+        The Postal Philately Booth.<br>
+        <span class="desi-gradient-text">Apple Cover Flow &bull; Indian Cities.</span>
+      </h2>
+      <p class="coverplay-desc">
+        Classic Apple iTunes 3D Cover Flow reimagined with Desi Kitsch philately. Every Indian city rendered with bespoke regional art, pantone colors, and PIN codes. Scrub in 3D perspective or step into the Photo Booth to mint your own custom postmarked stamp.
+      </p>
+    </div>
+
+    <!-- 3D Apple Cover Flow Stage -->
+    <div class="coverflow-stage" id="coverflow-stage" aria-label="3D Cover Flow Carousel">
+      <div class="coverflow-track" id="coverflow-track">
+        <!-- Rendered dynamically by CoverplayEngine -->
+      </div>
+    </div>
+
+    <!-- Active Stamp Meta & Controls -->
+    <div class="coverflow-controls-bar">
+      <div class="coverplay-active-meta">
+        <span class="active-meta-title" id="coverplay-city-title">BOMBAY // ₹25.00</span>
+        <span class="active-meta-sub" id="coverplay-city-meta">MAHARASHTRA &bull; PIN 400001</span>
+        <p class="active-meta-tag" id="coverplay-city-tag">Maximum City // Cutting Chai &amp; Sea Breeze</p>
+      </div>
+
+      <div class="coverflow-nav-actions">
+        <button class="coverflow-arrow-btn" id="coverflow-prev" aria-label="Previous Stamp">‹</button>
+        <div class="coverflow-dots" id="coverflow-dots"></div>
+        <button class="coverflow-arrow-btn" id="coverflow-next" aria-label="Next Stamp">›</button>
+      </div>
+    </div>
+
+    <!-- POST STAMP PHOTO BOOTH WORKSPACE -->
+    <div class="photo-booth-workspace" id="photo-booth-workspace">
+      <div class="booth-grid">
+        <!-- Left: Live Stamp Canvas Preview -->
+        <div class="booth-canvas-wrap">
+          <canvas id="booth-canvas" width="480" height="580" role="img" aria-label="Interactive Postal Stamp Canvas"></canvas>
+          <img id="booth-preview-img" src="" alt="User Booth Portrait" style="display: none;">
+        </div>
+
+        <!-- Right: Stamp Customizer Controls -->
+        <div class="booth-form">
+          <div>
+            <span class="section-tag desi">PHOTO BOOTH LAB</span>
+            <h3 class="booth-section-title">Mint Your Commemorative Stamp</h3>
+            <p style="color: var(--silver-400); font-size: 0.9rem; margin-top: 4px;">
+              Snap a live camera selfie or upload your portrait, select an Indian city palette, and stamp a custom postal cancel mark!
+            </p>
+          </div>
+
+          <div class="booth-inputs-grid">
+            <div class="booth-control-group">
+              <label for="booth-city-select">1. Select City Theme</label>
+              <select id="booth-city-select" class="booth-select">
+                <!-- Dynamically populated -->
+              </select>
+            </div>
+
+            <div class="booth-control-group">
+              <label for="booth-price-select">2. Postage Denomination</label>
+              <select id="booth-price-select" class="booth-select">
+                <option value="₹15.00">₹15.00 (Inland Letter)</option>
+                <option value="₹25.00" selected>₹25.00 (Speed Post)</option>
+                <option value="₹50.00">₹50.00 (Air Mail Special)</option>
+                <option value="₹100.00">₹100.00 (Commemorative Gold)</option>
+              </select>
+            </div>
+
+            <div class="booth-control-group">
+              <label for="booth-name-input">3. Personalized Stamp Name</label>
+              <input type="text" id="booth-name-input" class="booth-input" placeholder="e.g. VISH / YOUR NAME" value="VISH // CHAI & SHADERS">
+            </div>
+
+            <div class="booth-control-group">
+              <label for="booth-filter-select">4. Postal Print Filter</label>
+              <select id="booth-filter-select" class="booth-select">
+                <option value="desi" selected>Desi Pop Duotone</option>
+                <option value="halftone">Vintage Halftone Raster</option>
+                <option value="sepia">1970s Postal Sepia</option>
+                <option value="normal">Original Colors</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Photo Source Actions -->
+          <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <label class="desi-btn secondary" style="cursor: pointer; margin: 0;">
+              <span>📁 Upload Portrait</span>
+              <input type="file" id="booth-file-input" accept="image/*" style="display: none;">
+            </label>
+            <button type="button" class="desi-btn secondary" id="booth-cam-btn">
+              <span>📷 Snap Live Selfie</span>
+            </button>
+            <button type="button" class="desi-btn secondary" id="booth-thump-btn">
+              <span>💥 Rubber Stamp (THUMP!)</span>
+            </button>
+          </div>
+
+          <!-- Mint & Download Actions -->
+          <div class="booth-actions-row">
+            <button type="button" class="desi-btn primary" id="booth-download-btn">
+              <span>💾 Download Stamp (PNG)</span>
+            </button>
+            <button type="button" class="desi-btn secondary" id="booth-add-btn">
+              <span>🎡 Add to 3D Cover Flow ↗</span>
+            </button>
           </div>
         </div>
       </div>
